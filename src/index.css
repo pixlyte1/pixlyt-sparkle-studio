@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -9,7 +9,7 @@
     --background: 0 0% 100%;
     --foreground: 215 25% 15%;
 
-    --card: 0 0% 100%;
+    --card: 210 30% 98%;
     --card-foreground: 215 25% 15%;
 
     --popover: 0 0% 100%;
@@ -36,12 +36,8 @@
 
     --radius: 0.75rem;
 
-    /* Custom tokens */
-    --gradient-hero: linear-gradient(135deg, hsl(210 50% 97%) 0%, hsl(211 60% 93%) 50%, hsl(199 50% 95%) 100%);
-    --gradient-primary: linear-gradient(135deg, hsl(211 90% 52%) 0%, hsl(199 90% 48%) 100%);
-    --shadow-card: 0 4px 20px -4px hsl(211 90% 52% / 0.1);
-    --shadow-card-hover: 0 12px 40px -8px hsl(211 90% 52% / 0.2);
-    --shadow-navbar: 0 2px 20px -2px hsl(211 30% 50% / 0.1);
+    --hero-overlay: 211 60% 12%;
+    --section-alt: 210 40% 97%;
 
     --font-heading: 'Poppins', sans-serif;
     --font-body: 'Inter', sans-serif;
@@ -52,39 +48,133 @@
   * {
     @apply border-border;
   }
-
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-body);
   }
-
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-heading);
   }
-
   html {
     scroll-behavior: smooth;
   }
 }
 
 @layer utilities {
-  .gradient-hero {
-    background: var(--gradient-hero);
+  .gradient-primary {
+    background: linear-gradient(135deg, hsl(211 90% 52%) 0%, hsl(199 90% 48%) 100%);
   }
 
-  .gradient-primary {
-    background: var(--gradient-primary);
+  .gradient-primary-dark {
+    background: linear-gradient(135deg, hsl(211 90% 42%) 0%, hsl(199 90% 38%) 100%);
+  }
+
+  .gradient-section {
+    background: linear-gradient(180deg, hsl(210 40% 97%) 0%, hsl(0 0% 100%) 100%);
+  }
+
+  .gradient-section-reverse {
+    background: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(210 40% 97%) 100%);
   }
 
   .shadow-card {
-    box-shadow: var(--shadow-card);
+    box-shadow: 0 4px 24px -6px hsl(211 50% 50% / 0.08);
   }
 
   .shadow-card-hover {
-    box-shadow: var(--shadow-card-hover);
+    box-shadow: 0 20px 50px -12px hsl(211 90% 52% / 0.2);
   }
 
   .shadow-navbar {
-    box-shadow: var(--shadow-navbar);
+    box-shadow: 0 2px 30px -4px hsl(211 30% 50% / 0.12);
   }
+
+  .shadow-glow {
+    box-shadow: 0 0 40px -8px hsl(211 90% 52% / 0.3);
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, hsl(211 90% 52%) 0%, hsl(199 90% 48%) 100%);
+  }
+
+  .glass {
+    background: hsl(0 0% 100% / 0.7);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  .glass-dark {
+    background: hsl(211 60% 12% / 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  .border-gradient {
+    border: 1px solid transparent;
+    background-clip: padding-box;
+    position: relative;
+  }
+
+  .border-gradient::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, hsl(211 90% 52% / 0.3), hsl(199 90% 48% / 0.1));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-float-delayed {
+    animation: float 6s ease-in-out 2s infinite;
+  }
+
+  .animate-pulse-slow {
+    animation: pulse-slow 4s ease-in-out infinite;
+  }
+
+  .animate-slide-progress {
+    animation: slide-progress var(--duration, 5s) linear forwards;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes slide-progress {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.shimmer-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-effect::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, hsl(0 0% 100% / 0.15), transparent);
+  animation: shimmer 2s infinite;
 }
