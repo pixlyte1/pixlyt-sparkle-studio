@@ -1,6 +1,7 @@
 import { FaYoutube, FaInstagram, FaFacebookF } from "react-icons/fa";
 import { motion } from "framer-motion";
 import AnimatedSection from "./AnimatedSection";
+import { openExternalLink } from "@/lib/openExternalLink";
 
 const socials = [
   {
@@ -54,6 +55,11 @@ const SocialMedia = () => (
             href={s.href}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label={`Open ${s.subtitle} in a new tab`}
+            onClick={(event) => {
+              event.preventDefault();
+              openExternalLink(s.href);
+            }}
             initial={{ opacity: 0, scale: 0.85 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-60px" }}
@@ -67,10 +73,10 @@ const SocialMedia = () => (
             >
               <s.icon
                 size={32}
-                className={`text-muted-foreground ${s.iconHover} transition-colors duration-500 pointer-events-none`}
+                className={`text-muted-foreground ${s.iconHover} transition-colors duration-500`}
               />
             </div>
-            <div className="text-center pointer-events-none">
+            <div className="text-center">
               <p className="font-heading font-semibold text-foreground text-lg">{s.label}</p>
               <p className="text-muted-foreground text-sm mt-1">{s.subtitle}</p>
             </div>

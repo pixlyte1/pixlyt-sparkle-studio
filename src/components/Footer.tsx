@@ -1,6 +1,7 @@
 import { Youtube, Instagram, Facebook, ArrowUp } from "lucide-react";
 import { motion } from "framer-motion";
 import logo from "@/assets/pixlyt-logo.png";
+import { openExternalLink } from "@/lib/openExternalLink";
 
 const footerLinks = [
   { label: "Home", href: "#home" },
@@ -44,15 +45,20 @@ const Footer = () => (
           <h4 className="text-primary-foreground font-heading font-semibold mb-4">Follow Us</h4>
           <div className="flex items-center gap-3">
             {[
-              { icon: Youtube, href: "https://www.youtube.com/@TamilThulinews" },
-              { icon: Instagram, href: "https://www.instagram.com/tamilthulinews/" },
-              { icon: Facebook, href: "https://www.facebook.com/tamilthulinews/" },
+              { icon: Youtube, label: "YouTube", href: "https://www.youtube.com/@TamilThulinews" },
+              { icon: Instagram, label: "Instagram", href: "https://www.instagram.com/tamilthulinews/" },
+              { icon: Facebook, label: "Facebook", href: "https://www.facebook.com/tamilthulinews/" },
             ].map((s, i) => (
               <motion.a
-                key={i}
+                key={s.label}
                 href={s.href}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={`Open ${s.label} in a new tab`}
+                onClick={(event) => {
+                  event.preventDefault();
+                  openExternalLink(s.href);
+                }}
                 whileHover={{ scale: 1.15, y: -2 }}
                 className="w-10 h-10 rounded-xl bg-primary-foreground/5 hover:gradient-primary flex items-center justify-center text-primary-foreground/40 hover:text-primary-foreground transition-all duration-300"
               >
