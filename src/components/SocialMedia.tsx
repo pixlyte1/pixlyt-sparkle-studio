@@ -3,9 +3,9 @@ import { motion } from "framer-motion";
 import AnimatedSection from "./AnimatedSection";
 
 const socials = [
-  { icon: Youtube, label: "Tamil Tuli News", subtitle: "YouTube Channel", href: "https://youtube.com", hoverBg: "group-hover:bg-red-500", hoverText: "group-hover:text-red-500" },
-  { icon: Instagram, label: "PIXLYT", subtitle: "Instagram", href: "https://instagram.com", hoverBg: "group-hover:bg-pink-500", hoverText: "group-hover:text-pink-500" },
-  { icon: Facebook, label: "PIXLYT Digital", subtitle: "Facebook", href: "https://facebook.com", hoverBg: "group-hover:bg-blue-600", hoverText: "group-hover:text-blue-600" },
+  { icon: Youtube, label: "Tamil Thuli News", subtitle: "YouTube Channel", href: "https://www.youtube.com/@TamilThulinews", hoverBg: "group-hover:bg-red-500", hoverText: "group-hover:text-red-500" },
+  { icon: Instagram, label: "Tamil Thuli News", subtitle: "Instagram", href: "https://www.instagram.com/tamilthulinews/", hoverBg: "group-hover:bg-pink-500", hoverText: "group-hover:text-pink-500" },
+  { icon: Facebook, label: "Tamil Thuli News", subtitle: "Facebook", href: "https://www.facebook.com/tamilthulinews/", hoverBg: "group-hover:bg-blue-600", hoverText: "group-hover:text-blue-600" },
 ];
 
 const SocialMedia = () => (
