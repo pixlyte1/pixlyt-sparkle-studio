@@ -3,12 +3,12 @@ import AnimatedSection from "./AnimatedSection";
 import ServiceCard from "./ServiceCard";
 
 const services = [
-  { icon: Bot, title: "AI Solutions", description: "Intelligent automation, chatbots, predictive analytics, and machine learning solutions to streamline your business operations and decision-making." },
-  { icon: Globe, title: "Web Development", description: "Modern, responsive websites and progressive web applications built with cutting-edge technologies for blazing-fast performance." },
+  { icon: Video, title: "Media & Content Production", description: "High-quality video production, photography, motion graphics, and multimedia content that tells your story compellingly." },
+  { icon: Share2, title: "Social Media Management", description: "Strategic content planning, community management, and growth hacking across all major social platforms." },
   { icon: Megaphone, title: "Digital Marketing", description: "Data-driven marketing strategies including SEO, SEM, and performance marketing to boost your online presence and conversions." },
   { icon: Palette, title: "Branding & Creative Design", description: "Stunning visual identities, logos, brand guidelines, and creative assets that make your brand unforgettable." },
-  { icon: Share2, title: "Social Media Management", description: "Strategic content planning, community management, and growth hacking across all major social platforms." },
-  { icon: Video, title: "Media & Content Production", description: "High-quality video production, photography, motion graphics, and multimedia content that tells your story." },
+  { icon: Bot, title: "AI Solutions", description: "Intelligent automation, chatbots, predictive analytics, and machine learning solutions to streamline your business operations." },
+  { icon: Globe, title: "Web Development", description: "Modern, responsive websites and progressive web applications built with cutting-edge technologies for blazing-fast performance." },
 ];
 
 const Services = () => (

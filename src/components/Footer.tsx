@@ -43,14 +43,20 @@ const Footer = () => (
         <div>
           <h4 className="text-primary-foreground font-heading font-semibold mb-4">Follow Us</h4>
           <div className="flex items-center gap-3">
-            {[Youtube, Instagram, Facebook].map((Icon, i) => (
+            {[
+              { icon: Youtube, href: "https://www.youtube.com/@TamilThulinews" },
+              { icon: Instagram, href: "https://www.instagram.com/tamilthulinews/" },
+              { icon: Facebook, href: "https://www.facebook.com/tamilthulinews/" },
+            ].map((s, i) => (
               <motion.a
                 key={i}
-                href="#"
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.15, y: -2 }}
                 className="w-10 h-10 rounded-xl bg-primary-foreground/5 hover:gradient-primary flex items-center justify-center text-primary-foreground/40 hover:text-primary-foreground transition-all duration-300"
               >
-                <Icon size={18} />
+                <s.icon size={18} />
               </motion.a>
             ))}
           </div>
