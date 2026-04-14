@@ -49,30 +49,32 @@ const SocialMedia = () => (
 
       <div className="flex flex-wrap items-stretch justify-center gap-8 max-w-3xl mx-auto">
         {socials.map((s, i) => (
-          <AnimatedSection key={s.subtitle} delay={i * 0.12} direction="scale">
-            <motion.a
-              href={s.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ y: -8, scale: 1.03 }}
-              transition={{ type: "spring", stiffness: 300 }}
-              className={`group flex flex-col items-center gap-5 p-10 bg-card rounded-2xl shadow-card hover:shadow-xl border border-border/50 transition-all duration-500 min-w-[220px] cursor-pointer`}
+          <motion.a
+            key={s.subtitle}
+            href={s.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            initial={{ opacity: 0, scale: 0.85 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: "-60px" }}
+            whileHover={{ y: -8, scale: 1.03 }}
+            transition={{ type: "spring", stiffness: 300, delay: i * 0.12 }}
+            className="group flex flex-col items-center gap-5 p-10 bg-card rounded-2xl shadow-card hover:shadow-xl border border-border/50 transition-all duration-500 min-w-[220px] cursor-pointer"
+          >
+            <div
+              className={`rounded-2xl bg-muted flex items-center justify-center transition-all duration-500 ${s.hoverBg} ${s.hoverShadow} hover:shadow-lg`}
+              style={{ width: 72, height: 72 }}
             >
-              <div
-                className={`w-18 h-18 rounded-2xl bg-muted flex items-center justify-center transition-all duration-500 ${s.hoverBg} ${s.hoverShadow} hover:shadow-lg`}
-                style={{ width: 72, height: 72 }}
-              >
-                <s.icon
-                  size={32}
-                  className={`text-muted-foreground ${s.iconHover} transition-colors duration-500`}
-                />
-              </div>
-              <div className="text-center">
-                <p className="font-heading font-semibold text-foreground text-lg">{s.label}</p>
-                <p className="text-muted-foreground text-sm mt-1">{s.subtitle}</p>
-              </div>
-            </motion.a>
-          </AnimatedSection>
+              <s.icon
+                size={32}
+                className={`text-muted-foreground ${s.iconHover} transition-colors duration-500 pointer-events-none`}
+              />
+            </div>
+            <div className="text-center pointer-events-none">
+              <p className="font-heading font-semibold text-foreground text-lg">{s.label}</p>
+              <p className="text-muted-foreground text-sm mt-1">{s.subtitle}</p>
+            </div>
+          </motion.a>
         ))}
       </div>
     </div>
