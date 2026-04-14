@@ -3,31 +3,40 @@ import AnimatedSection from "./AnimatedSection";
 import ServiceCard from "./ServiceCard";
 
 const services = [
-  { icon: Bot, title: "AI Solutions", description: "Intelligent automation, chatbots, and machine learning solutions to streamline your business operations." },
-  { icon: Globe, title: "Web Development", description: "Modern, responsive websites and web applications built with cutting-edge technologies." },
-  { icon: Megaphone, title: "Digital Marketing", description: "Data-driven strategies to boost your online presence, engagement, and conversions." },
-  { icon: Palette, title: "Branding & Creative Design", description: "Stunning visual identities, logos, and brand guidelines that make you stand out." },
-  { icon: Share2, title: "Social Media Management", description: "Strategic content planning and community management across all platforms." },
-  { icon: Video, title: "Media & Content Production", description: "High-quality video production, photography, and multimedia content creation." },
+  { icon: Bot, title: "AI Solutions", description: "Intelligent automation, chatbots, predictive analytics, and machine learning solutions to streamline your business operations and decision-making." },
+  { icon: Globe, title: "Web Development", description: "Modern, responsive websites and progressive web applications built with cutting-edge technologies for blazing-fast performance." },
+  { icon: Megaphone, title: "Digital Marketing", description: "Data-driven marketing strategies including SEO, SEM, and performance marketing to boost your online presence and conversions." },
+  { icon: Palette, title: "Branding & Creative Design", description: "Stunning visual identities, logos, brand guidelines, and creative assets that make your brand unforgettable." },
+  { icon: Share2, title: "Social Media Management", description: "Strategic content planning, community management, and growth hacking across all major social platforms." },
+  { icon: Video, title: "Media & Content Production", description: "High-quality video production, photography, motion graphics, and multimedia content that tells your story." },
 ];
 
 const Services = () => (
-  <section id="services" className="py-24 bg-secondary/30">
-    <div className="container mx-auto px-4">
-      <AnimatedSection className="text-center max-w-2xl mx-auto mb-16">
-        <span className="text-primary font-semibold text-sm uppercase tracking-wider">Our Services</span>
-        <h2 className="font-heading text-3xl sm:text-4xl font-bold text-foreground mt-3 mb-5">
-          What We Offer
+  <section id="services" className="py-28 gradient-section relative overflow-hidden">
+    {/* Decorative dots pattern */}
+    <div className="absolute inset-0 opacity-[0.015]" style={{
+      backgroundImage: "radial-gradient(circle, hsl(211 90% 52%) 1px, transparent 1px)",
+      backgroundSize: "30px 30px",
+    }} />
+
+    <div className="container mx-auto px-4 relative">
+      <AnimatedSection className="text-center max-w-3xl mx-auto mb-20">
+        <span className="inline-block px-4 py-1.5 rounded-full gradient-primary text-primary-foreground text-xs font-semibold uppercase tracking-widest mb-5">
+          Our Services
+        </span>
+        <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight mb-6">
+          Solutions That Drive{" "}
+          <span className="text-gradient">Real Growth</span>
         </h2>
-        <p className="text-muted-foreground text-lg">
-          Comprehensive digital solutions tailored to elevate your brand and drive growth.
+        <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+          Comprehensive digital solutions tailored to elevate your brand, optimize operations, and drive measurable business growth.
         </p>
       </AnimatedSection>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-7">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {services.map((s, i) => (
-          <AnimatedSection key={s.title} delay={i * 0.1}>
-            <ServiceCard {...s} />
+          <AnimatedSection key={s.title} delay={i * 0.1} direction={i % 3 === 0 ? "left" : i % 3 === 2 ? "right" : "up"}>
+            <ServiceCard {...s} index={i} />
           </AnimatedSection>
         ))}
       </div>
