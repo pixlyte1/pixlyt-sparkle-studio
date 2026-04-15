@@ -1,6 +1,5 @@
 import { motion } from "framer-motion";
-import { Sparkles, Users, Copy, Check, Lightbulb, BarChart3, Bot, FileText, BrainCircuit, CalendarCheck } from "lucide-react";
-import { useState } from "react";
+import { Sparkles, Users, Lightbulb, BarChart3, Bot, FileText, BrainCircuit, CalendarCheck } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
 
 const products = [
@@ -31,35 +30,6 @@ const products = [
     ],
   },
 ];
-
-const prompts = [
-  {
-    title: "Creator AI Prompt",
-    text: "Create an AI-powered SaaS platform that helps content creators generate viral social media scripts, YouTube video ideas, captions, thumbnails, and trending topic analysis using GPT-based models. Include dashboard, prompt templates, analytics, and export features.",
-  },
-  {
-    title: "HR Portal Prompt",
-    text: "Build an AI-driven HR management system with features like resume screening, candidate ranking, interview scheduling, employee tracking, performance analytics, and chatbot-based HR assistant.",
-  },
-];
-
-const CopyButton = ({ text }: { text: string }) => {
-  const [copied, setCopied] = useState(false);
-  const handleCopy = () => {
-    navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-  return (
-    <button
-      onClick={handleCopy}
-      className="absolute top-3 right-3 p-2 rounded-lg bg-background/80 border border-border hover:bg-primary/10 transition-colors"
-      aria-label="Copy prompt"
-    >
-      {copied ? <Check size={16} className="text-primary" /> : <Copy size={16} className="text-muted-foreground" />}
-    </button>
-  );
-};
 
 const Products = () => (
   <section id="products" className="py-24 bg-background">
@@ -108,29 +78,6 @@ const Products = () => (
         ))}
       </div>
 
-      {/* AI Product Prompts */}
-      <AnimatedSection className="text-center mb-10">
-        <h3 className="text-2xl md:text-3xl font-bold font-[family-name:var(--font-heading)] text-foreground mb-3">
-          AI Product Prompts
-        </h3>
-        <p className="text-muted-foreground">The prompts behind our AI products</p>
-      </AnimatedSection>
-
-      <div className="grid md:grid-cols-2 gap-8">
-        {prompts.map((prompt, i) => (
-          <AnimatedSection key={prompt.title} delay={i * 0.15} direction="up">
-            <div className="relative rounded-2xl bg-secondary border border-border p-6 hover:shadow-lg transition-shadow duration-300">
-              <CopyButton text={prompt.text} />
-              <h4 className="text-lg font-semibold font-[family-name:var(--font-heading)] text-foreground mb-4">
-                {prompt.title}
-              </h4>
-              <p className="font-mono text-sm text-muted-foreground leading-relaxed bg-background/60 rounded-xl p-4 border border-border">
-                "{prompt.text}"
-              </p>
-            </div>
-          </AnimatedSection>
-        ))}
-      </div>
     </div>
   </section>
 );
