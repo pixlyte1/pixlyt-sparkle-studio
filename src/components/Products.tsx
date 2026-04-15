@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Sparkles, Users, Lightbulb, BarChart3, Bot, FileText, BrainCircuit, CalendarCheck } from "lucide-react";
 import AnimatedSection from "./AnimatedSection";
+import { openExternalLink } from "@/lib/openExternalLink";
 
 const products = [
   {
@@ -71,9 +72,18 @@ const Products = () => (
                   </li>
                 ))}
               </ul>
-              <button className="w-full gradient-primary text-primary-foreground py-3 rounded-xl font-semibold hover:scale-[1.03] transition-transform duration-300 shadow-glow">
-                Explore
-              </button>
+              {product.link ? (
+                <button
+                  onClick={() => openExternalLink(product.link!)}
+                  className="w-full gradient-primary text-primary-foreground py-3 rounded-xl font-semibold hover:scale-[1.03] transition-transform duration-300 shadow-glow"
+                >
+                  Explore
+                </button>
+              ) : (
+                <button className="w-full gradient-primary text-primary-foreground py-3 rounded-xl font-semibold hover:scale-[1.03] transition-transform duration-300 shadow-glow">
+                  Coming Soon
+                </button>
+              )}
             </motion.div>
           </AnimatedSection>
         ))}
