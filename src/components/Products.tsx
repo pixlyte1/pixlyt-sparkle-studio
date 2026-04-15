@@ -8,6 +8,7 @@ const products = [
     description:
       "An AI-powered platform designed for content creators to generate viral content ideas, YouTube scripts, captions, thumbnails, and trend analysis.",
     icon: Sparkles,
+    link: "https://prompt-de4a.vercel.app/login",
     features: [
       { icon: FileText, label: "AI content generation (scripts, captions, hooks)" },
       { icon: Lightbulb, label: "YouTube video idea generator" },
