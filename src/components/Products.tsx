@@ -56,7 +56,7 @@ const CopyButton = ({ text }: { text: string }) => {
       className="absolute top-3 right-3 p-2 rounded-lg bg-background/80 border border-border hover:bg-primary/10 transition-colors"
       aria-label="Copy prompt"
     >
-      {copied ? <Check size={16} className="text-green-500" /> : <Copy size={16} className="text-muted-foreground" />}
+      {copied ? <Check size={16} className="text-primary" /> : <Copy size={16} className="text-muted-foreground" />}
     </button>
   );
 };
