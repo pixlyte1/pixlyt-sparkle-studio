@@ -4,6 +4,7 @@ import StatsBar from "@/components/StatsBar";
 import About from "@/components/About";
 import Services from "@/components/Services";
 import Projects from "@/components/Projects";
+import Products from "@/components/Products";
 import SocialMedia from "@/components/SocialMedia";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
@@ -16,6 +17,7 @@ const Index = () => (
     <About />
     <Services />
     <Projects />
+    <Products />
     <SocialMedia />
     <Contact />
     <Footer />
