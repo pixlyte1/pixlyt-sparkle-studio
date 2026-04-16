@@ -7,6 +7,7 @@ const navLinks = [
   { label: "Home", href: "#home" },
   { label: "About", href: "#about" },
   { label: "Services", href: "#services" },
+  { label: "Products", href: "#products" },
   { label: "Projects", href: "#projects" },
   { label: "Contact", href: "#contact" },
 ];
@@ -28,7 +29,7 @@ const Navbar = () => {
       transition={{ duration: 0.6, ease: "easeOut" }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         scrolled
-          ? "glass shadow-navbar py-3"
+          ? "glass-premium shadow-navbar py-3 border-b border-border/30"
           : "bg-transparent py-5"
       }`}
     >
@@ -47,8 +48,8 @@ const Navbar = () => {
             <li key={link.href}>
               <a
                 href={link.href}
-                className={`text-sm font-medium transition-colors duration-200 hover:text-primary ${
-                  scrolled ? "text-foreground/70" : "text-primary-foreground/80 hover:text-primary-foreground"
+                className={`text-sm font-medium transition-colors duration-200 underline-hover ${
+                  scrolled ? "text-foreground/70 hover:text-primary" : "text-primary-foreground/80 hover:text-primary-foreground"
                 }`}
               >
                 {link.label}
@@ -59,7 +60,7 @@ const Navbar = () => {
 
         <a
           href="#contact"
-          className="hidden md:inline-flex gradient-primary text-primary-foreground px-6 py-2.5 rounded-xl text-sm font-semibold hover:scale-105 transition-transform duration-300 shadow-glow"
+          className="hidden md:inline-flex gradient-primary text-primary-foreground px-6 py-2.5 rounded-xl text-sm font-semibold hover:scale-105 transition-all duration-300 shadow-glow btn-3d animate-glow-pulse"
         >
           Get in Touch
         </a>
@@ -78,7 +79,7 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden glass border-t border-border/50 overflow-hidden"
+            className="md:hidden glass-premium border-t border-border/30 overflow-hidden"
           >
             <ul className="flex flex-col gap-1 p-4">
               {navLinks.map((link, i) => (
@@ -101,7 +102,7 @@ const Navbar = () => {
                 <a
                   href="#contact"
                   onClick={() => setMobileOpen(false)}
-                  className="block gradient-primary text-primary-foreground text-center px-5 py-3 rounded-xl text-sm font-semibold"
+                  className="block gradient-primary text-primary-foreground text-center px-5 py-3 rounded-xl text-sm font-semibold shadow-glow"
                 >
                   Get in Touch
                 </a>

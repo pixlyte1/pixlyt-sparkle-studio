@@ -24,7 +24,8 @@ const Contact = () => {
 
   return (
     <section id="contact" className="py-28 bg-background relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-primary/3 blur-3xl pointer-events-none" />
+      <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-primary/5 blur-[100px] animate-blob pointer-events-none" />
+      <div className="absolute bottom-20 left-10 w-72 h-72 rounded-full bg-accent/5 blur-[80px] animate-blob-delayed pointer-events-none" />
 
       <div className="container mx-auto px-4 relative">
         <AnimatedSection className="text-center max-w-3xl mx-auto mb-20">
@@ -50,9 +51,9 @@ const Contact = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.5 }}
-                className="flex items-start gap-4 p-5 rounded-2xl bg-card shadow-card border border-border/50"
+                className="flex items-start gap-4 p-5 rounded-2xl glass-card border-glow hover:shadow-card-hover transition-all duration-500"
               >
-                <div className="w-12 h-12 rounded-xl gradient-primary flex items-center justify-center shrink-0">
+                <div className="w-12 h-12 rounded-xl gradient-primary flex items-center justify-center shrink-0 shadow-glow">
                   <info.icon size={20} className="text-primary-foreground" />
                 </div>
                 <div>
@@ -65,7 +66,7 @@ const Contact = () => {
 
           {/* Form */}
           <AnimatedSection direction="right" className="lg:col-span-3" delay={0.15}>
-            <form onSubmit={handleSubmit} className="space-y-5 bg-card p-8 rounded-2xl shadow-card border border-border/50">
+            <form onSubmit={handleSubmit} className="space-y-5 glass-card p-8 rounded-2xl border-glow">
               <div className="grid sm:grid-cols-2 gap-5">
                 <input
                   type="text"
@@ -73,7 +74,7 @@ const Contact = () => {
                   required
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
-                  className="w-full px-5 py-3.5 rounded-xl border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all duration-200"
+                  className="w-full px-5 py-3.5 rounded-xl border border-border bg-background/80 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all duration-200"
                 />
                 <input
                   type="email"
@@ -81,7 +82,7 @@ const Contact = () => {
                   required
                   value={form.email}
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
-                  className="w-full px-5 py-3.5 rounded-xl border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all duration-200"
+                  className="w-full px-5 py-3.5 rounded-xl border border-border bg-background/80 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all duration-200"
                 />
               </div>
               <textarea
@@ -90,13 +91,13 @@ const Contact = () => {
                 required
                 value={form.message}
                 onChange={(e) => setForm({ ...form, message: e.target.value })}
-                className="w-full px-5 py-3.5 rounded-xl border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all duration-200 resize-none"
+                className="w-full px-5 py-3.5 rounded-xl border border-border bg-background/80 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all duration-200 resize-none"
               />
               <motion.button
                 type="submit"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className={`w-full gradient-primary text-primary-foreground py-4 rounded-xl font-semibold text-base flex items-center justify-center gap-2 shadow-glow transition-opacity duration-300 ${submitted ? 'opacity-80' : ''}`}
+                className={`w-full gradient-primary text-primary-foreground py-4 rounded-xl font-semibold text-base flex items-center justify-center gap-2 shadow-glow hover:shadow-glow-lg transition-all duration-300 btn-3d shimmer-effect ${submitted ? 'opacity-80' : ''}`}
                 disabled={submitted}
               >
                 {submitted ? (

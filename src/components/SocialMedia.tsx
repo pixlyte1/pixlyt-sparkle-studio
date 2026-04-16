@@ -35,6 +35,10 @@ const socials = [
 
 const SocialMedia = () => (
   <section className="py-28 gradient-section relative overflow-hidden">
+    {/* Background blobs */}
+    <div className="absolute top-10 left-20 w-64 h-64 rounded-full bg-primary/5 blur-[80px] animate-blob pointer-events-none" />
+    <div className="absolute bottom-10 right-20 w-72 h-72 rounded-full bg-accent/5 blur-[100px] animate-blob-delayed pointer-events-none" />
+
     <div className="container mx-auto px-4 relative">
       <AnimatedSection className="text-center max-w-3xl mx-auto mb-16">
         <span className="inline-block px-4 py-1.5 rounded-full gradient-primary text-primary-foreground text-xs font-semibold uppercase tracking-widest mb-5">
@@ -63,12 +67,12 @@ const SocialMedia = () => (
             initial={{ opacity: 0, scale: 0.85 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-60px" }}
-            whileHover={{ y: -8, scale: 1.03 }}
+            whileHover={{ y: -10, scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300, delay: i * 0.12 }}
-            className="group flex flex-col items-center gap-5 p-10 bg-card rounded-2xl shadow-card hover:shadow-xl border border-border/50 transition-all duration-500 min-w-[220px] cursor-pointer"
+            className="group flex flex-col items-center gap-5 p-10 glass-card rounded-2xl hover:shadow-card-hover border-glow transition-all duration-500 min-w-[220px] cursor-pointer"
           >
             <div
-              className={`rounded-2xl bg-muted flex items-center justify-center transition-all duration-500 ${s.hoverBg} ${s.hoverShadow} hover:shadow-lg`}
+              className={`rounded-2xl bg-muted flex items-center justify-center transition-all duration-500 ${s.hoverBg} ${s.hoverShadow} hover:shadow-lg group-hover:shadow-glow`}
               style={{ width: 72, height: 72 }}
             >
               <s.icon
