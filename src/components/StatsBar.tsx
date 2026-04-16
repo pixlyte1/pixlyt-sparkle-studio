@@ -42,7 +42,7 @@ const StatsBar = () => (
   <section className="relative -mt-20 z-20 pb-8">
     <div className="container mx-auto px-4">
       <AnimatedSection direction="scale">
-        <div className="glass rounded-3xl border border-border/50 shadow-card p-8 sm:p-10">
+        <div className="glass-premium rounded-3xl border border-border/30 shadow-card-hover p-8 sm:p-10">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map((stat, i) => (
               <motion.div
@@ -53,8 +53,8 @@ const StatsBar = () => (
                 transition={{ delay: i * 0.1, duration: 0.5 }}
                 className="text-center"
               >
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 mb-4">
-                  <stat.icon className="text-primary" size={22} />
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl gradient-primary shadow-glow mb-4">
+                  <stat.icon className="text-primary-foreground" size={22} />
                 </div>
                 <div className="mb-1">
                   <Counter target={stat.value} suffix={stat.suffix} />

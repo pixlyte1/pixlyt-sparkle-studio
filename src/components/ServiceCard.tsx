@@ -12,7 +12,7 @@ const ServiceCard = ({ icon: Icon, title, description, index }: Props) => (
   <motion.div
     whileHover={{ y: -10, scale: 1.02 }}
     transition={{ type: "spring", stiffness: 300, damping: 20 }}
-    className="group relative bg-card rounded-2xl p-8 shadow-card hover:shadow-card-hover border border-border/50 transition-shadow duration-500 overflow-hidden h-full"
+    className="group relative glass-card rounded-2xl p-8 hover:shadow-card-hover border-glow transition-all duration-500 overflow-hidden h-full"
   >
     {/* Background number */}
     <span className="absolute -top-2 -right-2 text-8xl font-heading font-black text-primary/[0.04] group-hover:text-primary/[0.08] transition-colors duration-500 select-none">

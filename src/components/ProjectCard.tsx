@@ -10,7 +10,7 @@ const ProjectCard = ({ image, title, category }: Props) => (
   <motion.div
     whileHover={{ y: -8 }}
     transition={{ type: "spring", stiffness: 300, damping: 20 }}
-    className="group relative rounded-2xl overflow-hidden shadow-card hover:shadow-card-hover transition-shadow duration-500"
+    className="group relative rounded-2xl overflow-hidden shadow-card hover:shadow-card-hover transition-all duration-500 border-glow"
   >
     <div className="overflow-hidden aspect-[4/3]">
       <motion.img
@@ -30,7 +30,7 @@ const ProjectCard = ({ image, title, category }: Props) => (
     </div>
 
     {/* Hover border glow */}
-    <div className="absolute inset-0 rounded-2xl border-2 border-primary/0 group-hover:border-primary/30 transition-colors duration-500" />
+    <div className="absolute inset-0 rounded-2xl border-2 border-primary/0 group-hover:border-primary/30 group-hover:shadow-glow transition-all duration-500" />
   </motion.div>
 );
 

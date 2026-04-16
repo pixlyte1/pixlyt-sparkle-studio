@@ -13,6 +13,10 @@ const services = [
 
 const Services = () => (
   <section id="services" className="py-28 gradient-section relative overflow-hidden">
+    {/* Decorative blobs */}
+    <div className="absolute top-20 right-20 w-72 h-72 rounded-full bg-primary/5 blur-[100px] animate-blob pointer-events-none" />
+    <div className="absolute bottom-20 left-20 w-64 h-64 rounded-full bg-accent/5 blur-[80px] animate-blob-delayed pointer-events-none" />
+
     {/* Decorative dots pattern */}
     <div className="absolute inset-0 opacity-[0.015]" style={{
       backgroundImage: "radial-gradient(circle, hsl(211 90% 52%) 1px, transparent 1px)",

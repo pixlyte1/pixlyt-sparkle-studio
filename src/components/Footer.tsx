@@ -7,6 +7,7 @@ const footerLinks = [
   { label: "Home", href: "#home" },
   { label: "About", href: "#about" },
   { label: "Services", href: "#services" },
+  { label: "Products", href: "#products" },
   { label: "Projects", href: "#projects" },
   { label: "Contact", href: "#contact" },
 ];
@@ -16,7 +17,10 @@ const Footer = () => (
     {/* Gradient top border */}
     <div className="h-1 gradient-primary" />
 
-    <div className="container mx-auto px-4 py-16">
+    {/* Subtle glow */}
+    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-96 h-32 bg-primary/10 blur-[80px] pointer-events-none" />
+
+    <div className="container mx-auto px-4 py-16 relative">
       <div className="grid md:grid-cols-3 gap-12 mb-12">
         {/* Brand */}
         <div>
@@ -48,7 +52,7 @@ const Footer = () => (
               { icon: Youtube, label: "YouTube", href: "https://www.youtube.com/@TamilThulinews" },
               { icon: Instagram, label: "Instagram", href: "https://www.instagram.com/tamilthulinews/" },
               { icon: Facebook, label: "Facebook", href: "https://www.facebook.com/tamilthulinews/" },
-            ].map((s, i) => (
+            ].map((s) => (
               <motion.a
                 key={s.label}
                 href={s.href}
@@ -60,7 +64,7 @@ const Footer = () => (
                   openExternalLink(s.href);
                 }}
                 whileHover={{ scale: 1.15, y: -2 }}
-                className="w-10 h-10 rounded-xl bg-primary-foreground/5 hover:gradient-primary flex items-center justify-center text-primary-foreground/40 hover:text-primary-foreground transition-all duration-300"
+                className="w-10 h-10 rounded-xl bg-primary-foreground/5 hover:gradient-primary flex items-center justify-center text-primary-foreground/40 hover:text-primary-foreground transition-all duration-300 hover:shadow-glow"
               >
                 <s.icon size={18} />
               </motion.a>
@@ -76,7 +80,7 @@ const Footer = () => (
         <motion.a
           href="#home"
           whileHover={{ y: -3 }}
-          className="w-10 h-10 rounded-full border border-primary-foreground/10 flex items-center justify-center text-primary-foreground/30 hover:text-primary hover:border-primary/30 transition-all duration-300"
+          className="w-10 h-10 rounded-full border border-primary-foreground/10 flex items-center justify-center text-primary-foreground/30 hover:text-primary hover:border-primary/30 transition-all duration-300 hover:shadow-glow"
         >
           <ArrowUp size={18} />
         </motion.a>

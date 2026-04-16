@@ -60,14 +60,31 @@ const Hero = () => {
             width={1920}
             height={1080}
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-[hsl(211_60%_8%/0.88)] via-[hsl(211_60%_12%/0.75)] to-[hsl(211_60%_12%/0.5)]" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[hsl(211_60%_8%/0.92)] via-[hsl(211_60%_12%/0.78)] to-[hsl(211_60%_12%/0.5)]" />
           <div className="absolute inset-0 bg-gradient-to-t from-[hsl(211_60%_8%/0.6)] to-transparent" />
         </motion.div>
       </AnimatePresence>
 
-      {/* Floating decorative elements */}
-      <div className="absolute top-1/4 right-1/4 w-64 h-64 rounded-full bg-primary/10 blur-3xl animate-float pointer-events-none" />
-      <div className="absolute bottom-1/4 left-1/3 w-48 h-48 rounded-full bg-accent/10 blur-3xl animate-float-delayed pointer-events-none" />
+      {/* Animated gradient blobs */}
+      <div className="absolute top-1/4 right-1/4 w-96 h-96 rounded-full bg-primary/8 blur-[100px] animate-blob pointer-events-none" />
+      <div className="absolute bottom-1/4 left-1/3 w-72 h-72 rounded-full bg-accent/10 blur-[80px] animate-blob-delayed pointer-events-none" />
+      <div className="absolute top-1/2 right-1/3 w-64 h-64 rounded-full bg-primary/5 blur-[60px] animate-blob-slow pointer-events-none" />
+
+      {/* Floating 3D decorative cards */}
+      <div className="absolute top-[20%] right-[10%] z-10 hidden lg:block pointer-events-none">
+        <motion.div
+          animate={{ y: [-10, 10, -10], rotateZ: [-2, 2, -2] }}
+          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+          className="w-32 h-20 rounded-2xl glass-dark border border-primary-foreground/10 shadow-glow-lg"
+        />
+      </div>
+      <div className="absolute top-[40%] right-[5%] z-10 hidden lg:block pointer-events-none">
+        <motion.div
+          animate={{ y: [8, -12, 8], rotateZ: [1, -1, 1] }}
+          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+          className="w-24 h-16 rounded-xl glass-dark border border-accent/20 shadow-glow-accent"
+        />
+      </div>
 
       {/* Content */}
       <div className="relative z-10 h-full flex items-center">
@@ -80,7 +97,7 @@ const Hero = () => {
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: 30 }}
                   transition={{ duration: 0.5, delay: 0.2 }}
-                  className="inline-block px-4 py-1.5 rounded-full border border-primary-foreground/20 text-primary-foreground/80 text-sm font-medium mb-6 glass-dark"
+                  className="inline-block px-5 py-2 rounded-full border border-primary-foreground/20 text-primary-foreground/80 text-sm font-medium mb-6 glass-dark"
                 >
                   {slide.tag}
                 </motion.span>
@@ -121,13 +138,13 @@ const Hero = () => {
                 >
                   <a
                     href="#contact"
-                    className="gradient-primary shimmer-effect text-primary-foreground px-8 py-4 rounded-xl font-semibold text-base flex items-center justify-center gap-2 hover:scale-105 transition-transform duration-300 shadow-glow"
+                    className="gradient-primary shimmer-effect text-primary-foreground px-8 py-4 rounded-xl font-semibold text-base flex items-center justify-center gap-2 hover:scale-105 transition-all duration-300 shadow-glow-lg btn-3d"
                   >
                     Get Started <ArrowRight size={18} />
                   </a>
                   <a
                     href="#projects"
-                    className="px-8 py-4 rounded-xl font-semibold text-base border border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10 transition-all duration-300 text-center"
+                    className="px-8 py-4 rounded-xl font-semibold text-base border border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10 transition-all duration-300 text-center glass-dark btn-3d"
                   >
                     View Projects
                   </a>
@@ -142,13 +159,13 @@ const Hero = () => {
       <div className="absolute bottom-8 right-8 z-20 flex items-center gap-3">
         <button
           onClick={prev}
-          className="w-12 h-12 rounded-full border border-primary-foreground/20 text-primary-foreground/70 hover:bg-primary-foreground/10 hover:text-primary-foreground flex items-center justify-center transition-all duration-300"
+          className="w-12 h-12 rounded-full border border-primary-foreground/20 text-primary-foreground/70 hover:bg-primary-foreground/10 hover:text-primary-foreground flex items-center justify-center transition-all duration-300 glass-dark"
         >
           <ChevronLeft size={20} />
         </button>
         <button
           onClick={next}
-          className="w-12 h-12 rounded-full border border-primary-foreground/20 text-primary-foreground/70 hover:bg-primary-foreground/10 hover:text-primary-foreground flex items-center justify-center transition-all duration-300"
+          className="w-12 h-12 rounded-full border border-primary-foreground/20 text-primary-foreground/70 hover:bg-primary-foreground/10 hover:text-primary-foreground flex items-center justify-center transition-all duration-300 glass-dark"
         >
           <ChevronRight size={20} />
         </button>
