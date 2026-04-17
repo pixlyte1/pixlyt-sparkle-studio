@@ -6,8 +6,9 @@ import logo from "@/assets/pixlyt-logo.png";
 const navLinks = [
   { label: "Home", href: "#home" },
   { label: "About", href: "#about" },
+  { label: "Services", href: "#services" },
   { label: "Products", href: "#products" },
-  { label: "Media", href: "#media" },
+  { label: "Projects", href: "#projects" },
   { label: "Contact", href: "#contact" },
 ];
 
