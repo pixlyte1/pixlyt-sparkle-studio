@@ -22,7 +22,7 @@ const slides = [
     image: heroSlide3,
     tag: "Technology First",
     heading: ["Building the Future", "of Digital Innovation"],
-    desc: "Robust, scalable technology platforms powering the next generation of digital transformation.",
+    desc: "Scalable technology platforms powering the next generation of digital transformation.",
   },
 ];
 
