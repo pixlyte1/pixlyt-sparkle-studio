@@ -11,7 +11,7 @@ const highlights = [
   {
     icon: Monitor,
     title: "IT Excellence",
-    desc: "Building robust, scalable technology platforms that power modern digital experiences and drive operational efficiency.",
+    desc: "Building scalable technology platforms that power modern digital experiences and drive operational efficiency.",
   },
   {
     icon: Film,
