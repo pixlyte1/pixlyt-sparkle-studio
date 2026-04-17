@@ -143,10 +143,10 @@ const Hero = () => {
                     Get Started <ArrowRight size={18} />
                   </a>
                   <a
-                    href="#projects"
+                    href="#products"
                     className="px-8 py-4 rounded-xl font-semibold text-base border border-primary-foreground/20 text-primary-foreground hover:bg-primary-foreground/10 transition-all duration-300 text-center glass-dark btn-3d"
                   >
-                    View Projects
+                    Explore Products
                   </a>
                 </motion.div>
               </motion.div>
