@@ -49,9 +49,9 @@ const Footer = () => (
           <h4 className="text-primary-foreground font-heading font-semibold mb-4">Follow Us</h4>
           <div className="flex items-center gap-3">
             {[
-              { icon: Youtube, label: "YouTube", href: "https://www.youtube.com/@TamilThulinews" },
-              { icon: Instagram, label: "Instagram", href: "https://www.instagram.com/tamilthulinews/" },
-              { icon: Facebook, label: "Facebook", href: "https://www.facebook.com/tamilthulinews/" },
+              { icon: Youtube, label: "YouTube", href: "https://youtube.com" },
+              { icon: Instagram, label: "Instagram", href: "https://instagram.com" },
+              { icon: Facebook, label: "Facebook", href: "https://facebook.com" },
             ].map((s) => (
               <motion.a
                 key={s.label}

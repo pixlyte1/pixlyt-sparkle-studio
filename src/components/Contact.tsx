@@ -4,9 +4,9 @@ import { motion } from "framer-motion";
 import AnimatedSection from "./AnimatedSection";
 
 const contactInfo = [
-  { icon: MapPin, label: "Visit Us", value: "Chennai, Tamil Nadu, India" },
-  { icon: Mail, label: "Email Us", value: "hello@pixlyt.com" },
-  { icon: Phone, label: "Call Us", value: "+91 98765 43210" },
+  { icon: MapPin, label: "Visit Us", value: "Vellore, Tamil Nadu, India" },
+  { icon: Mail, label: "Email Us", value: "md@pixlyt.in" },
+  { icon: Phone, label: "Call Us", value: "+91 8618826965" },
 ];
 
 const Contact = () => {
