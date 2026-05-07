@@ -22,18 +22,18 @@ const socials = [
   {
     icon: FaFacebookF,
     label: "Facebook",
-    href: "https://www.facebook.com/tamilthulinews",
+    href: "https://facebook.com",
     hoverBg: "hover:bg-blue-600",
   },
   {
     icon: FaInstagram,
     label: "Instagram",
-    href: "https://www.instagram.com/tamilthulinews/",
+    href: "https://instagram.com",
     hoverBg: "hover:bg-gradient-to-br hover:from-purple-500 hover:via-pink-500 hover:to-orange-400",
   },
 ];
 
-const YT_URL = "https://www.youtube.com/@TamilThulinews";
+const YT_URL = "https://youtube.com";
 
 const Media = () => (
   <section id="media" className="py-28 gradient-section-reverse relative overflow-hidden">
@@ -48,7 +48,7 @@ const Media = () => (
           Media Division
         </span>
         <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight mb-6">
-          PIXLYT Media – <span className="text-gradient">Tamil Tuli News</span>
+          PIXLYT Media – <span className="text-gradient">News Channel</span>
         </h2>
         <p className="text-xl text-muted-foreground mb-4 font-medium">
           Viral News. Deep Tamil Commentary.
@@ -109,7 +109,7 @@ const Media = () => (
                   onClick={() => openExternalLink(YT_URL)}
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.95 }}
-                  aria-label="Visit Tamil Tuli News YouTube channel"
+                  aria-label="Visit News Channel YouTube channel"
                   className="relative z-10 w-20 h-20 rounded-full bg-white shadow-2xl flex items-center justify-center group-hover:shadow-glow-lg transition-shadow duration-500"
                 >
                   <Play className="text-red-600 ml-1" size={32} fill="currentColor" />
@@ -131,7 +131,7 @@ const Media = () => (
                 Featured Channel
               </div>
               <h3 className="font-heading text-2xl sm:text-3xl font-bold text-foreground mb-3">
-                Tamil Tuli News YouTube Channel
+                News Channel YouTube
               </h3>
               <p className="text-muted-foreground mb-6 leading-relaxed">
                 Join our growing community for viral stories, deep Tamil commentary, and unique perspectives on global news.
@@ -191,7 +191,7 @@ const Media = () => (
       {/* Social Links */}
       <AnimatedSection className="max-w-2xl mx-auto mb-12">
         <h4 className="text-center text-sm uppercase tracking-widest text-muted-foreground font-semibold mb-6">
-          Follow Tamil Tuli News
+          Follow News Channel
         </h4>
         <div className="flex flex-wrap items-center justify-center gap-5">
           {socials.map((s, i) => (

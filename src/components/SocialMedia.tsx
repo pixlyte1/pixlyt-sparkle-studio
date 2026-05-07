@@ -6,27 +6,27 @@ import { openExternalLink } from "@/lib/openExternalLink";
 const socials = [
   {
     icon: FaYoutube,
-    label: "Tamil Thuli News",
-    subtitle: "YouTube Channel",
-    href: "https://www.youtube.com/@TamilThulinews",
+    label: "YouTube",
+    subtitle: "YouTube",
+    href: "https://youtube.com",
     hoverBg: "hover:bg-red-500",
     hoverShadow: "hover:shadow-red-500/30",
     iconHover: "group-hover:text-white",
   },
   {
     icon: FaInstagram,
-    label: "Tamil Thuli News",
+    label: "Instagram",
     subtitle: "Instagram",
-    href: "https://www.instagram.com/tamilthulinews/",
+    href: "https://instagram.com",
     hoverBg: "hover:bg-gradient-to-br hover:from-purple-500 hover:via-pink-500 hover:to-orange-400",
     hoverShadow: "hover:shadow-pink-500/30",
     iconHover: "group-hover:text-white",
   },
   {
     icon: FaFacebookF,
-    label: "Tamil Thuli News",
+    label: "Facebook",
     subtitle: "Facebook",
-    href: "https://www.facebook.com/tamilthulinews/",
+    href: "https://facebook.com",
     hoverBg: "hover:bg-blue-600",
     hoverShadow: "hover:shadow-blue-600/30",
     iconHover: "group-hover:text-white",
@@ -54,16 +54,11 @@ const SocialMedia = () => (
 
       <div className="flex flex-wrap items-stretch justify-center gap-8 max-w-3xl mx-auto">
         {socials.map((s, i) => (
-          <motion.a
+          <motion.button
+            type="button"
             key={s.subtitle}
-            href={s.href}
-            target="_blank"
-            rel="noopener noreferrer"
             aria-label={`Open ${s.subtitle} in a new tab`}
-            onClick={(event) => {
-              event.preventDefault();
-              openExternalLink(s.href);
-            }}
+            onClick={() => openExternalLink(s.href)}
             initial={{ opacity: 0, scale: 0.85 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-60px" }}
@@ -84,7 +79,7 @@ const SocialMedia = () => (
               <p className="font-heading font-semibold text-foreground text-lg">{s.label}</p>
               <p className="text-muted-foreground text-sm mt-1">{s.subtitle}</p>
             </div>
-          </motion.a>
+          </motion.button>
         ))}
       </div>
     </div>
