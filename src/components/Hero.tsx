@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight, Sparkles, Users } from "lucide-react";
 import heroSlide1 from "@/assets/hero-slide-1.jpg";
 import heroSlide2 from "@/assets/hero-slide-2.jpg";
 import heroSlide3 from "@/assets/hero-slide-3.jpg";
@@ -70,20 +70,57 @@ const Hero = () => {
       <div className="absolute bottom-1/4 left-1/3 w-72 h-72 rounded-full bg-accent/10 blur-[80px] animate-blob-delayed pointer-events-none" />
       <div className="absolute top-1/2 right-1/3 w-64 h-64 rounded-full bg-primary/5 blur-[60px] animate-blob-slow pointer-events-none" />
 
-      {/* Floating 3D decorative cards */}
-      <div className="absolute top-[20%] right-[10%] z-10 hidden lg:block pointer-events-none">
+      {/* Floating product cards */}
+      <div className="absolute top-[14%] right-[8%] z-10 hidden lg:block">
         <motion.div
-          animate={{ y: [-10, 10, -10], rotateZ: [-2, 2, -2] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-          className="w-32 h-20 rounded-2xl glass-dark border border-primary-foreground/10 shadow-glow-lg"
-        />
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: [-10, 10, -10], rotateZ: [-2, 2, -2] }}
+          transition={{
+            opacity: { duration: 0.8, delay: 0.6 },
+            y: { duration: 6, repeat: Infinity, ease: "easeInOut" },
+            rotateZ: { duration: 6, repeat: Infinity, ease: "easeInOut" },
+          }}
+          whileHover={{ scale: 1.04, rotateZ: 0 }}
+          className="w-64 rounded-2xl glass-dark border border-primary-foreground/15 shadow-glow-lg p-5 backdrop-blur-xl"
+        >
+          <div className="relative h-28 rounded-xl mb-4 overflow-hidden bg-gradient-to-br from-primary/40 via-primary/20 to-accent/30 border border-primary-foreground/10 flex items-center justify-center">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,hsl(var(--primary)/0.4),transparent_70%)]" />
+            <Sparkles className="relative text-primary-foreground" size={36} />
+          </div>
+          <h4 className="font-heading text-primary-foreground text-lg font-bold mb-1">Creator AI</h4>
+          <p className="text-primary-foreground/60 text-xs leading-snug mb-4">
+            AI tools to ideate, create and elevate your content effortlessly.
+          </p>
+          <div className="w-9 h-9 rounded-full bg-primary-foreground/10 border border-primary-foreground/20 flex items-center justify-center">
+            <ArrowRight size={16} className="text-primary-foreground" />
+          </div>
+        </motion.div>
       </div>
-      <div className="absolute top-[40%] right-[5%] z-10 hidden lg:block pointer-events-none">
+
+      <div className="absolute top-[48%] right-[3%] z-10 hidden lg:block">
         <motion.div
-          animate={{ y: [8, -12, 8], rotateZ: [1, -1, 1] }}
-          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-          className="w-24 h-16 rounded-xl glass-dark border border-accent/20 shadow-glow-accent"
-        />
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: [8, -12, 8], rotateZ: [1, -1, 1] }}
+          transition={{
+            opacity: { duration: 0.8, delay: 0.9 },
+            y: { duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 },
+            rotateZ: { duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 },
+          }}
+          whileHover={{ scale: 1.04, rotateZ: 0 }}
+          className="w-64 rounded-2xl glass-dark border border-accent/25 shadow-glow-accent p-5 backdrop-blur-xl"
+        >
+          <div className="relative h-28 rounded-xl mb-4 overflow-hidden bg-gradient-to-br from-accent/40 via-primary/20 to-primary/30 border border-primary-foreground/10 flex items-center justify-center">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,hsl(var(--accent)/0.4),transparent_70%)]" />
+            <Users className="relative text-primary-foreground" size={36} />
+          </div>
+          <h4 className="font-heading text-primary-foreground text-lg font-bold mb-1">HR AI</h4>
+          <p className="text-primary-foreground/60 text-xs leading-snug mb-4">
+            Smart recruitment, employee insights & workforce automation.
+          </p>
+          <div className="w-9 h-9 rounded-full bg-primary-foreground/10 border border-primary-foreground/20 flex items-center justify-center">
+            <ArrowRight size={16} className="text-primary-foreground" />
+          </div>
+        </motion.div>
       </div>
 
       {/* Content */}
