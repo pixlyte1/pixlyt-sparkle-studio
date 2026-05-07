@@ -45,85 +45,89 @@ const Hero = () => {
 
   return (
     <section id="home" className="relative h-screen overflow-hidden">
-      {/* Background images */}
-      <AnimatePresence mode="wait">
+      {/* Visual layer: background + floating cards transition together */}
+      <AnimatePresence mode="sync">
         <motion.div
           key={current}
-          initial={{ scale: 1.1, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 1.2, ease: "easeInOut" }}
-          className="absolute inset-0"
+          transition={{ duration: 1.6, ease: [0.4, 0, 0.2, 1] }}
+          className="absolute inset-0 z-0"
         >
-          <img
-            src={slide.image}
-            alt=""
-            className="w-full h-full object-cover"
-            width={1920}
-            height={1080}
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-[hsl(211_60%_8%/0.92)] via-[hsl(211_60%_12%/0.78)] to-[hsl(211_60%_12%/0.5)]" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[hsl(211_60%_8%/0.6)] to-transparent" />
+          {/* Background image */}
+          <motion.div
+            initial={{ scale: 1.08 }}
+            animate={{ scale: 1 }}
+            transition={{ duration: 8, ease: "easeOut" }}
+            className="absolute inset-0"
+          >
+            <img
+              src={slide.image}
+              alt=""
+              className="w-full h-full object-cover"
+              width={1920}
+              height={1080}
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-[hsl(211_60%_8%/0.92)] via-[hsl(211_60%_12%/0.78)] to-[hsl(211_60%_12%/0.5)]" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[hsl(211_60%_8%/0.6)] to-transparent" />
+          </motion.div>
+
+          {/* Floating product cards (part of the visual layer) */}
+          <div className="absolute top-[14%] right-[8%] hidden lg:block">
+            <motion.div
+              animate={{ y: [-10, 10, -10], rotateZ: [-2, 2, -2] }}
+              transition={{
+                y: { duration: 6, repeat: Infinity, ease: "easeInOut" },
+                rotateZ: { duration: 6, repeat: Infinity, ease: "easeInOut" },
+              }}
+              whileHover={{ scale: 1.04, rotateZ: 0 }}
+              className="w-64 rounded-2xl glass-dark border border-primary-foreground/15 shadow-glow-lg p-5 backdrop-blur-xl"
+            >
+              <div className="relative h-32 rounded-xl mb-4 overflow-hidden border border-primary-foreground/10">
+                <img src={cardCreatorAI} alt="Creator AI workstation" loading="lazy" width={512} height={512} className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[hsl(211_60%_8%/0.6)] via-transparent to-transparent" />
+              </div>
+              <h4 className="font-heading text-primary-foreground text-lg font-bold mb-1">Creator AI</h4>
+              <p className="text-primary-foreground/60 text-xs leading-snug mb-4">
+                AI tools to ideate, create and elevate your content effortlessly.
+              </p>
+              <div className="w-9 h-9 rounded-full bg-primary-foreground/10 border border-primary-foreground/20 flex items-center justify-center">
+                <ArrowRight size={16} className="text-primary-foreground" />
+              </div>
+            </motion.div>
+          </div>
+
+          <div className="absolute top-[48%] right-[3%] hidden lg:block">
+            <motion.div
+              animate={{ y: [8, -12, 8], rotateZ: [1, -1, 1] }}
+              transition={{
+                y: { duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 },
+                rotateZ: { duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 },
+              }}
+              whileHover={{ scale: 1.04, rotateZ: 0 }}
+              className="w-64 rounded-2xl glass-dark border border-accent/25 shadow-glow-accent p-5 backdrop-blur-xl"
+            >
+              <div className="relative h-32 rounded-xl mb-4 overflow-hidden border border-primary-foreground/10">
+                <img src={cardHrAI} alt="HR AI network" loading="lazy" width={512} height={512} className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[hsl(211_60%_8%/0.6)] via-transparent to-transparent" />
+              </div>
+              <h4 className="font-heading text-primary-foreground text-lg font-bold mb-1">HR AI</h4>
+              <p className="text-primary-foreground/60 text-xs leading-snug mb-4">
+                Smart recruitment, employee insights & workforce automation.
+              </p>
+              <div className="w-9 h-9 rounded-full bg-primary-foreground/10 border border-primary-foreground/20 flex items-center justify-center">
+                <ArrowRight size={16} className="text-primary-foreground" />
+              </div>
+            </motion.div>
+          </div>
         </motion.div>
       </AnimatePresence>
 
-      {/* Animated gradient blobs */}
-      <div className="absolute top-1/4 right-1/4 w-96 h-96 rounded-full bg-primary/8 blur-[100px] animate-blob pointer-events-none" />
-      <div className="absolute bottom-1/4 left-1/3 w-72 h-72 rounded-full bg-accent/10 blur-[80px] animate-blob-delayed pointer-events-none" />
-      <div className="absolute top-1/2 right-1/3 w-64 h-64 rounded-full bg-primary/5 blur-[60px] animate-blob-slow pointer-events-none" />
-
-      {/* Floating product cards */}
-      <div className="absolute top-[14%] right-[8%] z-10 hidden lg:block">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: [-10, 10, -10], rotateZ: [-2, 2, -2] }}
-          transition={{
-            opacity: { duration: 0.8, delay: 0.6 },
-            y: { duration: 6, repeat: Infinity, ease: "easeInOut" },
-            rotateZ: { duration: 6, repeat: Infinity, ease: "easeInOut" },
-          }}
-          whileHover={{ scale: 1.04, rotateZ: 0 }}
-          className="w-64 rounded-2xl glass-dark border border-primary-foreground/15 shadow-glow-lg p-5 backdrop-blur-xl"
-        >
-          <div className="relative h-32 rounded-xl mb-4 overflow-hidden border border-primary-foreground/10">
-            <img src={cardCreatorAI} alt="Creator AI workstation" loading="lazy" width={512} height={512} className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[hsl(211_60%_8%/0.6)] via-transparent to-transparent" />
-          </div>
-          <h4 className="font-heading text-primary-foreground text-lg font-bold mb-1">Creator AI</h4>
-          <p className="text-primary-foreground/60 text-xs leading-snug mb-4">
-            AI tools to ideate, create and elevate your content effortlessly.
-          </p>
-          <div className="w-9 h-9 rounded-full bg-primary-foreground/10 border border-primary-foreground/20 flex items-center justify-center">
-            <ArrowRight size={16} className="text-primary-foreground" />
-          </div>
-        </motion.div>
-      </div>
-
-      <div className="absolute top-[48%] right-[3%] z-10 hidden lg:block">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: [8, -12, 8], rotateZ: [1, -1, 1] }}
-          transition={{
-            opacity: { duration: 0.8, delay: 0.9 },
-            y: { duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 },
-            rotateZ: { duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 },
-          }}
-          whileHover={{ scale: 1.04, rotateZ: 0 }}
-          className="w-64 rounded-2xl glass-dark border border-accent/25 shadow-glow-accent p-5 backdrop-blur-xl"
-        >
-          <div className="relative h-32 rounded-xl mb-4 overflow-hidden border border-primary-foreground/10">
-            <img src={cardHrAI} alt="HR AI network" loading="lazy" width={512} height={512} className="w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[hsl(211_60%_8%/0.6)] via-transparent to-transparent" />
-          </div>
-          <h4 className="font-heading text-primary-foreground text-lg font-bold mb-1">HR AI</h4>
-          <p className="text-primary-foreground/60 text-xs leading-snug mb-4">
-            Smart recruitment, employee insights & workforce automation.
-          </p>
-          <div className="w-9 h-9 rounded-full bg-primary-foreground/10 border border-primary-foreground/20 flex items-center justify-center">
-            <ArrowRight size={16} className="text-primary-foreground" />
-          </div>
-        </motion.div>
-      </div>
+      {/* Animated gradient blobs (stable, behind content) */}
+      <div className="absolute top-1/4 right-1/4 w-96 h-96 rounded-full bg-primary/8 blur-[100px] animate-blob pointer-events-none z-[1]" />
+      <div className="absolute bottom-1/4 left-1/3 w-72 h-72 rounded-full bg-accent/10 blur-[80px] animate-blob-delayed pointer-events-none z-[1]" />
+      <div className="absolute top-1/2 right-1/3 w-64 h-64 rounded-full bg-primary/5 blur-[60px] animate-blob-slow pointer-events-none z-[1]" />
 
       {/* Content */}
       <div className="relative z-10 h-full flex items-center">
