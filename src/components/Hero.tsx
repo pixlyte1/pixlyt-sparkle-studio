@@ -1,9 +1,11 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, ChevronLeft, ChevronRight, Sparkles, Users } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import heroSlide1 from "@/assets/hero-slide-1.jpg";
 import heroSlide2 from "@/assets/hero-slide-2.jpg";
 import heroSlide3 from "@/assets/hero-slide-3.jpg";
+import cardCreatorAI from "@/assets/card-creator-ai.jpg";
+import cardHrAI from "@/assets/card-hr-ai.jpg";
 
 const slides = [
   {
@@ -83,9 +85,9 @@ const Hero = () => {
           whileHover={{ scale: 1.04, rotateZ: 0 }}
           className="w-64 rounded-2xl glass-dark border border-primary-foreground/15 shadow-glow-lg p-5 backdrop-blur-xl"
         >
-          <div className="relative h-28 rounded-xl mb-4 overflow-hidden bg-gradient-to-br from-primary/40 via-primary/20 to-accent/30 border border-primary-foreground/10 flex items-center justify-center">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,hsl(var(--primary)/0.4),transparent_70%)]" />
-            <Sparkles className="relative text-primary-foreground" size={36} />
+          <div className="relative h-32 rounded-xl mb-4 overflow-hidden border border-primary-foreground/10">
+            <img src={cardCreatorAI} alt="Creator AI workstation" loading="lazy" width={512} height={512} className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[hsl(211_60%_8%/0.6)] via-transparent to-transparent" />
           </div>
           <h4 className="font-heading text-primary-foreground text-lg font-bold mb-1">Creator AI</h4>
           <p className="text-primary-foreground/60 text-xs leading-snug mb-4">
@@ -109,9 +111,9 @@ const Hero = () => {
           whileHover={{ scale: 1.04, rotateZ: 0 }}
           className="w-64 rounded-2xl glass-dark border border-accent/25 shadow-glow-accent p-5 backdrop-blur-xl"
         >
-          <div className="relative h-28 rounded-xl mb-4 overflow-hidden bg-gradient-to-br from-accent/40 via-primary/20 to-primary/30 border border-primary-foreground/10 flex items-center justify-center">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_30%,hsl(var(--accent)/0.4),transparent_70%)]" />
-            <Users className="relative text-primary-foreground" size={36} />
+          <div className="relative h-32 rounded-xl mb-4 overflow-hidden border border-primary-foreground/10">
+            <img src={cardHrAI} alt="HR AI network" loading="lazy" width={512} height={512} className="w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[hsl(211_60%_8%/0.6)] via-transparent to-transparent" />
           </div>
           <h4 className="font-heading text-primary-foreground text-lg font-bold mb-1">HR AI</h4>
           <p className="text-primary-foreground/60 text-xs leading-snug mb-4">
