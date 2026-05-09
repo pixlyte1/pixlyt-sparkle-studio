@@ -1,7 +1,8 @@
-import { useState, FormEvent } from "react";
-import { Send, MapPin, Mail, Phone } from "lucide-react";
+import { useState, useEffect, FormEvent } from "react";
+import { Send, MapPin, Mail, Phone, Loader2 } from "lucide-react";
 import { motion } from "framer-motion";
 import AnimatedSection from "./AnimatedSection";
+import { supabase } from "@/integrations/supabase/client";
 
 const contactInfo = [
   { icon: MapPin, label: "Visit Us", value: "Vellore, Tamil Nadu, India" },
@@ -9,17 +10,89 @@ const contactInfo = [
   { icon: Phone, label: "Call Us", value: "+91 8618826965" },
 ];
 
+declare global {
+  interface Window {
+    grecaptcha?: {
+      ready: (cb: () => void) => void;
+      execute: (siteKey: string, opts: { action: string }) => Promise<string>;
+    };
+  }
+}
+
+type Status = "idle" | "submitting" | "success" | "error";
+
 const Contact = () => {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [submitted, setSubmitted] = useState(false);
+  const [status, setStatus] = useState<Status>("idle");
+  const [errorMsg, setErrorMsg] = useState<string>("");
+  const [siteKey, setSiteKey] = useState<string>("");
 
-  const handleSubmit = (e: FormEvent) => {
+  // Fetch reCAPTCHA site key + load script
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const { data } = await supabase.functions.invoke("recaptcha-config");
+        if (cancelled) return;
+        const key = (data as { siteKey?: string } | null)?.siteKey;
+        if (!key) return;
+        setSiteKey(key);
+        if (!document.querySelector(`script[data-recaptcha="true"]`)) {
+          const script = document.createElement("script");
+          script.src = `https://www.google.com/recaptcha/api.js?render=${key}`;
+          script.async = true;
+          script.defer = true;
+          script.dataset.recaptcha = "true";
+          document.head.appendChild(script);
+        }
+      } catch (e) {
+        console.error("Failed to load reCAPTCHA config", e);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
+    setErrorMsg("");
+    setStatus("submitting");
+
+    try {
+      if (!siteKey || !window.grecaptcha) {
+        throw new Error("reCAPTCHA not loaded yet. Please wait a moment and try again.");
+      }
+
+      const token: string = await new Promise((resolve, reject) => {
+        window.grecaptcha!.ready(async () => {
+          try {
+            const t = await window.grecaptcha!.execute(siteKey, { action: "contact_submit" });
+            resolve(t);
+          } catch (err) {
+            reject(err);
+          }
+        });
+      });
+
+      const { data, error } = await supabase.functions.invoke("submit-contact", {
+        body: { ...form, recaptchaToken: token },
+      });
+
+      if (error) throw new Error(error.message || "Submission failed");
+      if (!(data as { success?: boolean })?.success) {
+        throw new Error((data as { error?: string })?.error || "Submission failed");
+      }
+
+      setStatus("success");
       setForm({ name: "", email: "", message: "" });
-      setSubmitted(false);
-    }, 3000);
+      setTimeout(() => setStatus("idle"), 4000);
+    } catch (err) {
+      console.error(err);
+      setErrorMsg(err instanceof Error ? err.message : "Something went wrong. Please try again.");
+      setStatus("error");
+      setTimeout(() => setStatus("idle"), 5000);
+    }
   };
 
   return (
@@ -72,6 +145,7 @@ const Contact = () => {
                   type="text"
                   placeholder="Your Name"
                   required
+                  maxLength={100}
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
                   className="w-full px-5 py-3.5 rounded-xl border border-border bg-background/80 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all duration-200"
@@ -80,6 +154,7 @@ const Contact = () => {
                   type="email"
                   placeholder="Your Email"
                   required
+                  maxLength={255}
                   value={form.email}
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
                   className="w-full px-5 py-3.5 rounded-xl border border-border bg-background/80 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all duration-200"
@@ -89,19 +164,45 @@ const Contact = () => {
                 placeholder="Tell us about your project..."
                 rows={5}
                 required
+                maxLength={2000}
                 value={form.message}
                 onChange={(e) => setForm({ ...form, message: e.target.value })}
                 className="w-full px-5 py-3.5 rounded-xl border border-border bg-background/80 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all duration-200 resize-none"
               />
+
+              {/* reCAPTCHA notice (v3 is invisible) */}
+              <div className="flex items-center gap-2 px-4 py-3 rounded-xl bg-primary/5 border border-primary/10 text-xs text-muted-foreground">
+                <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                <span>
+                  Protected by Google reCAPTCHA —{" "}
+                  <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="underline hover:text-primary">Privacy</a>
+                  {" · "}
+                  <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer" className="underline hover:text-primary">Terms</a>
+                </span>
+              </div>
+
+              {status === "error" && errorMsg && (
+                <div className="px-4 py-3 rounded-xl bg-destructive/10 border border-destructive/20 text-destructive text-sm">
+                  {errorMsg}
+                </div>
+              )}
+              {status === "success" && (
+                <div className="px-4 py-3 rounded-xl bg-primary/10 border border-primary/20 text-primary text-sm">
+                  Message sent successfully — we'll be in touch shortly.
+                </div>
+              )}
+
               <motion.button
                 type="submit"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className={`w-full gradient-primary text-primary-foreground py-4 rounded-xl font-semibold text-base flex items-center justify-center gap-2 shadow-glow hover:shadow-glow-lg transition-all duration-300 btn-3d shimmer-effect ${submitted ? 'opacity-80' : ''}`}
-                disabled={submitted}
+                whileHover={{ scale: status === "submitting" ? 1 : 1.02 }}
+                whileTap={{ scale: status === "submitting" ? 1 : 0.98 }}
+                disabled={status === "submitting" || status === "success"}
+                className={`w-full gradient-primary text-primary-foreground py-4 rounded-xl font-semibold text-base flex items-center justify-center gap-2 shadow-glow hover:shadow-glow-lg transition-all duration-300 btn-3d shimmer-effect disabled:opacity-70 disabled:cursor-not-allowed`}
               >
-                {submitted ? (
-                  "Message Sent! ✓"
+                {status === "submitting" ? (
+                  <><Loader2 size={18} className="animate-spin" /> Sending...</>
+                ) : status === "success" ? (
+                  "Message Sent ✓"
                 ) : (
                   <>Send Message <Send size={18} /></>
                 )}
