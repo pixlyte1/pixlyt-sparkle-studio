@@ -46,11 +46,14 @@ Deno.serve(async (req) => {
     });
     const verifyData = await verifyRes.json();
 
-    if (!verifyData.success || (typeof verifyData.score === "number" && verifyData.score < 0.5)) {
+    console.log("reCAPTCHA verify response:", JSON.stringify(verifyData));
+
+    if (!verifyData.success || (typeof verifyData.score === "number" && verifyData.score < 0.3)) {
       return new Response(
         JSON.stringify({
           error: "reCAPTCHA verification failed. Please try again.",
           score: verifyData.score,
+          errorCodes: verifyData["error-codes"] ?? null,
         }),
         { status: 403, headers: { ...corsHeaders, "Content-Type": "application/json" } },
       );
