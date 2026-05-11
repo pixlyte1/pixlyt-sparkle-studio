@@ -3,6 +3,7 @@ import { Play, Newspaper, Mic, Subtitles, Globe2, BookOpen, Youtube, Users, Vide
 import { FaInstagram, FaFacebookF } from "react-icons/fa";
 import AnimatedSection from "./AnimatedSection";
 import { openExternalLink } from "@/lib/openExternalLink";
+import newsStudioImage from "@/assets/news-studio.png";
 
 const features = [
   { icon: Newspaper, title: "Viral News Analysis", desc: "Curating the most impactful viral stories from around the world." },
