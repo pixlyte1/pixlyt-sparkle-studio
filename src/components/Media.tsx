@@ -89,7 +89,7 @@ const Media = () => (
           className="glass-card rounded-3xl overflow-hidden border-glow shadow-card hover:shadow-card-hover transition-all duration-500 group"
         >
           <div className="grid md:grid-cols-2 gap-0">
-            {/* Thumbnail style preview */}
+            {/* Left visual: full cinematic studio image */}
             <div className="relative aspect-video md:aspect-auto md:min-h-[320px] overflow-hidden bg-black">
               <img
                 src={newsStudioImage}
@@ -97,29 +97,6 @@ const Media = () => (
                 loading="lazy"
                 className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
-              {/* Subtle overlay for blending with site theme */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-primary/20 via-transparent to-accent/10 mix-blend-overlay pointer-events-none" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent pointer-events-none" />
-
-              {/* Play button */}
-              <div className="absolute inset-0 flex items-center justify-center">
-                <motion.button
-                  type="button"
-                  onClick={() => openExternalLink(YT_URL)}
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                  aria-label="Visit News Channel YouTube channel"
-                  className="relative z-10 w-20 h-20 rounded-full bg-white/95 backdrop-blur shadow-2xl flex items-center justify-center group-hover:shadow-glow-lg transition-shadow duration-500"
-                >
-                  <Play className="text-red-600 ml-1" size={32} fill="currentColor" />
-                  <span className="absolute inset-0 rounded-full bg-white animate-ping opacity-30" />
-                </motion.button>
-              </div>
-
-              <div className="absolute bottom-4 left-4 flex items-center gap-2 text-white text-sm font-medium drop-shadow-lg">
-                <Youtube size={18} className="text-red-500" fill="currentColor" />
-                <span>YouTube</span>
-              </div>
             </div>
 
             {/* Content */}
