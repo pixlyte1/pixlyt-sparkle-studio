@@ -4,17 +4,22 @@ import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assets/pixlyt-logo.png";
 
 const navLinks = [
-  { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Services", href: "#services" },
-  { label: "Products", href: "#products" },
-  { label: "Projects", href: "#projects" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", href: "/#home" },
+  { label: "About", href: "/#about" },
+  { label: "Solutions", href: "/solutions" },
+  { label: "Products", href: "/#products" },
+  { label: "Projects", href: "/#projects" },
+  { label: "Contact", href: "/#contact" },
 ];
 
-const Navbar = () => {
+interface NavbarProps {
+  forceSolid?: boolean;
+}
+
+const Navbar = ({ forceSolid = false }: NavbarProps) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const isSolid = forceSolid || scrolled;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 50);
@@ -28,17 +33,17 @@ const Navbar = () => {
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
+        isSolid
           ? "glass-premium shadow-navbar py-3 border-b border-border/30"
           : "bg-transparent py-5"
       }`}
     >
       <div className="container mx-auto flex items-center justify-between px-4">
-        <a href="#home" className="flex items-center gap-2">
+        <a href="/#home" className="flex items-center gap-2">
           <img
             src={logo}
             alt="PIXLYT Logo"
-            className={`h-9 w-auto transition-all duration-300 ${!scrolled ? "brightness-0 invert" : ""}`}
+            className={`h-9 w-auto transition-all duration-300 ${!isSolid ? "brightness-0 invert" : ""}`}
           />
         </a>
 
@@ -49,7 +54,7 @@ const Navbar = () => {
               <a
                 href={link.href}
                 className={`text-sm font-medium transition-colors duration-200 underline-hover ${
-                  scrolled ? "text-foreground/70 hover:text-primary" : "text-primary-foreground/80 hover:text-primary-foreground"
+                  isSolid ? "text-foreground/70 hover:text-primary" : "text-primary-foreground/80 hover:text-primary-foreground"
                 }`}
               >
                 {link.label}
@@ -59,14 +64,14 @@ const Navbar = () => {
         </ul>
 
         <a
-          href="#contact"
+          href="/#contact"
           className="hidden md:inline-flex gradient-primary text-primary-foreground px-6 py-2.5 rounded-xl text-sm font-semibold hover:scale-105 transition-all duration-300 shadow-glow btn-3d animate-glow-pulse"
         >
           Get in Touch
         </a>
 
         <button
-          className={`md:hidden ${scrolled ? "text-foreground" : "text-primary-foreground"}`}
+          className={`md:hidden ${isSolid ? "text-foreground" : "text-primary-foreground"}`}
           onClick={() => setMobileOpen(!mobileOpen)}
         >
           {mobileOpen ? <X size={24} /> : <Menu size={24} />}
@@ -100,7 +105,7 @@ const Navbar = () => {
               ))}
               <li className="pt-2">
                 <a
-                  href="#contact"
+                  href="/#contact"
                   onClick={() => setMobileOpen(false)}
                   className="block gradient-primary text-primary-foreground text-center px-5 py-3 rounded-xl text-sm font-semibold shadow-glow"
                 >

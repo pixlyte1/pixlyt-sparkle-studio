@@ -1,49 +1,112 @@
-import { Bot, Globe, Megaphone, Palette, Share2, Video } from "lucide-react";
+import { ArrowRight, ArrowUpRight, CheckCircle2 } from "lucide-react";
+import { Link } from "react-router-dom";
 import AnimatedSection from "./AnimatedSection";
-import ServiceCard from "./ServiceCard";
-
-const services = [
-  { icon: Video, title: "Media & Content Production", description: "High-quality video production, motion graphics, and multimedia content that tells your story compellingly." },
-  { icon: Share2, title: "Social Media Management", description: "Strategic content planning, community management, and growth hacking across all major social platforms." },
-  { icon: Megaphone, title: "Digital Marketing", description: "Data-driven marketing strategies including SEO, SEM, and performance marketing to boost your online presence and conversions." },
-  { icon: Palette, title: "Branding & Creative Design", description: "Stunning visual identities, logos, brand guidelines, and creative assets that make your brand unforgettable." },
-  { icon: Bot, title: "AI Solutions", description: "Intelligent automation, chatbots, predictive analytics, and machine learning solutions to streamline your business operations." },
-  { icon: Globe, title: "Web Development", description: "Modern, responsive websites and progressive web applications built with cutting-edge technologies for blazing-fast performance." },
-];
+import { featuredSolutions, getSolutionBySlug, solutionRows } from "@/data/solutions";
 
 const Services = () => (
-  <section id="services" className="py-28 gradient-section relative overflow-hidden">
-    {/* Decorative blobs */}
-    <div className="absolute top-20 right-20 w-72 h-72 rounded-full bg-primary/5 blur-[100px] animate-blob pointer-events-none" />
-    <div className="absolute bottom-20 left-20 w-64 h-64 rounded-full bg-accent/5 blur-[80px] animate-blob-delayed pointer-events-none" />
-
-    {/* Decorative dots pattern */}
-    <div className="absolute inset-0 opacity-[0.015]" style={{
-      backgroundImage: "radial-gradient(circle, hsl(211 90% 52%) 1px, transparent 1px)",
-      backgroundSize: "30px 30px",
-    }} />
-
-    <div className="container mx-auto px-4 relative">
-      <AnimatedSection className="text-center max-w-3xl mx-auto mb-20">
-        <span className="inline-block px-4 py-1.5 rounded-full gradient-primary text-primary-foreground text-xs font-semibold uppercase tracking-widest mb-5">
-          Our Services
-        </span>
-        <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight mb-6">
-          Solutions That Drive{" "}
-          <span className="text-gradient">Real Growth</span>
-        </h2>
-        <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-          Comprehensive digital solutions tailored to elevate your brand, optimize operations, and drive measurable business growth.
+  <section id="services" className="relative overflow-hidden bg-background py-24 sm:py-28">
+    <div className="absolute inset-x-0 top-0 h-px bg-border" />
+    <div className="container mx-auto px-4">
+      <AnimatedSection className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+        <div>
+          <span className="mb-4 inline-flex rounded-md border border-primary/20 bg-primary/5 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-primary">
+            Expertise
+          </span>
+          <h2 className="max-w-2xl font-heading text-3xl font-bold leading-tight text-foreground sm:text-4xl lg:text-5xl">
+            Solutions built for intelligent digital growth
+          </h2>
+        </div>
+        <p className="max-w-2xl text-base leading-8 text-muted-foreground lg:ml-auto">
+          Choose a capability to explore how PIXLYT plans, designs, builds, and supports business-ready digital systems. Each solution page includes focused services, outcomes, and delivery approach.
         </p>
       </AnimatedSection>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {services.map((s, i) => (
-          <AnimatedSection key={s.title} delay={i * 0.1} direction={i % 3 === 0 ? "left" : i % 3 === 2 ? "right" : "up"}>
-            <ServiceCard {...s} index={i} />
-          </AnimatedSection>
-        ))}
+      <div className="mt-14 grid gap-10 lg:grid-cols-[1.15fr_0.85fr]">
+        <AnimatedSection className="rounded-lg border border-border bg-white shadow-card">
+          <div className="grid divide-y divide-border md:grid-cols-2 md:divide-x md:divide-y-0">
+            {solutionRows.map((column, columnIndex) => (
+              <div key={columnIndex} className="divide-y divide-border">
+                {column.map((slug) => {
+                  const solution = getSolutionBySlug(slug);
+                  if (!solution) return null;
+                  const Icon = solution.icon;
+
+                  return (
+                    <Link
+                      key={solution.slug}
+                      to={`/solutions/${solution.slug}`}
+                      className={`group flex min-h-20 items-center justify-between gap-4 px-5 py-5 transition-colors hover:bg-secondary/70 sm:px-7 ${
+                        solution.featured ? "bg-primary/[0.03]" : ""
+                      }`}
+                    >
+                      <span className="flex min-w-0 items-center gap-4">
+                        <span
+                          className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-md border transition-all ${
+                            solution.featured
+                              ? "border-primary/25 bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground"
+                              : "border-border bg-secondary/50 text-muted-foreground group-hover:border-primary/25 group-hover:text-primary"
+                          }`}
+                        >
+                          <Icon size={20} />
+                        </span>
+                        <span>
+                          <span className="block font-heading text-base font-semibold text-foreground transition-colors group-hover:text-primary">
+                            {solution.shortTitle ?? solution.title}
+                          </span>
+                        </span>
+                      </span>
+                      <ArrowUpRight
+                        size={18}
+                        className="shrink-0 text-muted-foreground opacity-60 transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-primary group-hover:opacity-100"
+                      />
+                    </Link>
+                  );
+                })}
+              </div>
+            ))}
+          </div>
+        </AnimatedSection>
+
+        <AnimatedSection delay={0.1} direction="right" className="space-y-4">
+          {featuredSolutions.map((solution) => (
+            <Link
+              key={solution.slug}
+              to={`/solutions/${solution.slug}`}
+              className="group block overflow-hidden rounded-lg border border-border bg-white shadow-card transition-all hover:-translate-y-1 hover:border-primary/25 hover:shadow-card-hover"
+            >
+              <div className="grid grid-cols-[112px_1fr]">
+                <img
+                  src={solution.heroImage}
+                  alt={`${solution.title} preview`}
+                  className="h-full min-h-32 w-full object-cover"
+                  loading="lazy"
+                />
+                <div className="p-5">
+                  <div className="mb-3 flex items-center justify-between gap-3">
+                    <span className="text-xs font-semibold uppercase tracking-widest text-primary">{solution.eyebrow}</span>
+                    <ArrowRight size={18} className="text-muted-foreground transition-transform group-hover:translate-x-1 group-hover:text-primary" />
+                  </div>
+                  <h3 className="font-heading text-lg font-bold text-foreground">{solution.title}</h3>
+                  <p className="mt-2 line-clamp-2 text-sm leading-6 text-muted-foreground">{solution.summary}</p>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </AnimatedSection>
       </div>
+
+      <AnimatedSection delay={0.15} className="mt-12 grid gap-3 rounded-lg border border-border bg-secondary/50 p-5 sm:grid-cols-3">
+        {[
+          "Strategy, design, build, and support in one team",
+          "Responsive pages with premium brand storytelling",
+          "Business content, images, and CTAs for every solution",
+        ].map((item) => (
+          <div key={item} className="flex items-start gap-3 text-sm font-medium text-foreground">
+            <CheckCircle2 size={18} className="mt-0.5 shrink-0 text-primary" />
+            <span>{item}</span>
+          </div>
+        ))}
+      </AnimatedSection>
     </div>
   </section>
 );

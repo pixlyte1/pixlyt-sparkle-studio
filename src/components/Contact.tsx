@@ -1,58 +1,147 @@
-import { useState, useEffect, FormEvent } from "react";
-import { Send, MapPin, Mail, Phone, Loader2 } from "lucide-react";
+import { useEffect, useRef, useState, FormEvent } from "react";
+import { Send, MapPin, Mail, Phone, Loader2, ShieldAlert } from "lucide-react";
 import { motion } from "framer-motion";
 import AnimatedSection from "./AnimatedSection";
 import { supabase } from "@/integrations/supabase/client";
 
 const contactInfo = [
   { icon: MapPin, label: "Visit Us", value: "Vellore, Tamil Nadu, India" },
-  { icon: Mail, label: "Email Us", value: "md@pixlyt.in" },
+  { icon: Mail, label: "Email Us", value: "pixlyt.e1@gmail.com" },
   { icon: Phone, label: "Call Us", value: "+91 8618826965" },
 ];
+
+const recaptchaSiteKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY?.trim() ?? "";
+const isRecaptchaPlaceholder = !recaptchaSiteKey || recaptchaSiteKey === "PASTE_SITE_KEY_HERE";
 
 declare global {
   interface Window {
     grecaptcha?: {
       ready: (cb: () => void) => void;
-      execute: (siteKey: string, opts: { action: string }) => Promise<string>;
+      render: (
+        container: HTMLElement,
+        params: {
+          sitekey: string;
+          callback: (token: string) => void;
+          "expired-callback": () => void;
+          "error-callback": () => void;
+        },
+      ) => number;
+      reset: (widgetId?: number) => void;
     };
   }
 }
 
 type Status = "idle" | "submitting" | "success" | "error";
 
-const Contact = () => {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
+interface ContactProps {
+  initialMessage?: string;
+}
+
+const getFunctionErrorMessage = async (error: unknown) => {
+  const response = (error as { context?: Response } | null)?.context;
+
+  if (response) {
+    try {
+      const payload = (await response.clone().json()) as {
+        error?: string;
+        code?: string;
+        errorCodes?: string[];
+        score?: number;
+      };
+
+      if (payload.error) {
+        const details = [
+          payload.code ? `code: ${payload.code}` : "",
+          payload.errorCodes?.length ? `reCAPTCHA: ${payload.errorCodes.join(", ")}` : "",
+          typeof payload.score === "number" ? `score: ${payload.score}` : "",
+        ].filter(Boolean);
+
+        return details.length ? `${payload.error} (${details.join("; ")})` : payload.error;
+      }
+    } catch {
+      try {
+        const text = await response.clone().text();
+        if (text) return text;
+      } catch {
+        // Fall back to the default error below.
+      }
+    }
+  }
+
+  return error instanceof Error ? error.message : "Submission failed";
+};
+
+const Contact = ({ initialMessage = "" }: ContactProps) => {
+  const [form, setForm] = useState({ name: "", email: "", message: initialMessage });
+  const [consent, setConsent] = useState(false);
+  const [recaptchaToken, setRecaptchaToken] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState<string>("");
-  const [siteKey, setSiteKey] = useState<string>("");
+  const recaptchaRef = useRef<HTMLDivElement | null>(null);
+  const widgetIdRef = useRef<number | null>(null);
+  const lastInitialMessageRef = useRef(initialMessage);
 
-  // Fetch reCAPTCHA site key + load script
   useEffect(() => {
-    let cancelled = false;
-    (async () => {
-      try {
-        const { data } = await supabase.functions.invoke("recaptcha-config");
-        if (cancelled) return;
-        const key = (data as { siteKey?: string } | null)?.siteKey;
-        if (!key) return;
-        setSiteKey(key);
-        if (!document.querySelector(`script[data-recaptcha="true"]`)) {
-          const script = document.createElement("script");
-          script.src = `https://www.google.com/recaptcha/api.js?render=${key}`;
-          script.async = true;
-          script.defer = true;
-          script.dataset.recaptcha = "true";
-          document.head.appendChild(script);
-        }
-      } catch (e) {
-        console.error("Failed to load reCAPTCHA config", e);
-      }
-    })();
-    return () => {
-      cancelled = true;
+    if (initialMessage === lastInitialMessageRef.current) return;
+
+    setForm((currentForm) => ({
+      ...currentForm,
+      message:
+        !currentForm.message || currentForm.message === lastInitialMessageRef.current
+          ? initialMessage
+          : currentForm.message,
+    }));
+    lastInitialMessageRef.current = initialMessage;
+  }, [initialMessage]);
+
+  useEffect(() => {
+    if (isRecaptchaPlaceholder) return;
+
+    const renderRecaptcha = () => {
+      if (!recaptchaRef.current || !window.grecaptcha || widgetIdRef.current !== null) return;
+
+      widgetIdRef.current = window.grecaptcha.render(recaptchaRef.current, {
+        sitekey: recaptchaSiteKey,
+        callback: (token: string) => setRecaptchaToken(token),
+        "expired-callback": () => setRecaptchaToken(""),
+        "error-callback": () => setRecaptchaToken(""),
+      });
     };
+
+    const existingScript = document.querySelector<HTMLScriptElement>('script[data-recaptcha="true"]');
+
+    if (window.grecaptcha) {
+      window.grecaptcha.ready(renderRecaptcha);
+      return;
+    }
+
+    if (existingScript) {
+      existingScript.addEventListener("load", () => window.grecaptcha?.ready(renderRecaptcha), { once: true });
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.src = "https://www.google.com/recaptcha/api.js?render=explicit";
+    script.async = true;
+    script.defer = true;
+    script.dataset.recaptcha = "true";
+    script.addEventListener("load", () => window.grecaptcha?.ready(renderRecaptcha), { once: true });
+    document.head.appendChild(script);
   }, []);
+
+  const resetRecaptcha = () => {
+    setRecaptchaToken("");
+    if (widgetIdRef.current !== null) {
+      window.grecaptcha?.reset(widgetIdRef.current);
+    }
+  };
+
+  const isSubmitDisabled =
+    status === "submitting" ||
+    status === "success" ||
+    isRecaptchaPlaceholder ||
+    !consent ||
+    !recaptchaToken;
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -60,63 +149,61 @@ const Contact = () => {
     setStatus("submitting");
 
     try {
-      if (!siteKey || !window.grecaptcha) {
-        throw new Error("reCAPTCHA not loaded yet. Please wait a moment and try again.");
+      if (!consent) {
+        throw new Error("Please consent to receive communications before submitting.");
       }
 
-      const token: string = await new Promise((resolve, reject) => {
-        window.grecaptcha!.ready(async () => {
-          try {
-            const t = await window.grecaptcha!.execute(siteKey, { action: "contact_submit" });
-            resolve(t);
-          } catch (err) {
-            reject(err);
-          }
-        });
-      });
+      if (isRecaptchaPlaceholder) {
+        throw new Error("Please add your real VITE_RECAPTCHA_SITE_KEY in the .env file.");
+      }
+
+      if (!recaptchaToken) {
+        throw new Error("Please complete the reCAPTCHA verification.");
+      }
 
       const { data, error } = await supabase.functions.invoke("submit-contact", {
-        body: { ...form, recaptchaToken: token },
+        body: { ...form, recaptchaToken },
       });
 
-      if (error) throw new Error(error.message || "Submission failed");
+      if (error) throw new Error(await getFunctionErrorMessage(error));
       if (!(data as { success?: boolean })?.success) {
         throw new Error((data as { error?: string })?.error || "Submission failed");
       }
 
       setStatus("success");
       setForm({ name: "", email: "", message: "" });
+      setConsent(false);
+      resetRecaptcha();
       setTimeout(() => setStatus("idle"), 4000);
     } catch (err) {
       console.error(err);
       setErrorMsg(err instanceof Error ? err.message : "Something went wrong. Please try again.");
       setStatus("error");
+      resetRecaptcha();
       setTimeout(() => setStatus("idle"), 5000);
     }
   };
 
   return (
-    <section id="contact" className="py-28 bg-background relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-primary/5 blur-[100px] animate-blob pointer-events-none" />
-      <div className="absolute bottom-20 left-10 w-72 h-72 rounded-full bg-accent/5 blur-[80px] animate-blob-delayed pointer-events-none" />
+    <section id="contact" className="relative overflow-hidden bg-background py-28">
+      <div className="absolute right-0 top-0 h-96 w-96 rounded-full bg-primary/5 blur-[100px] animate-blob pointer-events-none" />
+      <div className="absolute bottom-20 left-10 h-72 w-72 rounded-full bg-accent/5 blur-[80px] animate-blob-delayed pointer-events-none" />
 
-      <div className="container mx-auto px-4 relative">
-        <AnimatedSection className="text-center max-w-3xl mx-auto mb-20">
-          <span className="inline-block px-4 py-1.5 rounded-full gradient-primary text-primary-foreground text-xs font-semibold uppercase tracking-widest mb-5">
+      <div className="container relative mx-auto px-4">
+        <AnimatedSection className="mx-auto mb-20 max-w-3xl text-center">
+          <span className="mb-5 inline-block rounded-full gradient-primary px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-primary-foreground">
             Contact
           </span>
-          <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight mb-6">
-            Let's Build Something{" "}
-            <span className="text-gradient">Amazing Together</span>
+          <h2 className="mb-6 font-heading text-3xl font-bold leading-tight text-foreground sm:text-4xl lg:text-5xl">
+            Let's Build Something <span className="text-gradient">Amazing Together</span>
           </h2>
-          <p className="text-muted-foreground text-lg">
+          <p className="text-lg text-muted-foreground">
             Ready to transform your brand? We'd love to hear from you.
           </p>
         </AnimatedSection>
 
-        <div className="grid lg:grid-cols-5 gap-12 max-w-5xl mx-auto">
-          {/* Contact info */}
-          <AnimatedSection direction="left" className="lg:col-span-2 flex flex-col gap-6">
+        <div className="mx-auto grid max-w-5xl gap-12 lg:grid-cols-5">
+          <AnimatedSection direction="left" className="flex flex-col gap-6 lg:col-span-2">
             {contactInfo.map((info, i) => (
               <motion.div
                 key={info.label}
@@ -124,23 +211,22 @@ const Contact = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.5 }}
-                className="flex items-start gap-4 p-5 rounded-2xl glass-card border-glow hover:shadow-card-hover transition-all duration-500"
+                className="flex items-start gap-4 rounded-2xl glass-card border-glow p-5 transition-all duration-500 hover:shadow-card-hover"
               >
-                <div className="w-12 h-12 rounded-xl gradient-primary flex items-center justify-center shrink-0 shadow-glow">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl gradient-primary shadow-glow">
                   <info.icon size={20} className="text-primary-foreground" />
                 </div>
                 <div>
-                  <p className="font-heading font-semibold text-foreground text-sm">{info.label}</p>
-                  <p className="text-muted-foreground text-sm">{info.value}</p>
+                  <p className="font-heading text-sm font-semibold text-foreground">{info.label}</p>
+                  <p className="text-sm text-muted-foreground">{info.value}</p>
                 </div>
               </motion.div>
             ))}
           </AnimatedSection>
 
-          {/* Form */}
           <AnimatedSection direction="right" className="lg:col-span-3" delay={0.15}>
-            <form onSubmit={handleSubmit} className="space-y-5 glass-card p-8 rounded-2xl border-glow">
-              <div className="grid sm:grid-cols-2 gap-5">
+            <form onSubmit={handleSubmit} className="space-y-5 rounded-2xl glass-card border-glow p-8">
+              <div className="grid gap-5 sm:grid-cols-2">
                 <input
                   type="text"
                   placeholder="Your Name"
@@ -148,7 +234,7 @@ const Contact = () => {
                   maxLength={100}
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
-                  className="w-full px-5 py-3.5 rounded-xl border border-border bg-background/80 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all duration-200"
+                  className="w-full rounded-xl border border-border bg-background/80 px-5 py-3.5 text-foreground placeholder:text-muted-foreground transition-all duration-200 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30"
                 />
                 <input
                   type="email"
@@ -157,7 +243,7 @@ const Contact = () => {
                   maxLength={255}
                   value={form.email}
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
-                  className="w-full px-5 py-3.5 rounded-xl border border-border bg-background/80 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all duration-200"
+                  className="w-full rounded-xl border border-border bg-background/80 px-5 py-3.5 text-foreground placeholder:text-muted-foreground transition-all duration-200 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30"
                 />
               </div>
               <textarea
@@ -167,28 +253,57 @@ const Contact = () => {
                 maxLength={2000}
                 value={form.message}
                 onChange={(e) => setForm({ ...form, message: e.target.value })}
-                className="w-full px-5 py-3.5 rounded-xl border border-border bg-background/80 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all duration-200 resize-none"
+                className="w-full resize-none rounded-xl border border-border bg-background/80 px-5 py-3.5 text-foreground placeholder:text-muted-foreground transition-all duration-200 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30"
               />
 
-              {/* reCAPTCHA notice (v3 is invisible) */}
-              <div className="flex items-center gap-2 px-4 py-3 rounded-xl bg-primary/5 border border-primary/10 text-xs text-muted-foreground">
-                <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+              <label className="flex items-start gap-3 rounded-xl border border-border bg-background/70 p-4 text-sm leading-6 text-muted-foreground">
+                <input
+                  type="checkbox"
+                  checked={consent}
+                  onChange={(e) => setConsent(e.target.checked)}
+                  className="mt-1 h-4 w-4 rounded border-border text-primary focus:ring-primary"
+                />
                 <span>
-                  Protected by Google reCAPTCHA —{" "}
-                  <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="underline hover:text-primary">Privacy</a>
-                  {" · "}
-                  <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer" className="underline hover:text-primary">Terms</a>
+                  By checking this box, you consent to receive communications from us. You may unsubscribe at any time.
                 </span>
+              </label>
+
+              <div className="rounded-xl border border-primary/10 bg-primary/5 p-4">
+                {isRecaptchaPlaceholder ? (
+                  <div className="flex items-start gap-3 text-xs leading-5 text-destructive">
+                    <ShieldAlert size={17} className="mt-0.5 shrink-0" />
+                    <div>
+                      <p className="font-semibold">reCAPTCHA is not active yet.</p>
+                      <p className="mt-1 text-destructive/80">
+                        Replace PASTE_SITE_KEY_HERE in .env with your real Google reCAPTCHA v2 checkbox site key, then restart npm run dev.
+                      </p>
+                    </div>
+                  </div>
+                ) : (
+                  <div ref={recaptchaRef} className="min-h-[78px]" />
+                )}
               </div>
 
+              <p className="px-1 text-xs leading-6 text-muted-foreground">
+                This site is protected by reCAPTCHA and the Google{" "}
+                <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="underline hover:text-primary">
+                  Privacy Policy
+                </a>{" "}
+                and{" "}
+                <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer" className="underline hover:text-primary">
+                  Terms of Service
+                </a>{" "}
+                apply.
+              </p>
+
               {status === "error" && errorMsg && (
-                <div className="px-4 py-3 rounded-xl bg-destructive/10 border border-destructive/20 text-destructive text-sm">
+                <div className="rounded-xl border border-destructive/20 bg-destructive/10 px-4 py-3 text-sm text-destructive">
                   {errorMsg}
                 </div>
               )}
               {status === "success" && (
-                <div className="px-4 py-3 rounded-xl bg-primary/10 border border-primary/20 text-primary text-sm">
-                  Message sent successfully — we'll be in touch shortly.
+                <div className="rounded-xl border border-primary/20 bg-primary/10 px-4 py-3 text-sm text-primary">
+                  Message sent successfully - we'll be in touch shortly.
                 </div>
               )}
 
@@ -196,15 +311,25 @@ const Contact = () => {
                 type="submit"
                 whileHover={{ scale: status === "submitting" ? 1 : 1.02 }}
                 whileTap={{ scale: status === "submitting" ? 1 : 0.98 }}
-                disabled={status === "submitting" || status === "success"}
-                className={`w-full gradient-primary text-primary-foreground py-4 rounded-xl font-semibold text-base flex items-center justify-center gap-2 shadow-glow hover:shadow-glow-lg transition-all duration-300 btn-3d shimmer-effect disabled:opacity-70 disabled:cursor-not-allowed`}
+                disabled={isSubmitDisabled}
+                className="flex w-full items-center justify-center gap-2 rounded-xl gradient-primary py-4 text-base font-semibold text-primary-foreground shadow-glow shimmer-effect transition-all duration-300 hover:shadow-glow-lg disabled:cursor-not-allowed disabled:opacity-70"
               >
                 {status === "submitting" ? (
-                  <><Loader2 size={18} className="animate-spin" /> Sending...</>
+                  <>
+                    <Loader2 size={18} className="animate-spin" /> Sending...
+                  </>
                 ) : status === "success" ? (
-                  "Message Sent ✓"
+                  "Message Sent"
+                ) : isRecaptchaPlaceholder ? (
+                  "Configure reCAPTCHA to Send"
+                ) : !consent ? (
+                  "Accept Consent to Send"
+                ) : !recaptchaToken ? (
+                  "Complete reCAPTCHA to Send"
                 ) : (
-                  <>Send Message <Send size={18} /></>
+                  <>
+                    Send Message <Send size={18} />
+                  </>
                 )}
               </motion.button>
             </form>
