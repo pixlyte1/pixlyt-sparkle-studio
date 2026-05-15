@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, FormEvent } from "react";
-import { Send, MapPin, Mail, Phone, Loader2, ShieldAlert } from "lucide-react";
+import { Send, MapPin, Mail, Phone, Loader2, ShieldAlert, CheckCircle2 } from "lucide-react";
 import { motion } from "framer-motion";
 import AnimatedSection from "./AnimatedSection";
 import { supabase } from "@/integrations/supabase/client";
@@ -72,12 +72,14 @@ const getFunctionErrorMessage = async (error: unknown) => {
 };
 
 const Contact = ({ initialMessage = "" }: ContactProps) => {
-  const [form, setForm] = useState({ name: "", email: "", message: initialMessage });
+  const [form, setForm] = useState({ name: "", email: "", mobile: "", message: initialMessage });
   const [consent, setConsent] = useState(false);
   const [recaptchaToken, setRecaptchaToken] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState<string>("");
+  const [consentError, setConsentError] = useState("");
   const recaptchaRef = useRef<HTMLDivElement | null>(null);
+  const consentRef = useRef<HTMLInputElement | null>(null);
   const widgetIdRef = useRef<number | null>(null);
   const lastInitialMessageRef = useRef(initialMessage);
 
@@ -136,12 +138,7 @@ const Contact = ({ initialMessage = "" }: ContactProps) => {
     }
   };
 
-  const isSubmitDisabled =
-    status === "submitting" ||
-    status === "success" ||
-    isRecaptchaPlaceholder ||
-    !consent ||
-    !recaptchaToken;
+  const isSubmitDisabled = status === "submitting" || status === "success";
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -150,8 +147,12 @@ const Contact = ({ initialMessage = "" }: ContactProps) => {
 
     try {
       if (!consent) {
-        throw new Error("Please consent to receive communications before submitting.");
+        setConsentError("Please click this checkbox before submitting.");
+        consentRef.current?.focus();
+        throw new Error("Please click the consent checkbox before submitting.");
       }
+
+      setConsentError("");
 
       if (isRecaptchaPlaceholder) {
         throw new Error("Please add your real VITE_RECAPTCHA_SITE_KEY in the .env file.");
@@ -171,7 +172,7 @@ const Contact = ({ initialMessage = "" }: ContactProps) => {
       }
 
       setStatus("success");
-      setForm({ name: "", email: "", message: "" });
+      setForm({ name: "", email: "", mobile: "", message: "" });
       setConsent(false);
       resetRecaptcha();
       setTimeout(() => setStatus("idle"), 4000);
@@ -224,7 +225,25 @@ const Contact = ({ initialMessage = "" }: ContactProps) => {
             ))}
           </AnimatedSection>
 
-          <AnimatedSection direction="right" className="lg:col-span-3" delay={0.15}>
+          <AnimatedSection direction="right" className="relative pt-14 lg:col-span-3" delay={0.15}>
+            {status === "success" && (
+              <motion.div
+                initial={{ opacity: 0, y: 10, scale: 0.98 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 10, scale: 0.98 }}
+                className="absolute left-1/2 top-0 z-10 flex w-[min(92%,420px)] -translate-x-1/2 items-center gap-3 rounded-xl border border-green-200 bg-white px-4 py-3 text-left shadow-lg shadow-green-950/10"
+                role="status"
+                aria-live="polite"
+              >
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-green-50 text-green-600">
+                  <CheckCircle2 size={18} />
+                </span>
+                <span>
+                  <span className="block text-sm font-bold text-slate-950">Message sent successfully</span>
+                  <span className="block text-xs leading-5 text-slate-600">We'll be in touch shortly.</span>
+                </span>
+              </motion.div>
+            )}
             <form onSubmit={handleSubmit} className="space-y-5 rounded-2xl glass-card border-glow p-8">
               <div className="grid gap-5 sm:grid-cols-2">
                 <input
@@ -245,6 +264,14 @@ const Contact = ({ initialMessage = "" }: ContactProps) => {
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
                   className="w-full rounded-xl border border-border bg-background/80 px-5 py-3.5 text-foreground placeholder:text-muted-foreground transition-all duration-200 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30"
                 />
+                <input
+                  type="tel"
+                  placeholder="Mobile No (Optional)"
+                  maxLength={30}
+                  value={form.mobile}
+                  onChange={(e) => setForm({ ...form, mobile: e.target.value })}
+                  className="w-full rounded-xl border border-border bg-background/80 px-5 py-3.5 text-foreground placeholder:text-muted-foreground transition-all duration-200 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30 sm:col-span-2"
+                />
               </div>
               <textarea
                 placeholder="Tell us about your project..."
@@ -258,15 +285,26 @@ const Contact = ({ initialMessage = "" }: ContactProps) => {
 
               <label className="flex items-start gap-3 rounded-xl border border-border bg-background/70 p-4 text-sm leading-6 text-muted-foreground">
                 <input
+                  ref={consentRef}
                   type="checkbox"
                   checked={consent}
-                  onChange={(e) => setConsent(e.target.checked)}
+                  aria-invalid={Boolean(consentError)}
+                  aria-describedby={consentError ? "contact-consent-error" : undefined}
+                  onChange={(e) => {
+                    setConsent(e.target.checked);
+                    if (e.target.checked) setConsentError("");
+                  }}
                   className="mt-1 h-4 w-4 rounded border-border text-primary focus:ring-primary"
                 />
                 <span>
                   By checking this box, you consent to receive communications from us. You may unsubscribe at any time.
                 </span>
               </label>
+              {consentError && (
+                <div id="contact-consent-error" className="rounded-xl border border-destructive/20 bg-destructive/10 px-4 py-3 text-sm text-destructive">
+                  {consentError}
+                </div>
+              )}
 
               <div className="rounded-xl border border-primary/10 bg-primary/5 p-4">
                 {isRecaptchaPlaceholder ? (
@@ -301,12 +339,6 @@ const Contact = ({ initialMessage = "" }: ContactProps) => {
                   {errorMsg}
                 </div>
               )}
-              {status === "success" && (
-                <div className="rounded-xl border border-primary/20 bg-primary/10 px-4 py-3 text-sm text-primary">
-                  Message sent successfully - we'll be in touch shortly.
-                </div>
-              )}
-
               <motion.button
                 type="submit"
                 whileHover={{ scale: status === "submitting" ? 1 : 1.02 }}
@@ -320,12 +352,6 @@ const Contact = ({ initialMessage = "" }: ContactProps) => {
                   </>
                 ) : status === "success" ? (
                   "Message Sent"
-                ) : isRecaptchaPlaceholder ? (
-                  "Configure reCAPTCHA to Send"
-                ) : !consent ? (
-                  "Accept Consent to Send"
-                ) : !recaptchaToken ? (
-                  "Complete reCAPTCHA to Send"
                 ) : (
                   <>
                     Send Message <Send size={18} />

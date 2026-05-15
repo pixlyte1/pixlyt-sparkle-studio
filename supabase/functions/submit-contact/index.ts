@@ -10,6 +10,7 @@ const corsHeaders = {
 const BodySchema = z.object({
   name: z.string().trim().min(1).max(100),
   email: z.string().trim().email().max(255),
+  mobile: z.string().trim().max(30).optional().default(""),
   message: z.string().trim().min(1).max(2000),
   recaptchaToken: z.string().min(10).max(4000),
 });
@@ -31,7 +32,7 @@ const escapeHtml = (value: string) =>
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#39;");
 
-const sendContactEmail = async (submission: { name: string; email: string; message: string }) => {
+const sendContactEmail = async (submission: { name: string; email: string; mobile: string | null; message: string }) => {
   const resendApiKey = Deno.env.get("RESEND_API_KEY");
   const toEmail = Deno.env.get("CONTACT_TO_EMAIL");
   const fromEmail = Deno.env.get("CONTACT_FROM_EMAIL") ?? "Pixlyt Contact <onboarding@resend.dev>";
@@ -46,7 +47,10 @@ const sendContactEmail = async (submission: { name: string; email: string; messa
 
   const escapedName = escapeHtml(submission.name);
   const escapedEmail = escapeHtml(submission.email);
+  const escapedMobile = submission.mobile ? escapeHtml(submission.mobile) : "";
   const escapedMessage = escapeHtml(submission.message).replaceAll("\n", "<br />");
+  const mobileHtml = escapedMobile ? `<p><strong>Mobile No:</strong> ${escapedMobile}</p>` : "";
+  const mobileText = submission.mobile ? [`Mobile No: ${submission.mobile}`] : [];
 
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST",
@@ -63,6 +67,7 @@ const sendContactEmail = async (submission: { name: string; email: string; messa
         <h2>New contact form message</h2>
         <p><strong>Name:</strong> ${escapedName}</p>
         <p><strong>Email:</strong> ${escapedEmail}</p>
+        ${mobileHtml}
         <p><strong>Message:</strong></p>
         <p>${escapedMessage}</p>
       `,
@@ -71,6 +76,7 @@ const sendContactEmail = async (submission: { name: string; email: string; messa
         "",
         `Name: ${submission.name}`,
         `Email: ${submission.email}`,
+        ...mobileText,
         "",
         submission.message,
       ].join("\n"),
@@ -105,6 +111,7 @@ Deno.serve(async (req) => {
       );
     }
     const { name, email, message, recaptchaToken } = parsed.data;
+    const mobile = parsed.data.mobile || null;
 
     const ip =
       req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
@@ -177,6 +184,7 @@ Deno.serve(async (req) => {
     const { error } = await supabase.from("contact_submissions").insert({
       name,
       email,
+      mobile,
       message,
       recaptcha_score: verifyData.score ?? null,
       ip_address: ip,
@@ -191,7 +199,7 @@ Deno.serve(async (req) => {
       );
     }
 
-    const emailResult = await sendContactEmail({ name, email, message });
+    const emailResult = await sendContactEmail({ name, email, mobile, message });
     if (!emailResult.ok) {
       return new Response(
         JSON.stringify({ error: emailResult.error }),

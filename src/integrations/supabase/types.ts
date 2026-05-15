@@ -21,6 +21,7 @@ export type Database = {
           id: string
           ip_address: string | null
           message: string
+          mobile: string | null
           name: string
           recaptcha_score: number | null
           user_agent: string | null
@@ -31,6 +32,7 @@ export type Database = {
           id?: string
           ip_address?: string | null
           message: string
+          mobile?: string | null
           name: string
           recaptcha_score?: number | null
           user_agent?: string | null
@@ -41,6 +43,7 @@ export type Database = {
           id?: string
           ip_address?: string | null
           message?: string
+          mobile?: string | null
           name?: string
           recaptcha_score?: number | null
           user_agent?: string | null
