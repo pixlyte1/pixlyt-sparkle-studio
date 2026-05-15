@@ -30,9 +30,9 @@ const Projects = () => (
         </p>
       </AnimatedSection>
 
-      <div className="grid sm:grid-cols-2 gap-8 max-w-5xl mx-auto">
+      <div className="mx-auto grid max-w-5xl items-stretch gap-8 sm:grid-cols-2">
         {projects.map((p, i) => (
-          <AnimatedSection key={p.title} delay={i * 0.12} direction={i % 2 === 0 ? "left" : "right"}>
+          <AnimatedSection key={p.title} delay={i * 0.12} direction="up" className="h-full">
             <ProjectCard {...p} />
           </AnimatedSection>
         ))}
