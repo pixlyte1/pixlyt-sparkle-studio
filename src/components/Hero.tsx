@@ -44,7 +44,7 @@ const Hero = () => {
   const slide = slides[current];
 
   return (
-    <section id="home" className="relative h-screen overflow-hidden">
+    <section id="home" className="relative min-h-[640px] h-[100svh] overflow-hidden">
       {/* Visual layer: background + floating cards transition together */}
       <AnimatePresence mode="sync">
         <motion.div
@@ -145,9 +145,7 @@ const Hero = () => {
                   {slide.tag}
                 </motion.span>
 
-                <motion.h1
-                  className="font-heading text-4xl sm:text-5xl lg:text-7xl font-bold leading-[1.1] mb-6"
-                >
+                <motion.h1 className="font-heading text-3xl sm:text-5xl lg:text-7xl font-bold leading-[1.1] mb-6">
                   {slide.heading.map((line, i) => (
                     <motion.span
                       key={i}
@@ -167,7 +165,7 @@ const Hero = () => {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.6, delay: 0.6 }}
-                  className="text-primary-foreground/70 text-lg sm:text-xl max-w-xl mb-10 leading-relaxed"
+                  className="text-primary-foreground/70 text-base sm:text-xl max-w-xl mb-8 sm:mb-10 leading-relaxed"
                 >
                   {slide.desc}
                 </motion.p>
@@ -199,7 +197,7 @@ const Hero = () => {
       </div>
 
       {/* Navigation arrows */}
-      <div className="absolute bottom-8 right-8 z-20 flex items-center gap-3">
+      <div className="absolute bottom-6 right-4 z-20 flex items-center gap-3 sm:bottom-8 sm:right-8">
         <button
           onClick={prev}
           className="w-12 h-12 rounded-full border border-primary-foreground/20 text-primary-foreground/70 hover:bg-primary-foreground/10 hover:text-primary-foreground flex items-center justify-center transition-all duration-300 glass-dark"

@@ -49,7 +49,7 @@ const Navbar = ({ forceSolid = false }: NavbarProps) => {
         </a>
 
         {/* Desktop */}
-        <ul className="hidden md:flex items-center gap-8">
+        <ul className="hidden lg:flex items-center gap-5 xl:gap-8">
           {navLinks.map((link) => (
             <li key={link.href}>
               <a
@@ -66,13 +66,13 @@ const Navbar = ({ forceSolid = false }: NavbarProps) => {
 
         <a
           href="/#contact"
-          className="hidden md:inline-flex gradient-primary text-primary-foreground px-6 py-2.5 rounded-xl text-sm font-semibold hover:scale-105 transition-all duration-300 shadow-glow btn-3d animate-glow-pulse"
+          className="hidden lg:inline-flex gradient-primary text-primary-foreground px-5 xl:px-6 py-2.5 rounded-xl text-sm font-semibold hover:scale-105 transition-all duration-300 shadow-glow btn-3d animate-glow-pulse"
         >
           Get in Touch
         </a>
 
         <button
-          className={`md:hidden ${isSolid ? "text-foreground" : "text-primary-foreground"}`}
+          className={`lg:hidden ${isSolid ? "text-foreground" : "text-primary-foreground"}`}
           onClick={() => setMobileOpen(!mobileOpen)}
         >
           {mobileOpen ? <X size={24} /> : <Menu size={24} />}
@@ -85,7 +85,7 @@ const Navbar = ({ forceSolid = false }: NavbarProps) => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden glass-premium border-t border-border/30 overflow-hidden"
+            className="lg:hidden glass-premium border-t border-border/30 overflow-hidden"
           >
             <ul className="flex flex-col gap-1 p-4">
               {navLinks.map((link, i) => (

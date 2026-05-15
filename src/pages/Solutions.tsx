@@ -5,18 +5,18 @@ import Navbar from "@/components/Navbar";
 import { featuredSolutions } from "@/data/solutions";
 
 const leftColumn = featuredSolutions.filter((solution) =>
-  ["ai", "data-engineering", "web-development"].includes(solution.slug)
+  ["ai", "data-engineering", "databricks", "web-development"].includes(solution.slug)
 );
 const rightColumn = featuredSolutions.filter((solution) =>
-  ["cms-dxp", "managed-services"].includes(solution.slug)
+  ["cms-dxp", "snowflake", "managed-services"].includes(solution.slug)
 );
 
 const Solutions = () => (
   <div className="min-h-screen bg-background text-foreground">
     <Navbar forceSolid />
 
-    <main className="mx-auto w-full max-w-7xl px-6 pb-20 pt-32 sm:px-10 lg:px-12">
-      <div className="mb-12 grid gap-8 md:grid-cols-[1fr_auto] md:items-start">
+    <main className="mx-auto w-full max-w-7xl px-4 pb-20 pt-32 sm:px-8 lg:px-12">
+      <div className="mb-12 grid gap-6 md:grid-cols-[1fr_auto] md:items-start">
         <h1 className="font-heading text-3xl font-bold leading-none text-foreground sm:text-4xl">Solutions</h1>
         <a href="/#services" className="inline-flex items-center gap-3 text-base font-bold text-foreground transition-colors hover:text-primary">
           What We Do
@@ -33,7 +33,7 @@ const Solutions = () => (
               <Link
                 key={solution.slug}
                 to={`/solutions/${solution.slug}`}
-                className="group flex min-h-[69px] items-center justify-between border-t border-border px-5 text-xl text-foreground transition-colors hover:bg-primary/5 hover:text-primary sm:text-2xl"
+                className="group flex min-h-[69px] items-center justify-between gap-4 border-t border-border px-4 text-lg text-foreground transition-colors hover:bg-primary/5 hover:text-primary sm:px-5 sm:text-2xl"
               >
                 <span>{solution.shortTitle ?? solution.title}</span>
                 <ArrowRight

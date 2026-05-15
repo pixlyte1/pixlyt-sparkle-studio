@@ -399,6 +399,150 @@ export const solutions: Solution[] = [
     ],
   },
   {
+    slug: "databricks",
+    title: "Databricks",
+    eyebrow: "Lakehouse Data Platform",
+    summary:
+      "Databricks solutions for unified data engineering, analytics, machine learning, and lakehouse workflows that help teams turn raw data into trusted business intelligence.",
+    seoTitle: "Databricks Solutions | PIXLYT Digital Solutions",
+    seoDescription:
+      "Plan and build Databricks lakehouse workflows, ETL pipelines, data quality checks, analytics models, and AI-ready data foundations with PIXLYT.",
+    heroImage: heroSlide3,
+    accentImage: project2,
+    icon: Database,
+    featured: true,
+    metrics: [
+      { value: "Lakehouse", label: "data architecture" },
+      { value: "ETL", label: "pipeline automation" },
+      { value: "AI", label: "ready datasets" },
+    ],
+    capabilities: [
+      "Databricks workspace planning and lakehouse architecture",
+      "ETL/ELT pipelines, notebooks, jobs, and workflow orchestration",
+      "Data quality checks, transformations, governance, and documentation",
+      "Analytics-ready and AI-ready datasets for dashboards and models",
+    ],
+    outcomes: [
+      "Unify scattered data into a scalable lakehouse foundation",
+      "Speed up reporting, analytics, and machine learning workflows",
+      "Improve trust in data through cleaner pipelines and quality checks",
+    ],
+    process: [
+      {
+        title: "Assess data sources",
+        description: "We map data sources, business rules, reporting needs, platform access, and lakehouse priorities.",
+      },
+      {
+        title: "Build pipelines",
+        description: "We create ingestion flows, transformations, notebooks, jobs, validation checks, and reusable data models.",
+      },
+      {
+        title: "Operationalize",
+        description: "We document, monitor, optimize, and prepare Databricks workflows for analytics and AI use cases.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Can PIXLYT help set up Databricks from scratch?",
+        answer: "Yes. We can help plan the workspace, lakehouse structure, ingestion flows, transformations, data models, jobs, and monitoring approach.",
+      },
+      {
+        question: "Is Databricks useful for AI and machine learning?",
+        answer: "Yes. Databricks is useful for preparing clean, governed datasets that can support analytics, automation, and machine learning workflows.",
+      },
+      {
+        question: "Can Databricks connect with existing databases and APIs?",
+        answer: "Yes. We can design ingestion and integration patterns for databases, files, APIs, cloud storage, analytics tools, and business systems.",
+      },
+    ],
+    caseStudies: [
+      {
+        title: "Lakehouse Reporting Foundation",
+        category: "Databricks",
+        summary: "A scalable data foundation for ingestion, transformation, quality checks, and dashboard-ready models.",
+        image: heroSlide3,
+      },
+      {
+        title: "AI-Ready Data Pipelines",
+        category: "Data Engineering",
+        summary: "Clean data workflows designed to support analytics, forecasting, and future AI use cases.",
+        image: project2,
+      },
+    ],
+  },
+  {
+    slug: "snowflake",
+    title: "Snowflake",
+    eyebrow: "Cloud Data Warehouse",
+    summary:
+      "Snowflake solutions for cloud data warehousing, secure data sharing, analytics models, and reliable reporting foundations across business systems.",
+    seoTitle: "Snowflake Solutions | PIXLYT Digital Solutions",
+    seoDescription:
+      "Build Snowflake cloud data warehouse solutions with ingestion, modeling, governance, analytics, reporting, and performance optimization.",
+    heroImage: project2,
+    accentImage: heroSlide3,
+    icon: CloudCog,
+    featured: true,
+    metrics: [
+      { value: "Cloud", label: "warehouse setup" },
+      { value: "BI", label: "ready models" },
+      { value: "Secure", label: "data sharing" },
+    ],
+    capabilities: [
+      "Snowflake warehouse design, schemas, roles, and access planning",
+      "Data ingestion, transformations, modeling, and reporting layers",
+      "Performance tuning, cost-aware warehouse usage, and query optimization",
+      "Governance, secure sharing, documentation, and analytics enablement",
+    ],
+    outcomes: [
+      "Create one reliable source for reporting and analytics",
+      "Improve data access while keeping governance and security clear",
+      "Support dashboards, operations, AI workflows, and executive reporting",
+    ],
+    process: [
+      {
+        title: "Warehouse planning",
+        description: "We define data domains, schemas, access roles, warehouse sizing, reporting priorities, and governance needs.",
+      },
+      {
+        title: "Model and integrate",
+        description: "We build ingestion flows, transformation logic, data models, quality checks, and BI-ready datasets.",
+      },
+      {
+        title: "Optimize and support",
+        description: "We tune queries, document workflows, monitor usage, and improve Snowflake performance and cost efficiency.",
+      },
+    ],
+    faqs: [
+      {
+        question: "Can Snowflake be used as our main data warehouse?",
+        answer: "Yes. Snowflake is built for scalable cloud data warehousing, analytics, secure sharing, and business reporting.",
+      },
+      {
+        question: "Can PIXLYT migrate existing reporting data into Snowflake?",
+        answer: "Yes. We can help map current data sources, design schemas, migrate datasets, validate quality, and prepare analytics-ready models.",
+      },
+      {
+        question: "Do you help with Snowflake performance and cost optimization?",
+        answer: "Yes. We can review warehouse usage, query patterns, data models, and scheduling to improve performance and control cloud spend.",
+      },
+    ],
+    caseStudies: [
+      {
+        title: "Cloud Warehouse Modernization",
+        category: "Snowflake",
+        summary: "A structured warehouse foundation for cleaner reporting, secure access, and scalable business analytics.",
+        image: project2,
+      },
+      {
+        title: "Executive BI Data Model",
+        category: "Analytics Engineering",
+        summary: "A reporting layer designed for consistent KPIs, dashboard performance, and business trust.",
+        image: heroSlide3,
+      },
+    ],
+  },
+  {
     slug: "digital-marketing",
     title: "Digital Marketing",
     eyebrow: "Growth Campaigns",
@@ -560,13 +704,15 @@ export const primarySolutionSlugs = [
   "ai",
   "cms-dxp",
   "data-engineering",
+  "databricks",
+  "snowflake",
   "managed-services",
   "web-development",
 ];
 
 export const solutionRows = [
-  ["ai", "cms-dxp", "data-engineering"],
-  ["managed-services", "web-development"],
+  ["ai", "cms-dxp", "data-engineering", "databricks"],
+  ["snowflake", "managed-services", "web-development"],
 ];
 
 export const solutionHighlights = [

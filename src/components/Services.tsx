@@ -74,7 +74,7 @@ const Services = () => (
               to={`/solutions/${solution.slug}`}
               className="group block overflow-hidden rounded-lg border border-border bg-white shadow-card transition-all hover:-translate-y-1 hover:border-primary/25 hover:shadow-card-hover"
             >
-              <div className="grid grid-cols-[112px_1fr]">
+              <div className="grid grid-cols-[96px_1fr] sm:grid-cols-[112px_1fr]">
                 <img
                   src={solution.heroImage}
                   alt={`${solution.title} preview`}

@@ -1,22 +1,24 @@
+import type { ComponentType } from "react";
+import { Cloud } from "lucide-react";
 import {
-  Bot,
-  Braces,
-  Cloud,
-  Code2,
-  Database,
-  FileJson,
-  Layers3,
-  MonitorSmartphone,
-  Server,
-  Workflow,
-  type LucideIcon,
-} from "lucide-react";
+  SiDotnet,
+  SiExpress,
+  SiMongodb,
+  SiNodedotjs,
+  SiPostgresql,
+  SiPostman,
+  SiReact,
+  SiSharp,
+  SiOpenai,
+} from "react-icons/si";
+
+type TechnologyIcon = ComponentType<{ size?: number | string; className?: string }>;
 
 export interface Technology {
   slug: string;
   name: string;
   category: string;
-  icon: LucideIcon;
+  icon: TechnologyIcon;
   summary: string;
   about: string[];
   capabilities: string[];
@@ -59,7 +61,7 @@ export const technologies: Technology[] = [
     slug: "react-js",
     name: "React.js",
     category: "Frontend technology",
-    icon: Code2,
+    icon: SiReact,
     summary:
       "React.js is used to build fast, modular, and interactive web interfaces with reusable components and clean API integration.",
     about: [
@@ -94,7 +96,7 @@ export const technologies: Technology[] = [
     slug: "react-native",
     name: "React Native",
     category: "Mobile technology",
-    icon: MonitorSmartphone,
+    icon: SiReact,
     summary:
       "React Native helps build mobile applications for Android and iOS from a shared codebase with native-feeling experiences.",
     about: [
@@ -129,7 +131,7 @@ export const technologies: Technology[] = [
     slug: "express-js",
     name: "Express.js",
     category: "Backend framework",
-    icon: Server,
+    icon: SiExpress,
     summary:
       "Express.js is a flexible Node.js framework for building secure backend APIs, web services, and application logic.",
     about: [
@@ -164,7 +166,7 @@ export const technologies: Technology[] = [
     slug: "node-js",
     name: "Node.js",
     category: "Runtime technology",
-    icon: Workflow,
+    icon: SiNodedotjs,
     summary:
       "Node.js powers scalable server-side JavaScript for APIs, real-time features, automation, and backend systems.",
     about: [
@@ -196,7 +198,7 @@ export const technologies: Technology[] = [
     slug: "mongodb",
     name: "MongoDB",
     category: "Database technology",
-    icon: Database,
+    icon: SiMongodb,
     summary:
       "MongoDB is a flexible document database for products that need adaptable schemas, fast iteration, and content-rich data.",
     about: [
@@ -231,7 +233,7 @@ export const technologies: Technology[] = [
     slug: "postgresql",
     name: "PostgreSQL",
     category: "Database technology",
-    icon: Database,
+    icon: SiPostgresql,
     summary:
       "PostgreSQL is a reliable relational database for structured business data, reporting, transactions, and complex queries.",
     about: [
@@ -266,7 +268,7 @@ export const technologies: Technology[] = [
     slug: "asp-net",
     name: "ASP.NET",
     category: "Enterprise framework",
-    icon: Layers3,
+    icon: SiDotnet,
     summary:
       "ASP.NET supports enterprise-grade web applications, APIs, portals, and cloud-ready systems on the Microsoft stack.",
     about: [
@@ -298,7 +300,7 @@ export const technologies: Technology[] = [
     slug: "c-sharp",
     name: "C Sharp",
     category: "Programming language",
-    icon: Braces,
+    icon: SiSharp,
     summary:
       "C Sharp is used to build robust business applications, backend services, APIs, desktop tools, and enterprise systems.",
     about: [
@@ -330,7 +332,7 @@ export const technologies: Technology[] = [
     slug: "postman-api",
     name: "Postman API",
     category: "API workflow",
-    icon: FileJson,
+    icon: SiPostman,
     summary:
       "Postman API supports API testing, documentation, collaboration, validation, and delivery across the API lifecycle.",
     about: [
@@ -368,7 +370,7 @@ export const technologies: Technology[] = [
     slug: "ai-tools",
     name: "AI Tools",
     category: "AI capability",
-    icon: Bot,
+    icon: SiOpenai,
     summary:
       "AI tools help automate workflows, support content generation, build assistants, analyze data, and improve operations.",
     about: [

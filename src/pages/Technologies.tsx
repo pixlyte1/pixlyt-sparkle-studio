@@ -4,16 +4,37 @@ import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { technologies } from "@/data/technologies";
+import frontendImage from "@/assets/hero-slide-2.jpg";
+import cloudImage from "@/assets/hero-slide-3.jpg";
+import deliveryImage from "@/assets/hero-slide-1.jpg";
 
 const leftColumn = technologies.filter((_, index) => index % 2 === 0);
 const rightColumn = technologies.filter((_, index) => index % 2 === 1);
+
+const technologyVisuals = [
+  {
+    image: frontendImage,
+    label: "Frontend and mobile",
+    title: "Interface systems built for real users",
+  },
+  {
+    image: cloudImage,
+    label: "Cloud and infrastructure",
+    title: "Secure platforms ready to scale",
+  },
+  {
+    image: deliveryImage,
+    label: "AI and delivery workflow",
+    title: "Connected teams, APIs, and automation",
+  },
+];
 
 const Technologies = () => (
   <div className="min-h-screen bg-background text-foreground">
     <Navbar forceSolid />
 
-    <main className="mx-auto w-full max-w-7xl px-6 pb-20 pt-32 sm:px-10 lg:px-12">
-      <div className="mb-12 grid gap-8 md:grid-cols-[1fr_auto] md:items-start">
+    <main className="mx-auto w-full max-w-7xl px-4 pb-20 pt-32 sm:px-8 lg:px-12">
+      <div className="mb-12 grid gap-6 md:grid-cols-[1fr_auto] md:items-start">
         <div>
           <h1 className="font-heading text-3xl font-bold leading-none text-foreground sm:text-4xl">Technologies</h1>
         </div>
@@ -29,11 +50,17 @@ const Technologies = () => (
         {[leftColumn, rightColumn].map((column, index) => (
           <div key={index} className="border-b border-border">
             {column.map((technology) => {
+              const Icon = technology.icon;
               const content = (
                 <div className="flex items-center justify-between gap-5">
-                  <h2 className="text-xl text-foreground transition-colors group-hover:text-primary sm:text-2xl">
-                    {technology.name}
-                  </h2>
+                  <div className="flex items-center gap-4">
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-border bg-secondary/60 text-primary transition-colors group-hover:border-primary/30 group-hover:bg-primary/10">
+                      <Icon size={22} className="text-primary" />
+                    </span>
+                    <h2 className="text-lg text-foreground transition-colors group-hover:text-primary sm:text-2xl">
+                      {technology.name}
+                    </h2>
+                  </div>
                   <ArrowRight
                     size={18}
                     className="shrink-0 text-primary opacity-0 transition-all group-hover:translate-x-1 group-hover:opacity-100"
@@ -46,7 +73,7 @@ const Technologies = () => (
                 <Link
                   key={technology.name}
                   to={`/technologies/${technology.slug}`}
-                  className="group block min-h-[69px] border-t border-border px-5 py-5 transition-colors hover:bg-primary/5"
+                  className="group block min-h-[69px] border-t border-border px-4 py-5 transition-colors hover:bg-primary/5 sm:px-5"
                 >
                   {content}
                 </Link>
@@ -56,6 +83,34 @@ const Technologies = () => (
           </div>
         ))}
       </div>
+
+      <section className="mt-16">
+        <div className="mb-5 flex items-end justify-between gap-4">
+          <div>
+            <span className="text-sm font-semibold text-primary">Technology visuals</span>
+            <h2 className="mt-2 font-heading text-2xl font-bold text-foreground">Tools, platforms, and delivery environments</h2>
+          </div>
+        </div>
+
+        <div className="grid gap-5 md:grid-cols-3">
+          {technologyVisuals.map((item) => (
+            <article key={item.title} className="group overflow-hidden rounded-lg border border-border bg-white shadow-card transition-all hover:-translate-y-1 hover:border-primary/25 hover:shadow-card-hover">
+              <div className="aspect-[16/10] overflow-hidden bg-secondary">
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                  loading="lazy"
+                />
+              </div>
+              <div className="p-5">
+                <span className="text-xs font-semibold uppercase tracking-widest text-primary">{item.label}</span>
+                <h3 className="mt-3 font-heading text-lg font-bold leading-snug text-foreground">{item.title}</h3>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
 
       <section className="mt-16">
         <div className="mb-5 flex items-end justify-between gap-4">
