@@ -225,13 +225,13 @@ const Contact = ({ initialMessage = "" }: ContactProps) => {
             ))}
           </AnimatedSection>
 
-          <AnimatedSection direction="right" className="relative pt-14 lg:col-span-3" delay={0.15}>
+          <AnimatedSection direction="right" className="relative lg:col-span-3" delay={0.15}>
             {status === "success" && (
               <motion.div
                 initial={{ opacity: 0, y: 10, scale: 0.98 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: 10, scale: 0.98 }}
-                className="absolute left-1/2 top-0 z-10 flex w-[min(92%,420px)] -translate-x-1/2 items-center gap-3 rounded-xl border border-green-200 bg-white px-4 py-3 text-left shadow-lg shadow-green-950/10"
+                className="fixed left-4 right-4 top-20 z-[60] flex items-center gap-3 rounded-xl border border-green-200 bg-white px-4 py-3 text-left shadow-lg shadow-green-950/10 sm:left-auto sm:right-6 sm:w-[360px]"
                 role="status"
                 aria-live="polite"
               >
