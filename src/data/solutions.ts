@@ -710,9 +710,18 @@ export const primarySolutionSlugs = [
   "web-development",
 ];
 
-export const solutionRows = [
-  ["ai", "cms-dxp", "data-engineering", "databricks"],
-  ["snowflake", "managed-services", "web-development"],
+export type SolutionRowItem = { slug: string; isSubItem?: boolean };
+
+export const solutionRows: SolutionRowItem[][] = [
+  [
+    { slug: "ai" },
+    { slug: "cms-dxp" },
+    { slug: "data-engineering" },
+  ],
+  [
+    { slug: "managed-services" },
+    { slug: "web-development" },
+  ],
 ];
 
 export const solutionHighlights = [

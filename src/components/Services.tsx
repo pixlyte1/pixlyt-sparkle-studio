@@ -25,32 +25,42 @@ const Services = () => (
         <AnimatedSection className="rounded-lg border border-border bg-white shadow-card">
           <div className="grid divide-y divide-border md:grid-cols-2 md:divide-x md:divide-y-0">
             {solutionRows.map((column, columnIndex) => (
-              <div key={columnIndex} className="divide-y divide-border">
-                {column.map((slug) => {
-                  const solution = getSolutionBySlug(slug);
+              <div key={columnIndex} className="divide-y divide-border relative">
+                {column.map((item) => {
+                  const solution = getSolutionBySlug(item.slug);
                   if (!solution) return null;
                   const Icon = solution.icon;
+                  const isSubItem = item.isSubItem;
 
                   return (
                     <Link
                       key={solution.slug}
                       to={`/solutions/${solution.slug}`}
-                      className={`group flex min-h-20 items-center justify-between gap-4 px-5 py-5 transition-colors hover:bg-secondary/70 sm:px-7 ${
-                        solution.featured ? "bg-primary/[0.03]" : ""
-                      }`}
+                      className={`group flex min-h-20 items-center justify-between gap-4 py-5 transition-colors hover:bg-secondary/70 ${
+                        solution.featured && !isSubItem ? "bg-primary/[0.03]" : ""
+                      } ${isSubItem ? "pl-16 pr-5 sm:pl-20 sm:pr-7" : "px-5 sm:px-7"}`}
                     >
-                      <span className="flex min-w-0 items-center gap-4">
-                        <span
-                          className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-md border transition-all ${
-                            solution.featured
-                              ? "border-primary/25 bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground"
-                              : "border-border bg-secondary/50 text-muted-foreground group-hover:border-primary/25 group-hover:text-primary"
-                          }`}
-                        >
-                          <Icon size={20} />
-                        </span>
-                        <span>
-                          <span className="block font-heading text-base font-semibold text-foreground transition-colors group-hover:text-primary">
+                      <span className="flex min-w-0 items-center gap-4 relative">
+                        {!isSubItem && (
+                          <span
+                            className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-md border transition-all relative z-10 bg-white ${
+                              solution.featured
+                                ? "border-primary/25 bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground"
+                                : "border-border bg-secondary/50 text-muted-foreground group-hover:border-primary/25 group-hover:text-primary"
+                            }`}
+                          >
+                            <Icon size={20} />
+                          </span>
+                        )}
+                        {isSubItem && (
+                          <div className="absolute -left-9 top-1/2 -translate-y-1/2 flex items-center">
+                            <div className="h-px w-6 bg-border group-hover:bg-primary/40 transition-colors"></div>
+                          </div>
+                        )}
+                        <span className="relative">
+                          <span className={`block font-heading font-semibold transition-colors group-hover:text-primary ${
+                            isSubItem ? "text-sm text-muted-foreground" : "text-base text-foreground"
+                          }`}>
                             {solution.shortTitle ?? solution.title}
                           </span>
                         </span>
@@ -67,7 +77,7 @@ const Services = () => (
           </div>
         </AnimatedSection>
 
-        <AnimatedSection delay={0.1} direction="right" className="space-y-4">
+        <AnimatedSection delay={0.1} direction="right" className="space-y-4 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
           {featuredSolutions.map((solution) => (
             <Link
               key={solution.slug}
@@ -112,3 +122,4 @@ const Services = () => (
 );
 
 export default Services;
+

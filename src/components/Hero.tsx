@@ -190,48 +190,24 @@ const Hero = () => {
                     View Projects
                   </a>
                 </motion.div>
+
               </motion.div>
             </AnimatePresence>
           </div>
         </div>
       </div>
 
-      {/* Navigation arrows */}
-      <div className="absolute bottom-6 right-4 z-20 flex items-center gap-3 sm:bottom-8 sm:right-8">
-        <button
-          onClick={prev}
-          className="w-12 h-12 rounded-full border border-primary-foreground/20 text-primary-foreground/70 hover:bg-primary-foreground/10 hover:text-primary-foreground flex items-center justify-center transition-all duration-300 glass-dark"
-        >
-          <ChevronLeft size={20} />
-        </button>
-        <button
-          onClick={next}
-          className="w-12 h-12 rounded-full border border-primary-foreground/20 text-primary-foreground/70 hover:bg-primary-foreground/10 hover:text-primary-foreground flex items-center justify-center transition-all duration-300 glass-dark"
-        >
-          <ChevronRight size={20} />
-        </button>
-      </div>
-
       {/* Slide indicators */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex items-center gap-3">
+      <div className="absolute bottom-32 left-1/2 -translate-x-1/2 z-20 flex items-center gap-3">
         {slides.map((_, i) => (
           <button
             key={i}
             onClick={() => setCurrent(i)}
-            className="relative h-1.5 rounded-full overflow-hidden transition-all duration-300"
-            style={{ width: i === current ? 48 : 16 }}
-          >
-            <div className="absolute inset-0 bg-primary-foreground/30 rounded-full" />
-            {i === current && (
-              <motion.div
-                className="absolute inset-0 gradient-primary rounded-full"
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ duration: SLIDE_DURATION / 1000, ease: "linear" }}
-                style={{ transformOrigin: "left" }}
-              />
-            )}
-          </button>
+            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+              i === current ? "bg-white scale-110" : "bg-white/30 hover:bg-white/50"
+            }`}
+            aria-label={`Go to slide ${i + 1}`}
+          />
         ))}
       </div>
     </section>

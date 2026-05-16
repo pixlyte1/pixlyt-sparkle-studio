@@ -9,6 +9,7 @@ import SolutionDetail from "./pages/SolutionDetail.tsx";
 import Solutions from "./pages/Solutions.tsx";
 import TechnologyDetail from "./pages/TechnologyDetail.tsx";
 import Technologies from "./pages/Technologies.tsx";
+import BackToTop from "@/components/BackToTop";
 
 const queryClient = new QueryClient();
 
@@ -18,6 +19,7 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+        <BackToTop />
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/solutions" element={<Solutions />} />
@@ -33,3 +35,4 @@ const App = () => (
 );
 
 export default App;
+
