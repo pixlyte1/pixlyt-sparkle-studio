@@ -13,6 +13,7 @@ import {
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
+import TechnologiesContent from "@/components/TechnologiesContent";
 import NotFound from "./NotFound";
 import { featuredSolutions, getSolutionBySlug, solutionHighlights } from "@/data/solutions";
 
@@ -206,6 +207,10 @@ const SolutionDetail = () => {
             </div>
           </div>
         </section>
+
+        {solution.slug === "web-development" && (
+          <TechnologiesContent className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-8 lg:px-12" />
+        )}
 
         <section className="py-20">
           <div className="container mx-auto px-4">
