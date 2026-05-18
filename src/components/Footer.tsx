@@ -1,4 +1,4 @@
-import { Youtube, Instagram, Facebook, ArrowUp, Linkedin, Twitter, Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
+import { Youtube, Instagram, Facebook, Linkedin, Twitter, Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 import logo from "@/assets/pixlyt-logo.png";
 import { openExternalLink } from "@/lib/openExternalLink";
@@ -16,13 +16,13 @@ const footerLinks = [
 const Footer = () => (
   <footer className="relative overflow-hidden bg-foreground">
     <div className="h-1 gradient-primary" />
-    <div className="absolute left-1/2 top-0 h-32 w-96 -translate-x-1/2 bg-primary/10 blur-[80px] pointer-events-none" />
+    <div className="absolute left-1/2 top-0 h-24 w-96 -translate-x-1/2 bg-primary/10 blur-[80px] pointer-events-none" />
 
-    <div className="container relative mx-auto px-4 py-16">
-      <div className="mb-12 grid gap-12 lg:grid-cols-3">
+    <div className="container relative mx-auto px-4 py-10">
+      <div className="mb-8 grid gap-8 lg:grid-cols-3">
         {/* Column 1 */}
-        <div className="flex flex-col gap-6">
-          <img src={logo} alt="PIXLYT" className="h-10 w-auto object-contain self-start brightness-0 invert" />
+        <div className="flex flex-col gap-5">
+          <img src={logo} alt="PIXLYT" className="h-8 w-auto object-contain self-start brightness-0 invert" />
           <p className="max-w-xs text-sm leading-relaxed text-primary-foreground/70">
             AI-driven IT and Media company empowering brands through smart technology and storytelling.
           </p>
@@ -54,8 +54,8 @@ const Footer = () => (
 
         {/* Column 2 */}
         <div>
-          <h4 className="mb-6 text-xs font-bold uppercase tracking-[0.2em] text-primary-foreground/40">Quick Links</h4>
-          <ul className="space-y-4">
+          <h4 className="mb-5 text-xs font-bold uppercase tracking-[0.2em] text-primary-foreground/40">Quick Links</h4>
+          <ul className="space-y-3">
             {footerLinks.map((link) => (
               <li key={link.href}>
                 <a href={link.href} className="text-sm font-medium text-primary-foreground/80 transition-colors hover:text-primary">
@@ -68,10 +68,10 @@ const Footer = () => (
 
         {/* Column 3 */}
         <div>
-          <h4 className="mb-6 text-xs font-bold uppercase tracking-[0.2em] text-primary-foreground/40">Get In Touch</h4>
+          <h4 className="mb-5 text-xs font-bold uppercase tracking-[0.2em] text-primary-foreground/40">Get In Touch</h4>
           
-          <div className="mb-4 rounded-2xl border border-primary-foreground/10 bg-primary-foreground/[0.02] p-4">
-            <div className="flex items-center gap-4 py-2">
+          <div className="mb-4 rounded-2xl border border-primary-foreground/10 bg-primary-foreground/[0.02] p-3">
+            <div className="flex items-center gap-4 py-1.5">
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-primary-foreground/10 bg-primary-foreground/5 text-primary">
                 <Mail size={18} strokeWidth={1.5} />
               </div>
@@ -85,7 +85,7 @@ const Footer = () => (
             
             <div className="my-2 h-px w-full bg-primary-foreground/5" />
             
-            <div className="flex items-center gap-4 py-2">
+            <div className="flex items-center gap-4 py-1.5">
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-primary-foreground/10 bg-primary-foreground/5 text-primary">
                 <Phone size={18} strokeWidth={1.5} />
               </div>
@@ -99,7 +99,7 @@ const Footer = () => (
 
             <div className="my-2 h-px w-full bg-primary-foreground/5" />
             
-            <div className="flex items-center gap-4 py-2">
+            <div className="flex items-center gap-4 py-1.5">
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-primary-foreground/10 bg-primary-foreground/5 text-primary">
                 <MapPin size={18} strokeWidth={1.5} />
               </div>
@@ -120,17 +120,10 @@ const Footer = () => (
         </div>
       </div>
 
-      <div className="flex flex-col items-center justify-between gap-4 border-t border-primary-foreground/10 pt-8 sm:flex-row">
+      <div className="flex flex-col items-center justify-between gap-4 border-t border-primary-foreground/10 pt-6 sm:flex-row">
         <p className="text-sm text-primary-foreground/40">
           &copy; 2026 PIXLYT Digital Solutions Pvt Ltd. All rights reserved.
         </p>
-        <motion.a
-          href="/#home"
-          whileHover={{ y: -3 }}
-          className="flex h-10 w-10 items-center justify-center rounded-full border border-primary-foreground/10 text-primary-foreground/40 transition-all duration-300 hover:border-primary/30 hover:text-primary hover:shadow-glow"
-        >
-          <ArrowUp size={18} />
-        </motion.a>
       </div>
     </div>
   </footer>
