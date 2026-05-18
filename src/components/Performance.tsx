@@ -3,7 +3,7 @@ import AnimatedSection from "./AnimatedSection";
 import strategyImage from "@/assets/strategy-to-success.png";
 
 const Performance = () => (
-  <section id="performance" className="py-28 bg-background relative overflow-hidden">
+  <section id="performance" className="pt-0 pb-16 bg-background relative overflow-hidden">
     <div className="absolute top-10 right-10 w-96 h-96 rounded-full bg-primary/5 blur-[120px] animate-blob pointer-events-none" />
     <div className="absolute bottom-10 left-10 w-80 h-80 rounded-full bg-accent/5 blur-[100px] animate-blob-delayed pointer-events-none" />
 

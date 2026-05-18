@@ -9,8 +9,8 @@ const socials = [
     label: "YouTube",
     subtitle: "YouTube",
     href: "https://youtube.com",
-    hoverBg: "hover:bg-red-500",
-    hoverShadow: "hover:shadow-red-500/30",
+    hoverBg: "group-hover:bg-red-500",
+    hoverShadow: "group-hover:shadow-red-500/30",
     iconHover: "group-hover:text-white",
   },
   {
@@ -18,8 +18,8 @@ const socials = [
     label: "Instagram",
     subtitle: "Instagram",
     href: "https://instagram.com",
-    hoverBg: "hover:bg-gradient-to-br hover:from-purple-500 hover:via-pink-500 hover:to-orange-400",
-    hoverShadow: "hover:shadow-pink-500/30",
+    hoverBg: "group-hover:bg-gradient-to-br group-hover:from-purple-500 group-hover:via-pink-500 group-hover:to-orange-400",
+    hoverShadow: "group-hover:shadow-pink-500/30",
     iconHover: "group-hover:text-white",
   },
   {
@@ -27,14 +27,14 @@ const socials = [
     label: "Facebook",
     subtitle: "Facebook",
     href: "https://facebook.com",
-    hoverBg: "hover:bg-blue-600",
-    hoverShadow: "hover:shadow-blue-600/30",
+    hoverBg: "group-hover:bg-blue-600",
+    hoverShadow: "group-hover:shadow-blue-600/30",
     iconHover: "group-hover:text-white",
   },
 ];
 
 const SocialMedia = () => (
-  <section className="py-28 gradient-section relative overflow-hidden">
+  <section className="py-16 gradient-section relative overflow-hidden">
     {/* Background blobs */}
     <div className="absolute top-10 left-20 w-64 h-64 rounded-full bg-primary/5 blur-[80px] animate-blob pointer-events-none" />
     <div className="absolute bottom-10 right-20 w-72 h-72 rounded-full bg-accent/5 blur-[100px] animate-blob-delayed pointer-events-none" />

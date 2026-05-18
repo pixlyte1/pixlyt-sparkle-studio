@@ -13,7 +13,7 @@ const projects = [
 ];
 
 const Projects = () => (
-  <section id="projects" className="py-28 bg-background relative overflow-hidden">
+  <section id="projects" className="pt-10 pb-16 bg-background relative overflow-hidden">
     <div className="absolute top-1/2 left-0 w-80 h-80 rounded-full bg-accent/3 blur-3xl pointer-events-none -translate-y-1/2" />
 
     <div className="container mx-auto px-4 relative">

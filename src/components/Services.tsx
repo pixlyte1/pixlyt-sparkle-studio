@@ -12,7 +12,7 @@ const deliveryFlow = [
 ];
 
 const Services = () => (
-  <section id="services" className="relative overflow-hidden bg-background py-24 sm:py-28">
+  <section id="services" className="relative overflow-hidden bg-background py-16 sm:py-20">
     <div className="absolute inset-x-0 top-0 h-px bg-border" />
     <div className="container mx-auto px-4">
       <AnimatedSection className="mx-auto max-w-7xl">

@@ -212,6 +212,124 @@ const SolutionDetail = () => {
           <TechnologiesContent className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-8 lg:px-12" />
         )}
 
+        {solution.slug === "data-engineering" && (
+          <section className="py-20 bg-background border-b border-border">
+            <div className="container mx-auto px-4">
+              <div className="mb-12">
+                <span className="text-xs font-semibold uppercase tracking-widest text-primary">Supported Platforms</span>
+                <h2 className="mt-3 font-heading text-3xl font-bold text-foreground">Core data technologies we implement</h2>
+              </div>
+              <div className="grid gap-5 md:grid-cols-2">
+                {["databricks", "snowflake"].map((platformSlug) => {
+                  const platform = getSolutionBySlug(platformSlug);
+                  if (!platform) return null;
+                  const PlatformIcon = platform.icon;
+                  return (
+                    <Link
+                      key={platform.slug}
+                      to={`/solutions/${platform.slug}`}
+                      className="group overflow-hidden rounded-lg border border-border bg-white shadow-card transition-all hover:-translate-y-1 hover:border-primary/25 hover:shadow-card-hover"
+                    >
+                      <img src={platform.heroImage} alt={platform.title} className="aspect-[16/9] w-full object-cover" loading="lazy" />
+                      <div className="p-6">
+                        <div className="mb-3 flex items-center gap-2 text-primary">
+                          <PlatformIcon size={18} />
+                          <span className="text-xs font-semibold uppercase tracking-widest">{platform.eyebrow}</span>
+                        </div>
+                        <h3 className="font-heading text-2xl font-bold text-foreground transition-colors group-hover:text-primary">
+                          {platform.title}
+                        </h3>
+                        <p className="mt-3 text-sm leading-6 text-muted-foreground">{platform.summary}</p>
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {solution.slug === "cms-dxp" && (
+          <section className="py-20 bg-background border-b border-border">
+            <div className="container mx-auto px-4">
+              <div className="mb-12">
+                <span className="text-xs font-semibold uppercase tracking-widest text-primary">Featured Platforms</span>
+                <h2 className="mt-3 font-heading text-3xl font-bold text-foreground">Core CMS & DXP technologies we implement</h2>
+              </div>
+              <div className="grid gap-5 md:grid-cols-2">
+                <div className="group overflow-hidden rounded-lg border border-border bg-white shadow-card transition-all hover:-translate-y-1 hover:border-primary/25 hover:shadow-card-hover">
+                  <img src={solution.heroImage} alt="Sitecore" className="aspect-[16/9] w-full object-cover" loading="lazy" />
+                  <div className="p-6">
+                    <div className="mb-3 flex items-center gap-2 text-primary">
+                      <Layers3 size={18} />
+                      <span className="text-xs font-semibold uppercase tracking-widest">Enterprise CMS</span>
+                    </div>
+                    <h3 className="font-heading text-2xl font-bold text-foreground transition-colors group-hover:text-primary">
+                      Sitecore
+                    </h3>
+                    <p className="mt-3 text-sm leading-6 text-muted-foreground">
+                      Enterprise-grade content management and digital experience platform with advanced personalization and headless capabilities using Next.js.
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="group overflow-hidden rounded-lg border border-border bg-white shadow-card transition-all hover:-translate-y-1 hover:border-primary/25 hover:shadow-card-hover">
+                  <img src={solution.accentImage} alt="Optimizely" className="aspect-[16/9] w-full object-cover" loading="lazy" />
+                  <div className="p-6">
+                    <div className="mb-3 flex items-center gap-2 text-primary">
+                      <Layers3 size={18} />
+                      <span className="text-xs font-semibold uppercase tracking-widest">DXP & Commerce</span>
+                    </div>
+                    <h3 className="font-heading text-2xl font-bold text-foreground transition-colors group-hover:text-primary">
+                      Optimizely
+                    </h3>
+                    <p className="mt-3 text-sm leading-6 text-muted-foreground">
+                      Modern DXP with strong content management, commerce, and experimentation tools, supporting headless architectures with Next.js.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {solution.slug === "managed-services" && (
+          <section className="py-20 bg-background border-b border-border">
+            <div className="container mx-auto px-4">
+              <div className="mb-12">
+                <span className="text-xs font-semibold uppercase tracking-widest text-primary">Related Services</span>
+                <h2 className="mt-3 font-heading text-3xl font-bold text-foreground">Complementary solutions</h2>
+              </div>
+              <div className="grid gap-5 md:grid-cols-2">
+                {["data-engineering"].map((platformSlug) => {
+                  const platform = getSolutionBySlug(platformSlug);
+                  if (!platform) return null;
+                  const PlatformIcon = platform.icon;
+                  return (
+                    <Link
+                      key={platform.slug}
+                      to={`/solutions/${platform.slug}`}
+                      className="group overflow-hidden rounded-lg border border-border bg-white shadow-card transition-all hover:-translate-y-1 hover:border-primary/25 hover:shadow-card-hover"
+                    >
+                      <img src={platform.heroImage} alt={platform.title} className="aspect-[16/9] w-full object-cover" loading="lazy" />
+                      <div className="p-6">
+                        <div className="mb-3 flex items-center gap-2 text-primary">
+                          <PlatformIcon size={18} />
+                          <span className="text-xs font-semibold uppercase tracking-widest">{platform.eyebrow}</span>
+                        </div>
+                        <h3 className="font-heading text-2xl font-bold text-foreground transition-colors group-hover:text-primary">
+                          {platform.title}
+                        </h3>
+                        <p className="mt-3 text-sm leading-6 text-muted-foreground">{platform.summary}</p>
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+            </div>
+          </section>
+        )}
+
         <section className="py-20">
           <div className="container mx-auto px-4">
             {caseStudies.length > 0 && (

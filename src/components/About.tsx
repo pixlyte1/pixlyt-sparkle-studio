@@ -21,7 +21,7 @@ const highlights = [
 ];
 
 const About = () => (
-  <section id="about" className="py-28 bg-background relative overflow-hidden">
+  <section id="about" className="py-16 bg-background relative overflow-hidden">
     {/* Decorative blobs */}
     <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-primary/5 blur-[100px] animate-blob pointer-events-none" />
     <div className="absolute bottom-0 left-0 w-72 h-72 rounded-full bg-accent/5 blur-[80px] animate-blob-delayed pointer-events-none" />

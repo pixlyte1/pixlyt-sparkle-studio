@@ -68,7 +68,7 @@ const TiltCard = ({ children, className }: { children: React.ReactNode; classNam
 };
 
 const Products = () => (
-  <section id="products" className="py-28 bg-background relative overflow-hidden">
+  <section id="products" className="py-16 bg-background relative overflow-hidden">
     {/* Background blobs */}
     <div className="absolute top-20 left-10 w-80 h-80 rounded-full bg-primary/5 blur-[100px] animate-blob pointer-events-none" />
     <div className="absolute bottom-20 right-10 w-96 h-96 rounded-full bg-accent/5 blur-[120px] animate-blob-delayed pointer-events-none" />
@@ -87,7 +87,7 @@ const Products = () => (
         </p>
       </AnimatedSection>
 
-      <div className="grid md:grid-cols-2 gap-8 mb-20">
+      <div className="grid md:grid-cols-2 gap-8 mb-5">
         {products.map((product, i) => (
           <AnimatedSection key={product.title} delay={i * 0.15} direction="up">
             <TiltCard className="h-full">
