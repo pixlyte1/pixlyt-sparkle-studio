@@ -5,10 +5,10 @@ import Navbar from "@/components/Navbar";
 import { featuredSolutions } from "@/data/solutions";
 
 const leftColumn = featuredSolutions.filter((solution) =>
-  ["ai", "data-engineering", "databricks", "web-development"].includes(solution.slug)
+  ["ai", "data-engineering", "web-development"].includes(solution.slug)
 );
 const rightColumn = featuredSolutions.filter((solution) =>
-  ["cms-dxp", "snowflake", "managed-services"].includes(solution.slug)
+  ["cms-dxp", "managed-services"].includes(solution.slug)
 );
 
 const Solutions = () => (

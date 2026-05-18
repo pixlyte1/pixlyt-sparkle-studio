@@ -14,9 +14,9 @@ const features = [
 ];
 
 const stats = [
-  { icon: Users, value: "16K+", label: "Subscribers" },
-  { icon: Video, value: "460+", label: "Videos" },
-  { icon: Eye, value: "9M+", label: "Views" },
+  { icon: Youtube, value: "30K+", label: "Subscribers" },
+  { icon: FaInstagram, value: "32K+", label: "Followers" },
+  { icon: Eye, value: "19,733,498", label: "Overall Views" },
 ];
 
 const socials = [
@@ -37,7 +37,7 @@ const socials = [
 const YT_URL = "https://youtube.com";
 
 const Media = () => (
-  <section id="media" className="py-28 gradient-section-reverse relative overflow-hidden">
+  <section id="media" className="py-16 gradient-section-reverse relative overflow-hidden">
     {/* Background blobs */}
     <div className="absolute top-20 -left-20 w-80 h-80 rounded-full bg-primary/5 blur-[100px] animate-blob pointer-events-none" />
     <div className="absolute bottom-20 -right-20 w-96 h-96 rounded-full bg-accent/5 blur-[120px] animate-blob-delayed pointer-events-none" />
@@ -153,7 +153,7 @@ const Media = () => (
       </div>
 
       {/* Tagline highlight block */}
-      <AnimatedSection className="max-w-4xl mx-auto mb-20">
+      <AnimatedSection className="max-w-4xl mx-auto mb-5">
         <div className="relative rounded-3xl gradient-primary p-10 sm:p-14 text-center overflow-hidden shadow-glow-lg">
           <div className="absolute -top-20 -right-20 w-64 h-64 rounded-full bg-white/10 blur-3xl" />
           <div className="absolute -bottom-20 -left-20 w-64 h-64 rounded-full bg-white/10 blur-3xl" />
@@ -164,7 +164,7 @@ const Media = () => (
       </AnimatedSection>
 
       {/* Social Links */}
-      <AnimatedSection className="max-w-2xl mx-auto mb-12">
+      {/* <AnimatedSection className="max-w-2xl mx-auto mb-12">
         <h4 className="text-center text-sm uppercase tracking-widest text-muted-foreground font-semibold mb-6">
           Follow News Channel
         </h4>
@@ -191,14 +191,14 @@ const Media = () => (
             </motion.button>
           ))}
         </div>
-      </AnimatedSection>
+      </AnimatedSection> */}
 
       {/* Footer note */}
-      <AnimatedSection className="max-w-2xl mx-auto">
+      {/* <AnimatedSection className="max-w-2xl mx-auto">
         <p className="text-center text-xs text-muted-foreground/80 italic">
           Content used under fair use for commentary. Contact for credits or takedown requests.
         </p>
-      </AnimatedSection>
+      </AnimatedSection> */}
     </div>
   </section>
 );

@@ -148,6 +148,7 @@ export const solutions: Solution[] = [
     ],
     capabilities: [
       "Headless CMS architecture and content modeling",
+      "Sitecore & Optimizely (Headless NextJs)",
       "Landing page systems, reusable blocks, and editorial workflows",
       "Personalized web experiences and campaign microsites",
       "SEO, analytics, performance, and governance setup",
@@ -704,8 +705,6 @@ export const primarySolutionSlugs = [
   "ai",
   "cms-dxp",
   "data-engineering",
-  "databricks",
-  "snowflake",
   "managed-services",
   "web-development",
 ];

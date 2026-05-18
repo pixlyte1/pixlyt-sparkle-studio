@@ -224,7 +224,7 @@ const Contact = ({ initialMessage = "" }: ContactProps) => {
   };
 
   return (
-    <section id="contact" className="relative overflow-hidden bg-background py-28">
+    <section id="contact" className="relative overflow-hidden bg-background pt-10 pb-16">
       <div className="absolute right-0 top-0 h-96 w-96 rounded-full bg-primary/5 blur-[100px] animate-blob pointer-events-none" />
       <div className="absolute bottom-20 left-10 h-72 w-72 rounded-full bg-accent/5 blur-[80px] animate-blob-delayed pointer-events-none" />
 
