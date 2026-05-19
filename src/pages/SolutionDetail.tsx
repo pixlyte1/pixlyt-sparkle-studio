@@ -13,7 +13,7 @@ import {
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
-import TechnologiesContent from "@/components/TechnologiesContent";
+import WebDevelopmentDetail from "@/components/WebDevelopmentDetail";
 import NotFound from "./NotFound";
 import { featuredSolutions, getSolutionBySlug, solutionHighlights } from "@/data/solutions";
 
@@ -49,6 +49,11 @@ const SolutionDetail = () => {
   }
 
   const Icon = solution.icon;
+
+  if (solution.slug === "web-development") {
+    return <WebDevelopmentDetail Icon={Icon} />;
+  }
+
   const relatedSolutions = featuredSolutions.filter((item) => item.slug !== solution.slug).slice(0, 2);
   const caseStudies = solution.caseStudies ?? [];
   const faqs = solution.faqs ?? [
@@ -208,8 +213,43 @@ const SolutionDetail = () => {
           </div>
         </section>
 
-        {solution.slug === "web-development" && (
-          <TechnologiesContent className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-8 lg:px-12" />
+        {solution.slug === "development-services" && solution.subServices && (
+          <section className="py-20 bg-background border-b border-border">
+            <div className="container mx-auto px-4">
+              <div className="mb-12">
+                <span className="text-xs font-semibold uppercase tracking-widest text-primary">Development Services</span>
+                <h2 className="mt-3 font-heading text-3xl font-bold text-foreground">Choose what you want to build</h2>
+                <p className="mt-3 max-w-2xl text-sm leading-6 text-muted-foreground">
+                  Select a focused development path. Web Development opens the same rich detail experience as the Express.js page style.
+                </p>
+              </div>
+              <div className="grid gap-5 md:grid-cols-3">
+                {solution.subServices.map((service) => (
+                  <Link
+                    key={service.slug}
+                    to={`/solutions/${service.slug}`}
+                    className="group overflow-hidden rounded-lg border border-border bg-white shadow-card transition-all hover:-translate-y-1 hover:border-primary/25 hover:shadow-card-hover"
+                  >
+                    <img src={service.image} alt={service.title} className="aspect-[16/10] w-full object-cover" loading="lazy" />
+                    <div className="p-6">
+                      <div className="mb-3 flex items-center gap-2 text-primary">
+                        <Icon size={18} />
+                        <span className="text-xs font-semibold uppercase tracking-widest">{service.eyebrow}</span>
+                      </div>
+                      <h3 className="font-heading text-2xl font-bold text-foreground transition-colors group-hover:text-primary">
+                        {service.title}
+                      </h3>
+                      <p className="mt-3 text-sm leading-6 text-muted-foreground">{service.description}</p>
+                      <div className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary">
+                        Explore service
+                        <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </section>
         )}
 
         {solution.slug === "data-engineering" && (

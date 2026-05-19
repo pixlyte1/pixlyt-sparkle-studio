@@ -46,6 +46,13 @@ export type Solution = {
   outcomes: string[];
   process: Array<{ title: string; description: string }>;
   faqs?: Array<{ question: string; answer: string }>;
+  subServices?: Array<{
+    slug: string;
+    title: string;
+    eyebrow: string;
+    description: string;
+    image: string;
+  }>;
   caseStudies?: Array<{
     title: string;
     category: string;
@@ -202,6 +209,78 @@ export const solutions: Solution[] = [
     ],
   },
   {
+    slug: "development-services",
+    title: "Development Services",
+    eyebrow: "Web, Software & Mobile",
+    summary:
+      "End-to-end development services for websites, custom software, and mobile apps built with clean UX, scalable architecture, and launch-ready engineering.",
+    seoTitle: "Development Services | PIXLYT Digital Solutions",
+    seoDescription:
+      "Explore web development, software development, and mobile app development services from PIXLYT.",
+    heroImage: project1,
+    accentImage: heroSlide1,
+    icon: Code2,
+    featured: true,
+    metrics: [
+      { value: "Web", label: "experiences" },
+      { value: "Software", label: "systems" },
+      { value: "Mobile", label: "apps" },
+    ],
+    capabilities: [
+      "Responsive websites, landing pages, portals, and web applications",
+      "Custom software platforms, dashboards, admin tools, and workflows",
+      "Mobile app planning, interface development, API integration, and release support",
+      "Modern frontend, backend, database, QA, deployment, and managed support",
+    ],
+    outcomes: [
+      "Choose the right development path from one connected delivery team",
+      "Launch polished digital products that work smoothly across devices",
+      "Build scalable foundations for future features, automation, and growth",
+    ],
+    process: [
+      { title: "Scope", description: "We map the product goal, users, workflows, platforms, and technical priorities." },
+      { title: "Develop", description: "We design and build the frontend, backend, integrations, content, and release workflow." },
+      { title: "Launch", description: "We test, optimize, deploy, and support the product after launch." },
+    ],
+    subServices: [
+      {
+        slug: "web-development",
+        title: "Web Development",
+        eyebrow: "Modern Web Experiences",
+        description: "Fast websites, web apps, portals, and landing pages with responsive UI, SEO basics, and reliable performance.",
+        image: project1,
+      },
+      {
+        slug: "software-development",
+        title: "Software Development",
+        eyebrow: "Custom Business Systems",
+        description: "Custom dashboards, admin tools, SaaS workflows, and business platforms built around real operational needs.",
+        image: project2,
+      },
+      {
+        slug: "mobile-app-development",
+        title: "Mobile App Development",
+        eyebrow: "iOS & Android Apps",
+        description: "Mobile app interfaces, APIs, release-ready features, and cross-platform delivery for customer and internal apps.",
+        image: heroSlide2,
+      },
+    ],
+    faqs: [
+      {
+        question: "Which development service should I choose?",
+        answer: "If you need a website or browser-based product, choose web development. If you need internal workflows or a custom platform, choose software development. If the primary experience is on phones, choose mobile app development.",
+      },
+      {
+        question: "Can one project include web, software, and mobile?",
+        answer: "Yes. We can plan a connected product roadmap where the web app, backend, admin system, and mobile app share the right architecture.",
+      },
+      {
+        question: "Do you handle design, development, and launch?",
+        answer: "Yes. We can support UX, UI, frontend, backend, integrations, QA, deployment, and post-launch improvements.",
+      },
+    ],
+  },
+  {
     slug: "web-development",
     title: "Web Development",
     eyebrow: "Modern Web Experiences",
@@ -262,6 +341,74 @@ export const solutions: Solution[] = [
         summary: "A high-impact landing page pattern for explaining offers, capturing interest, and supporting campaigns.",
         image: heroSlide1,
       },
+    ],
+  },
+  {
+    slug: "software-development",
+    title: "Software Development",
+    eyebrow: "Custom Business Systems",
+    summary:
+      "Custom software platforms, admin dashboards, SaaS workflows, and internal tools designed around your business operations.",
+    seoTitle: "Software Development Services | PIXLYT Digital Solutions",
+    seoDescription:
+      "Build custom software, dashboards, SaaS workflows, admin tools, and integrations with PIXLYT.",
+    heroImage: project2,
+    accentImage: project4,
+    icon: MonitorCog,
+    metrics: [
+      { value: "Custom", label: "workflows" },
+      { value: "API", label: "integrations" },
+      { value: "Secure", label: "architecture" },
+    ],
+    capabilities: [
+      "Custom business platforms, internal tools, and admin dashboards",
+      "SaaS feature development, role-based access, and workflow automation",
+      "Backend APIs, database design, integrations, and reporting modules",
+      "Testing, deployment, documentation, and ongoing enhancement support",
+    ],
+    outcomes: [
+      "Replace manual workflows with reliable digital systems",
+      "Improve visibility across teams, data, and operations",
+      "Create scalable software that can grow with your business",
+    ],
+    process: [
+      { title: "Map workflows", description: "We document users, roles, data, approvals, and operational pain points." },
+      { title: "Build modules", description: "We develop the interface, backend logic, database, integrations, and controls." },
+      { title: "Release and improve", description: "We test with real users, deploy safely, and refine around feedback." },
+    ],
+  },
+  {
+    slug: "mobile-app-development",
+    title: "Mobile App Development",
+    eyebrow: "iOS & Android Apps",
+    summary:
+      "Mobile apps with polished interfaces, reliable APIs, secure data flows, and release-ready experiences for customers or internal teams.",
+    seoTitle: "Mobile App Development Services | PIXLYT Digital Solutions",
+    seoDescription:
+      "Plan, design, build, and launch mobile apps for iOS and Android with PIXLYT.",
+    heroImage: heroSlide2,
+    accentImage: project3,
+    icon: PanelsTopLeft,
+    metrics: [
+      { value: "iOS", label: "ready" },
+      { value: "Android", label: "ready" },
+      { value: "API", label: "connected" },
+    ],
+    capabilities: [
+      "Mobile app UX, UI, navigation flows, and feature planning",
+      "Cross-platform app development with backend and API integration",
+      "Authentication, profiles, notifications, forms, media, and dashboards",
+      "Device testing, performance checks, deployment support, and updates",
+    ],
+    outcomes: [
+      "Give users a smooth mobile-first product experience",
+      "Connect app features with reliable backend systems",
+      "Launch with a maintainable foundation for future releases",
+    ],
+    process: [
+      { title: "Plan app flows", description: "We define screens, user journeys, platform needs, and release priorities." },
+      { title: "Develop features", description: "We build interfaces, APIs, authentication, data flows, and core modules." },
+      { title: "Test and release", description: "We test across devices, optimize performance, and support launch." },
     ],
   },
   {
@@ -706,7 +853,7 @@ export const primarySolutionSlugs = [
   "cms-dxp",
   "data-engineering",
   "managed-services",
-  "web-development",
+  "development-services",
 ];
 
 export type SolutionRowItem = { slug: string; isSubItem?: boolean };
@@ -719,7 +866,7 @@ export const solutionRows: SolutionRowItem[][] = [
   ],
   [
     { slug: "managed-services" },
-    { slug: "web-development" },
+    { slug: "development-services" },
   ],
 ];
 

@@ -5,7 +5,7 @@ import Navbar from "@/components/Navbar";
 import { featuredSolutions } from "@/data/solutions";
 
 const leftColumn = featuredSolutions.filter((solution) =>
-  ["ai", "data-engineering", "web-development"].includes(solution.slug)
+  ["ai", "data-engineering", "development-services"].includes(solution.slug)
 );
 const rightColumn = featuredSolutions.filter((solution) =>
   ["cms-dxp", "managed-services"].includes(solution.slug)
@@ -86,7 +86,7 @@ const Solutions = () => (
             <h2 className="mt-3 font-heading text-3xl font-bold">Not sure which solution fits your project?</h2>
             <p className="mt-3 max-w-2xl text-sm leading-6 text-primary-foreground/70">
               Tell us what you want to build, improve, or automate. We will help you choose the right path across AI,
-              CMS, data, managed services, and web development.
+              CMS, data, managed services, and development services.
             </p>
           </div>
           <a
