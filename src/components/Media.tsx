@@ -16,6 +16,7 @@ const features = [
 const stats = [
   { icon: Youtube, value: "30K+", label: "Subscribers" },
   { icon: FaInstagram, value: "32K+", label: "Followers" },
+  { icon: FaFacebookF, value: "55K+", label: "Followers" },
   { icon: Eye, value: "19,733,498", label: "Overall Views" },
 ];
 
@@ -61,7 +62,7 @@ const Media = () => (
       </AnimatedSection>
 
       {/* Channel Stats */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto mb-20">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto mb-20">
         {stats.map((stat, i) => (
           <motion.div
             key={stat.label}
@@ -70,13 +71,19 @@ const Media = () => (
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.5, delay: i * 0.1 }}
             whileHover={{ y: -6, scale: 1.03 }}
-            className="glass-card rounded-2xl p-8 text-center border-glow shadow-card hover:shadow-card-hover transition-all duration-500"
+            className="glass-card rounded-2xl px-4 py-8 sm:px-6 lg:px-4 xl:px-8 text-center border-glow shadow-card hover:shadow-card-hover transition-all duration-500"
           >
             <div className="w-14 h-14 mx-auto mb-4 rounded-2xl gradient-primary flex items-center justify-center shadow-glow">
               <stat.icon className="text-primary-foreground" size={26} />
             </div>
-            <div className="font-heading text-4xl font-bold text-gradient mb-1">{stat.value}</div>
-            <div className="text-muted-foreground text-sm uppercase tracking-wider font-medium">{stat.label}</div>
+            <div className={`font-heading font-bold text-gradient mb-1 tracking-tight ${
+              stat.value.length > 6 
+                ? "text-2xl sm:text-3xl lg:text-xl xl:text-3xl" 
+                : "text-3xl sm:text-4xl"
+            }`}>
+              {stat.value}
+            </div>
+            <div className="text-muted-foreground text-xs sm:text-sm uppercase tracking-wider font-medium">{stat.label}</div>
           </motion.div>
         ))}
       </div>

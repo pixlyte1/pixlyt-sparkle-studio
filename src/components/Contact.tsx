@@ -14,8 +14,8 @@ const supportCards = [
   {
     icon: MapPin,
     title: "Visit Us",
-    body: "Connect with us from Vellore, Tamil Nadu, India.",
-    lines: ["Vellore, Tamil Nadu, India"],
+    body: "Connect with us from Bangalore & Vellore, India.",
+    lines: ["Bangalore, Karnataka, India", "Vellore, Tamil Nadu, India"],
   },
   {
     icon: Mail,

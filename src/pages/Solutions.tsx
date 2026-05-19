@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import { featuredSolutions } from "@/data/solutions";
@@ -100,6 +101,7 @@ const Solutions = () => (
       </section>
     </main>
 
+    <Contact />
     <Footer />
   </div>
 );

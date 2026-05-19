@@ -44,7 +44,7 @@ const Navbar = ({ forceSolid = false }: NavbarProps) => {
           <img
             src={logo}
             alt="PIXLYT Logo"
-            className={`h-9 w-auto transition-all duration-300 ${!isSolid ? "brightness-0 invert" : ""}`}
+            className={`h-20 w-auto transition-all duration-300 ${!isSolid ? "brightness-0 invert" : ""}`}
           />
         </a>
 

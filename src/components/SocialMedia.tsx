@@ -1,4 +1,4 @@
-import { FaYoutube, FaInstagram, FaFacebookF } from "react-icons/fa";
+import { FaYoutube, FaInstagram, FaFacebookF, FaLinkedinIn, FaTwitter } from "react-icons/fa";
 import { motion } from "framer-motion";
 import AnimatedSection from "./AnimatedSection";
 import { openExternalLink } from "@/lib/openExternalLink";
@@ -31,6 +31,24 @@ const socials = [
     hoverShadow: "group-hover:shadow-blue-600/30",
     iconHover: "group-hover:text-white",
   },
+  {
+    icon: FaLinkedinIn,
+    label: "LinkedIn",
+    subtitle: "LinkedIn",
+    href: "https://linkedin.com",
+    hoverBg: "group-hover:bg-[#0077B5]",
+    hoverShadow: "group-hover:shadow-[#0077B5]/30",
+    iconHover: "group-hover:text-white",
+  },
+  {
+    icon: FaTwitter,
+    label: "Twitter",
+    subtitle: "Twitter",
+    href: "https://twitter.com",
+    hoverBg: "group-hover:bg-[#1DA1F2]",
+    hoverShadow: "group-hover:shadow-[#1DA1F2]/30",
+    iconHover: "group-hover:text-white",
+  },
 ];
 
 const SocialMedia = () => (
@@ -52,7 +70,7 @@ const SocialMedia = () => (
         </p>
       </AnimatedSection>
 
-      <div className="flex flex-wrap items-stretch justify-center gap-8 max-w-3xl mx-auto">
+      <div className="flex flex-wrap items-stretch justify-center gap-4 sm:gap-6 max-w-7xl mx-auto">
         {socials.map((s, i) => (
           <motion.button
             type="button"
@@ -64,7 +82,7 @@ const SocialMedia = () => (
             viewport={{ once: true, margin: "-60px" }}
             whileHover={{ y: -10, scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300, delay: i * 0.12 }}
-            className="group flex flex-col items-center gap-5 p-10 glass-card rounded-2xl hover:shadow-card-hover border-glow transition-all duration-500 min-w-[220px] cursor-pointer"
+            className="group flex flex-col items-center gap-5 p-6 sm:p-8 glass-card rounded-2xl hover:shadow-card-hover border-glow transition-all duration-500 w-full sm:w-[180px] xl:w-[200px] cursor-pointer"
           >
             <div
               className={`rounded-2xl bg-muted flex items-center justify-center transition-all duration-500 ${s.hoverBg} ${s.hoverShadow} hover:shadow-lg group-hover:shadow-glow`}
@@ -72,7 +90,7 @@ const SocialMedia = () => (
             >
               <s.icon
                 size={32}
-                className={`text-muted-foreground ${s.iconHover} transition-colors duration-500`}
+                className={`text-muted-foreground ${s.iconHover} transition-all duration-500 group-hover:scale-110 group-hover:rotate-12`}
               />
             </div>
             <div className="text-center">
