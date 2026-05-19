@@ -11,11 +11,14 @@ import {
   Sparkles,
 } from "lucide-react";
 import Contact from "@/components/Contact";
+import DevelopmentServicesPage from "@/components/DevelopmentServicesPage";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
-import WebDevelopmentDetail from "@/components/WebDevelopmentDetail";
+import WebDevelopmentDetail, { developmentTechStackItems } from "@/components/WebDevelopmentDetail";
 import NotFound from "./NotFound";
 import { featuredSolutions, getSolutionBySlug, solutionHighlights } from "@/data/solutions";
+
+const developmentDetailSlugs = ["web-development", "software-development", "mobile-app-development"] as const;
 
 const SolutionDetail = () => {
   const { slug } = useParams();
@@ -50,8 +53,12 @@ const SolutionDetail = () => {
 
   const Icon = solution.icon;
 
-  if (solution.slug === "web-development") {
-    return <WebDevelopmentDetail Icon={Icon} />;
+  if (solution.slug === "development-services") {
+    return <DevelopmentServicesPage Icon={Icon} />;
+  }
+
+  if (developmentDetailSlugs.includes(solution.slug as (typeof developmentDetailSlugs)[number])) {
+    return <WebDevelopmentDetail Icon={Icon} serviceSlug={solution.slug as (typeof developmentDetailSlugs)[number]} />;
   }
 
   const relatedSolutions = featuredSolutions.filter((item) => item.slug !== solution.slug).slice(0, 2);
@@ -220,8 +227,12 @@ const SolutionDetail = () => {
                 <span className="text-xs font-semibold uppercase tracking-widest text-primary">Development Services</span>
                 <h2 className="mt-3 font-heading text-3xl font-bold text-foreground">Choose what you want to build</h2>
                 <p className="mt-3 max-w-2xl text-sm leading-6 text-muted-foreground">
-                  Select a focused development path. Web Development opens the same rich detail experience as the Express.js page style.
+                  Select a focused development path or enterprise platform. Each item opens a related detail page.
                 </p>
+              </div>
+
+              <div className="mb-6">
+                <span className="text-xs font-semibold uppercase tracking-widest text-primary">SERVICES</span>
               </div>
               <div className="grid gap-5 md:grid-cols-3">
                 {solution.subServices.map((service) => (
@@ -247,6 +258,60 @@ const SolutionDetail = () => {
                     </div>
                   </Link>
                 ))}
+              </div>
+
+              {solution.enterprisePlatforms && (
+                <div className="mt-14">
+                  <div className="mb-6">
+                    <span className="text-xs font-semibold uppercase tracking-widest text-primary">ENTERPRISE PLATFORMS</span>
+                  </div>
+                  <div className="grid gap-5 md:grid-cols-2">
+                    {solution.enterprisePlatforms.map((platform) => (
+                      <Link
+                        key={platform.slug}
+                        to={`/solutions/${platform.slug}`}
+                        className="group overflow-hidden rounded-lg border border-border bg-white shadow-card transition-all hover:-translate-y-1 hover:border-primary/25 hover:shadow-card-hover"
+                      >
+                        <img src={platform.image} alt={platform.title} className="aspect-[16/9] w-full object-cover" loading="lazy" />
+                        <div className="p-6">
+                          <div className="mb-3 flex items-center gap-2 text-primary">
+                            <Layers3 size={18} />
+                            <span className="text-xs font-semibold uppercase tracking-widest">{platform.eyebrow}</span>
+                          </div>
+                          <h3 className="font-heading text-2xl font-bold text-foreground transition-colors group-hover:text-primary">
+                            {platform.title}
+                          </h3>
+                          <p className="mt-3 text-sm leading-6 text-muted-foreground">{platform.description}</p>
+                          <div className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary">
+                            Explore platform
+                            <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+                          </div>
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              <div className="mt-16 border-t border-border pt-12">
+                <div className="mb-8">
+                  <span className="text-xs font-semibold uppercase tracking-widest text-primary">Development Tech Stack</span>
+                  <h2 className="mt-3 font-heading text-3xl font-bold text-foreground">MERN, Flutter, cloud, APIs, payments, and AI tools</h2>
+                  <p className="mt-3 max-w-3xl text-sm leading-6 text-muted-foreground">
+                    We choose the right mix from React.js, Express.js, MongoDB, ASP.NET, Postman API, Cloud, React Native,
+                    Node.js, PostgreSQL, C Sharp, AI Tools, Flutter, MERN Stack, and Payment Integration.
+                  </p>
+                </div>
+                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                  {developmentTechStackItems.map(({ title, Icon: StackIcon, accent }) => (
+                    <div key={title} className="flex items-center gap-3 rounded-lg border border-border bg-white p-4 shadow-card">
+                      <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${accent}`}>
+                        <StackIcon size={20} />
+                      </span>
+                      <span className="font-heading text-sm font-bold text-foreground">{title}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </section>
@@ -297,37 +362,29 @@ const SolutionDetail = () => {
                 <h2 className="mt-3 font-heading text-3xl font-bold text-foreground">Core CMS & DXP technologies we implement</h2>
               </div>
               <div className="grid gap-5 md:grid-cols-2">
-                <div className="group overflow-hidden rounded-lg border border-border bg-white shadow-card transition-all hover:-translate-y-1 hover:border-primary/25 hover:shadow-card-hover">
-                  <img src={solution.heroImage} alt="Sitecore" className="aspect-[16/9] w-full object-cover" loading="lazy" />
-                  <div className="p-6">
-                    <div className="mb-3 flex items-center gap-2 text-primary">
-                      <Layers3 size={18} />
-                      <span className="text-xs font-semibold uppercase tracking-widest">Enterprise CMS</span>
-                    </div>
-                    <h3 className="font-heading text-2xl font-bold text-foreground transition-colors group-hover:text-primary">
-                      Sitecore
-                    </h3>
-                    <p className="mt-3 text-sm leading-6 text-muted-foreground">
-                      Enterprise-grade content management and digital experience platform with advanced personalization and headless capabilities using Next.js.
-                    </p>
-                  </div>
-                </div>
-                
-                <div className="group overflow-hidden rounded-lg border border-border bg-white shadow-card transition-all hover:-translate-y-1 hover:border-primary/25 hover:shadow-card-hover">
-                  <img src={solution.accentImage} alt="Optimizely" className="aspect-[16/9] w-full object-cover" loading="lazy" />
-                  <div className="p-6">
-                    <div className="mb-3 flex items-center gap-2 text-primary">
-                      <Layers3 size={18} />
-                      <span className="text-xs font-semibold uppercase tracking-widest">DXP & Commerce</span>
-                    </div>
-                    <h3 className="font-heading text-2xl font-bold text-foreground transition-colors group-hover:text-primary">
-                      Optimizely
-                    </h3>
-                    <p className="mt-3 text-sm leading-6 text-muted-foreground">
-                      Modern DXP with strong content management, commerce, and experimentation tools, supporting headless architectures with Next.js.
-                    </p>
-                  </div>
-                </div>
+                {["sitecore-development", "optimizely-development"].map((platformSlug) => {
+                  const platform = getSolutionBySlug(platformSlug);
+                  if (!platform) return null;
+                  return (
+                    <Link
+                      key={platform.slug}
+                      to={`/solutions/${platform.slug}`}
+                      className="group overflow-hidden rounded-lg border border-border bg-white shadow-card transition-all hover:-translate-y-1 hover:border-primary/25 hover:shadow-card-hover"
+                    >
+                      <img src={platform.heroImage} alt={platform.title} className="aspect-[16/9] w-full object-cover" loading="lazy" />
+                      <div className="p-6">
+                        <div className="mb-3 flex items-center gap-2 text-primary">
+                          <Layers3 size={18} />
+                          <span className="text-xs font-semibold uppercase tracking-widest">{platform.eyebrow}</span>
+                        </div>
+                        <h3 className="font-heading text-2xl font-bold text-foreground transition-colors group-hover:text-primary">
+                          {platform.title}
+                        </h3>
+                        <p className="mt-3 text-sm leading-6 text-muted-foreground">{platform.summary}</p>
+                      </div>
+                    </Link>
+                  );
+                })}
               </div>
             </div>
           </section>

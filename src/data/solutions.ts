@@ -53,6 +53,13 @@ export type Solution = {
     description: string;
     image: string;
   }>;
+  enterprisePlatforms?: Array<{
+    slug: string;
+    title: string;
+    eyebrow: string;
+    description: string;
+    image: string;
+  }>;
   caseStudies?: Array<{
     title: string;
     category: string;
@@ -209,6 +216,130 @@ export const solutions: Solution[] = [
     ],
   },
   {
+    slug: "sitecore-development",
+    title: "Sitecore Development",
+    eyebrow: "Enterprise CMS",
+    summary:
+      "Sitecore development for enterprise websites, headless CMS builds, personalization, content workflows, and scalable digital experience platforms.",
+    seoTitle: "Sitecore Development Services | PIXLYT Digital Solutions",
+    seoDescription:
+      "Build Sitecore websites, headless CMS implementations, personalization workflows, and enterprise digital experience platforms with PIXLYT.",
+    heroImage: newsStudio,
+    accentImage: heroSlide2,
+    icon: PanelsTopLeft,
+    metrics: [
+      { value: "CMS", label: "enterprise ready" },
+      { value: "Headless", label: "Next.js capable" },
+      { value: "Personal", label: "experience paths" },
+    ],
+    capabilities: [
+      "Sitecore website development, component architecture, and content modeling",
+      "Headless Sitecore builds with modern frontend frameworks like Next.js",
+      "Personalization, campaign pages, forms, analytics, and workflow setup",
+      "Migration planning, performance tuning, QA, deployment, and support",
+    ],
+    outcomes: [
+      "Give marketing teams a stronger enterprise publishing workflow",
+      "Create scalable content structures for multisite and campaign needs",
+      "Improve speed, personalization, governance, and customer experience",
+    ],
+    process: [
+      { title: "Plan CMS architecture", description: "We map content types, page templates, components, roles, and publishing workflows." },
+      { title: "Build Sitecore modules", description: "We develop components, integrations, personalization paths, forms, and frontend delivery." },
+      { title: "Launch and optimize", description: "We test content flows, performance, analytics, deployment, and ongoing platform support." },
+    ],
+    faqs: [
+      {
+        question: "Can PIXLYT build headless Sitecore websites?",
+        answer: "Yes. We can plan content models, components, APIs, preview flows, frontend integration, and launch workflows for headless Sitecore builds.",
+      },
+      {
+        question: "Can Sitecore support personalization?",
+        answer: "Yes. We can help structure audience rules, campaign paths, analytics, and content variations for personalized digital experiences.",
+      },
+      {
+        question: "Can you support an existing Sitecore platform?",
+        answer: "Yes. We can audit the existing setup, improve components, clean workflows, optimize performance, and support new features.",
+      },
+    ],
+    caseStudies: [
+      {
+        title: "Enterprise Content Hub",
+        category: "Sitecore Development",
+        summary: "A scalable content platform approach for reusable components, content governance, and campaign publishing.",
+        image: newsStudio,
+      },
+      {
+        title: "Headless Experience Build",
+        category: "Enterprise CMS",
+        summary: "A modern frontend pattern connected to Sitecore content, preview workflows, personalization, and analytics.",
+        image: heroSlide2,
+      },
+    ],
+  },
+  {
+    slug: "optimizely-development",
+    title: "Optimizely Development",
+    eyebrow: "DXP & Experimentation",
+    summary:
+      "Optimizely development for content platforms, DXP workflows, commerce-ready experiences, experimentation, and conversion-focused digital journeys.",
+    seoTitle: "Optimizely Development Services | PIXLYT Digital Solutions",
+    seoDescription:
+      "Build Optimizely CMS and DXP solutions with content workflows, experimentation, commerce support, and headless frontend delivery.",
+    heroImage: heroSlide2,
+    accentImage: newsStudio,
+    icon: PanelsTopLeft,
+    metrics: [
+      { value: "DXP", label: "platform delivery" },
+      { value: "A/B", label: "testing ready" },
+      { value: "CMS", label: "editor friendly" },
+    ],
+    capabilities: [
+      "Optimizely CMS and DXP implementation with reusable content blocks",
+      "Headless frontend delivery, page templates, personalization, and experiments",
+      "Commerce-ready experiences, campaign pages, forms, analytics, and integrations",
+      "Platform audits, migrations, performance tuning, QA, launch, and support",
+    ],
+    outcomes: [
+      "Enable faster content publishing and controlled experimentation",
+      "Create conversion-focused digital experiences across campaigns and products",
+      "Improve platform maintainability, governance, and release confidence",
+    ],
+    process: [
+      { title: "Map experience needs", description: "We define content workflows, experiments, templates, integrations, and user journeys." },
+      { title: "Develop DXP modules", description: "We build content blocks, frontend integrations, personalization rules, forms, and analytics." },
+      { title: "Test and improve", description: "We validate performance, experiments, editor workflows, deployment, and post-launch optimization." },
+    ],
+    faqs: [
+      {
+        question: "Can Optimizely support A/B testing and experimentation?",
+        answer: "Yes. We can help set up experiment-ready pages, content variations, tracking, and workflows for testing customer experiences.",
+      },
+      {
+        question: "Can Optimizely be used headlessly?",
+        answer: "Yes. We can connect Optimizely content and DXP capabilities with modern frontend frameworks for flexible delivery.",
+      },
+      {
+        question: "Can you improve an existing Optimizely implementation?",
+        answer: "Yes. We can audit content structures, templates, frontend delivery, integrations, performance, and editorial workflows.",
+      },
+    ],
+    caseStudies: [
+      {
+        title: "Experiment-Ready Campaign System",
+        category: "Optimizely Development",
+        summary: "A reusable campaign experience model for content publishing, testing, analytics, and conversion improvement.",
+        image: heroSlide2,
+      },
+      {
+        title: "DXP Content Workflow",
+        category: "Digital Experience Platform",
+        summary: "A content operations setup for editors, marketers, experiments, and frontend delivery.",
+        image: newsStudio,
+      },
+    ],
+  },
+  {
     slug: "development-services",
     title: "Development Services",
     eyebrow: "Web, Software & Mobile",
@@ -230,7 +361,7 @@ export const solutions: Solution[] = [
       "Responsive websites, landing pages, portals, and web applications",
       "Custom software platforms, dashboards, admin tools, and workflows",
       "Mobile app planning, interface development, API integration, and release support",
-      "Modern frontend, backend, database, QA, deployment, and managed support",
+      "Payment integration, modern frontend, backend, database, QA, deployment, and managed support",
     ],
     outcomes: [
       "Choose the right development path from one connected delivery team",
@@ -247,21 +378,37 @@ export const solutions: Solution[] = [
         slug: "web-development",
         title: "Web Development",
         eyebrow: "Modern Web Experiences",
-        description: "Fast websites, web apps, portals, and landing pages with responsive UI, SEO basics, and reliable performance.",
+        description: "Fast websites, web apps, portals, landing pages, payment flows, SEO basics, and reliable performance.",
         image: project1,
       },
       {
         slug: "software-development",
         title: "Software Development",
         eyebrow: "Custom Business Systems",
-        description: "Custom dashboards, admin tools, SaaS workflows, and business platforms built around real operational needs.",
+        description: "Custom dashboards, admin tools, SaaS workflows, payment modules, and business platforms built around real needs.",
         image: project2,
       },
       {
         slug: "mobile-app-development",
         title: "Mobile App Development",
         eyebrow: "iOS & Android Apps",
-        description: "Mobile app interfaces, APIs, release-ready features, and cross-platform delivery for customer and internal apps.",
+        description: "Mobile app interfaces, APIs, payment integration, release-ready features, and cross-platform delivery.",
+        image: heroSlide2,
+      },
+    ],
+    enterprisePlatforms: [
+      {
+        slug: "sitecore-development",
+        title: "Sitecore Development",
+        eyebrow: "Enterprise CMS",
+        description: "Enterprise CMS builds, headless Sitecore delivery, personalization, content workflows, and scalable web experiences.",
+        image: newsStudio,
+      },
+      {
+        slug: "optimizely-development",
+        title: "Optimizely Development",
+        eyebrow: "DXP & Experimentation",
+        description: "Optimizely CMS and DXP builds for content workflows, experimentation, commerce-ready journeys, and headless delivery.",
         image: heroSlide2,
       },
     ],
@@ -301,7 +448,7 @@ export const solutions: Solution[] = [
     capabilities: [
       "Corporate websites, landing pages, portals, and web apps",
       "Frontend development with responsive, accessible interfaces",
-      "Backend integrations, APIs, forms, analytics, and automation",
+      "Backend integrations, APIs, forms, payment gateways, analytics, and automation",
       "Performance optimization, SEO setup, QA, and launch support",
     ],
     outcomes: [
@@ -363,7 +510,7 @@ export const solutions: Solution[] = [
     capabilities: [
       "Custom business platforms, internal tools, and admin dashboards",
       "SaaS feature development, role-based access, and workflow automation",
-      "Backend APIs, database design, integrations, and reporting modules",
+      "Backend APIs, database design, payment integration, and reporting modules",
       "Testing, deployment, documentation, and ongoing enhancement support",
     ],
     outcomes: [
@@ -397,7 +544,7 @@ export const solutions: Solution[] = [
     capabilities: [
       "Mobile app UX, UI, navigation flows, and feature planning",
       "Cross-platform app development with backend and API integration",
-      "Authentication, profiles, notifications, forms, media, and dashboards",
+      "Authentication, profiles, payment integration, notifications, forms, media, and dashboards",
       "Device testing, performance checks, deployment support, and updates",
     ],
     outcomes: [

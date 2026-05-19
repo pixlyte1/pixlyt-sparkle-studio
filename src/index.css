@@ -87,6 +87,22 @@
     box-shadow: 0 4px 24px -6px hsl(211 50% 50% / 0.08);
   }
 
+  .shadow-premium {
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 8px 24px rgba(15, 23, 42, 0.06);
+  }
+
+  .shadow-premium-hover {
+    box-shadow: 0 4px 6px rgba(15, 23, 42, 0.08), 0 20px 40px rgba(15, 23, 42, 0.12);
+  }
+
+  .bg-premium-gradient {
+    background: linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%);
+  }
+
+  .bg-dark-premium-gradient {
+    background: linear-gradient(135deg, #0F172A 0%, #111827 100%);
+  }
+
   .shadow-card-hover {
     box-shadow: 0 20px 50px -12px hsl(211 90% 52% / 0.2);
   }
