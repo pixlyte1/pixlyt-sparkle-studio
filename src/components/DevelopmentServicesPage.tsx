@@ -4,31 +4,33 @@ import { Link } from "react-router-dom";
 import {
   ArrowRight,
   BadgeCheck,
-  Blocks,
-  Bot,
-  Braces,
   ChevronRight,
   Cloud,
-  CreditCard,
-  Layers3,
   LineChart,
-  MonitorSmartphone,
   PanelsTopLeft,
   ServerCog,
   Smartphone,
+  CheckCircle2,
+  TrendingUp,
+  Database,
+  Compass,
+  CreditCard,
+  ShoppingBag,
+  Wifi,
 } from "lucide-react";
 import {
-  SiDocker,
   SiDotnet,
-  SiExpress,
   SiFlutter,
-  SiJsonwebtokens,
   SiMongodb,
-  SiNextdotjs,
   SiNodedotjs,
   SiOpenai,
   SiPostgresql,
   SiReact,
+  SiNextdotjs,
+  SiTypescript,
+  SiTailwindcss,
+  SiAndroid,
+  SiApple,
 } from "react-icons/si";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
@@ -38,11 +40,6 @@ import heroSlide2 from "@/assets/hero-slide-2.jpg";
 import heroSlide3 from "@/assets/hero-slide-3.jpg";
 import project1 from "@/assets/project-1.jpg";
 import project2 from "@/assets/project-2.jpg";
-import project4 from "@/assets/project-4.jpg";
-import aiSolutionImage from "@/assets/solutions/ai_solution.png";
-import cmsSolutionImage from "@/assets/solutions/cms_solution.png";
-import dataEngSolutionImage from "@/assets/solutions/data_eng_solution.png";
-import managedServicesSolutionImage from "@/assets/solutions/managed_services_solution.png";
 
 
 type DetailIcon = ComponentType<{ size?: number | string; className?: string }>;
@@ -65,6 +62,7 @@ const coreServices = [
     label: "Web Platforms",
     description:
       "Scalable web platforms engineered for performance, content flexibility, payment readiness, and future growth.",
+    bullets: ["Custom Web Applications", "E-commerce Solutions", "CMS & Portals"],
     href: "/solutions/web-development",
     image: project1,
     Icon: PanelsTopLeft,
@@ -74,6 +72,7 @@ const coreServices = [
     label: "Product Systems",
     description:
       "Business-critical software systems built around secure APIs, operational workflows, analytics, and enterprise-grade architecture.",
+    bullets: ["API & Backend Development", "Enterprise Applications", "Cloud & DevOps Engineering"],
     href: "/solutions/software-development",
     image: project2,
     Icon: ServerCog,
@@ -83,6 +82,7 @@ const coreServices = [
     label: "Mobile Experiences",
     description:
       "Cross-platform mobile applications designed for connected services, reliable transactions, and release-ready product growth.",
+    bullets: ["iOS & Android Apps", "Cross-Platform (Flutter / React Native)", "Secure & Scalable Architecture"],
     href: "/solutions/mobile-app-development",
     image: heroSlide2,
     Icon: Smartphone,
@@ -116,35 +116,18 @@ const platforms = [
   },
 ];
 
-const marqueeItems = [
-  { name: "JWT Authentication", Icon: SiJsonwebtokens, bg: "bg-[#F1F5F9]", color: "text-[#475569]" },
-  { name: "REST APIs", Icon: Braces, bg: "bg-[#EFF6FF]", color: "text-[#3B82F6]" },
-  { name: "Docker", Icon: SiDocker, bg: "bg-[#F0FDFA]", color: "text-[#0D9488]" },
-  { name: "Cloud Deployment", Icon: Cloud, bg: "bg-[#EEF2FF]", color: "text-[#6366F1]" },
-  { name: "Express.js", Icon: SiExpress, bg: "bg-[#F8FAFC]", color: "text-[#475569]" },
-  { name: "Node.js", Icon: SiNodedotjs, bg: "bg-[#F0FDF4]", color: "text-[#16A34A]" },
-  { name: "MongoDB", Icon: SiMongodb, bg: "bg-[#F0FDF4]", color: "text-[#15803D]" },
-  { name: "PostgreSQL", Icon: SiPostgresql, bg: "bg-[#EFF6FF]", color: "text-[#2563EB]" },
+const ecosystemItems = [
+  { name: "React.js", Icon: SiReact },
+  { name: "Node.js", Icon: SiNodedotjs },
+  { name: "Flutter", Icon: SiFlutter },
+  { name: "PostgreSQL", Icon: SiPostgresql },
+  { name: ".NET", Icon: SiDotnet },
+  { name: "MongoDB", Icon: SiMongodb },
+  { name: "Cloud Infrastructure", Icon: Cloud },
+  { name: "AI Integrations", Icon: SiOpenai },
 ];
 
-const relatedSolutions = [
-  {
-    title: "CMS & DXP",
-    eyebrow: "Digital Experience Platforms",
-    href: "/solutions/cms-dxp",
-    Icon: Layers3,
-    image: cmsSolutionImage,
-    description: "Modern content platforms that let marketing teams publish faster while giving customers consistent experiences across web, mobile, and campaigns.",
-  },
-  {
-    title: "Data Engineering",
-    eyebrow: "Reliable Data Foundations",
-    href: "/solutions/data-engineering",
-    Icon: ServerCog,
-    image: dataEngSolutionImage,
-    description: "Clean data pipelines, trusted warehouses, integrations, and reporting foundations that make business intelligence dependable.",
-  },
-];
+
 
 const SectionHeader = ({
   eyebrow,
@@ -186,65 +169,298 @@ const MeshBackground = () => (
   </div>
 );
 
-const DarkMeshBackground = () => (
-  <div className="pointer-events-none absolute inset-0 overflow-hidden">
+const WebDevelopmentVisual = ({ image }: { image: string }) => (
+  <div className="relative min-h-[360px] w-full h-full overflow-hidden border-t lg:border-t-0 lg:border-l border-[#E2E8F0] bg-slate-100 p-6 flex items-center justify-center">
+    <img src={image} alt="Web Development" className="absolute inset-0 h-full w-full object-cover opacity-85 saturate-[1.2] contrast-[1.05]" loading="lazy" />
+    <div className="absolute inset-0 bg-gradient-to-tr from-slate-900/20 via-transparent to-[#3B82F6]/25" />
+    <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:24px_24px]" />
+    
+    <div className="relative w-full max-w-[400px] h-[280px] flex items-center justify-center">
+      {/* Code Editor Window */}
+      <div className="absolute w-[280px] sm:w-[320px] h-[190px] bg-slate-900/90 backdrop-blur-sm rounded-xl shadow-2xl border border-slate-750 overflow-hidden flex flex-col z-0 opacity-40 sm:opacity-50">
+        <div className="flex items-center gap-1.5 px-3.5 py-2.5 bg-slate-950/90 border-b border-slate-800">
+          <span className="w-2 h-2 rounded-full bg-[#EF4444]/80" />
+          <span className="w-2 h-2 rounded-full bg-[#F59E0B]/80" />
+          <span className="w-2 h-2 rounded-full bg-[#10B981]/80" />
+        </div>
+        <div className="p-4 font-mono text-[9px] text-slate-400 space-y-1.5 select-none leading-relaxed">
+  <div className="relative min-h-[420px] w-full h-full overflow-hidden bg-[#F8FAFC] border-t lg:border-t-0 lg:border-l border-[#E2E8F0] flex items-center justify-center p-8">
+    {/* Subtle grid */}
+    <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.04)_1px,transparent_1px)] bg-[size:28px_28px]" />
+
+    {/* Central photo - prominent */}
+    <div className="relative w-[220px] sm:w-[260px] h-[180px] sm:h-[210px] rounded-xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.18)] z-0">
+      <img src={image} alt="Web Development workspace" className="w-full h-full object-cover" loading="lazy" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+    </div>
+
+    {/* Performance Score - top left */}
     <motion.div
-      aria-hidden="true"
-      animate={{ opacity: [0.3, 0.5, 0.3], backgroundPosition: ["0% 0%", "100% 80%", "0% 0%"] }}
-      transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
-      className="absolute inset-0 bg-[linear-gradient(120deg,rgba(59,130,246,0.18),transparent_30%,rgba(147,51,234,0.12)_58%,transparent_76%,rgba(59,130,246,0.15))] bg-[length:180%_180%]"
-    />
-    <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:72px_72px] [mask-image:radial-gradient(ellipse_at_center,rgba(0,0,0,0.9),transparent_80%)]" />
+      animate={{ y: [0, -5, 0] }}
+      transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
+      className="absolute top-8 left-4 sm:left-8 z-10 w-[148px] bg-white rounded-xl border border-[#E2E8F0] shadow-[0_4px_24px_rgba(0,0,0,0.07)] p-3.5"
+    >
+      <div className="text-[10px] font-semibold text-slate-500 mb-1">Performance Score</div>
+      <div className="flex items-baseline gap-1.5">
+        <span className="text-2xl font-black text-slate-900 tracking-tight">98%</span>
+        <span className="flex items-center text-[10px] font-bold text-emerald-500"><TrendingUp size={10} className="mr-0.5" /> +2.4%</span>
+      </div>
+      <div className="mt-2 h-10 w-full">
+        <svg className="w-full h-full" viewBox="0 0 100 40" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="perfGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.2" />
+              <stop offset="100%" stopColor="#3B82F6" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+          <path d="M0,38 C10,35 20,30 30,22 S50,8 60,12 S80,5 100,3" fill="none" stroke="#3B82F6" strokeWidth="2.5" strokeLinecap="round" />
+          <path d="M0,38 C10,35 20,30 30,22 S50,8 60,12 S80,5 100,3 L100,40 L0,40 Z" fill="url(#perfGrad)" />
+        </svg>
+      </div>
+    </motion.div>
+
+    {/* Tech Stack - top right */}
+    <motion.div
+      animate={{ y: [0, 5, 0] }}
+      transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 0.4 }}
+      className="absolute top-8 right-4 sm:right-8 z-10 w-[180px] bg-white rounded-xl border border-[#E2E8F0] shadow-[0_4px_24px_rgba(0,0,0,0.07)] p-3.5"
+    >
+      <div className="text-[10px] font-semibold text-slate-500 mb-2.5">Tech Stack</div>
+      <div className="grid grid-cols-3 gap-2">
+        {[
+          { Icon: SiReact, name: "React", color: "#61DAFB" },
+          { Icon: SiNextdotjs, name: "Next.js", color: "#000000" },
+          { Icon: SiNodedotjs, name: "Node.js", color: "#339933" },
+          { Icon: SiTypescript, name: "TypeScript", color: "#3178C6" },
+          { Icon: SiTailwindcss, name: "Tailwind CSS", color: "#06B6D4" },
+          { Icon: SiPostgresql, name: "PostgreSQL", color: "#4169E1" },
+        ].map((tech, i) => (
+          <div key={i} className="flex flex-col items-center gap-1 p-1.5 rounded-lg bg-slate-50 border border-slate-100">
+            <tech.Icon style={{ color: tech.color }} className="text-base" />
+            <span className="text-[7px] font-semibold text-slate-500 text-center leading-tight">{tech.name}</span>
+          </div>
+        ))}
+      </div>
+    </motion.div>
+
+    {/* Project Status - bottom left */}
+    <motion.div
+      animate={{ y: [0, -4, 0] }}
+      transition={{ duration: 5.2, repeat: Infinity, ease: "easeInOut", delay: 0.2 }}
+      className="absolute bottom-8 left-4 sm:left-8 z-10 w-[155px] bg-white rounded-xl border border-[#E2E8F0] shadow-[0_4px_24px_rgba(0,0,0,0.07)] p-3.5"
+    >
+      <div className="flex items-center gap-1.5 mb-1.5">
+        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+        <span className="text-[10px] font-semibold text-slate-500">Project Status</span>
+      </div>
+      <div className="text-[13px] font-bold text-slate-800 mb-2">Production Ready</div>
+      <div className="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+        <div className="bg-[#3B82F6] h-full rounded-full w-full" />
+      </div>
+      <div className="mt-1 text-[9px] font-semibold text-slate-400 text-right">100%</div>
+    </motion.div>
+
+    {/* Uptime - bottom right */}
+    <motion.div
+      animate={{ y: [0, 4, 0] }}
+      transition={{ duration: 5.8, repeat: Infinity, ease: "easeInOut", delay: 0.7 }}
+      className="absolute bottom-8 right-4 sm:right-8 z-10 w-[130px] bg-white rounded-xl border border-[#E2E8F0] shadow-[0_4px_24px_rgba(0,0,0,0.07)] p-3.5"
+    >
+      <div className="text-[10px] font-semibold text-slate-500 mb-0.5">Uptime</div>
+      <div className="text-xl font-black text-[#3B82F6] tracking-tight">99.99%</div>
+      <div className="mt-2 h-8 w-full">
+        <svg className="w-full h-full" viewBox="0 0 100 30" preserveAspectRatio="none">
+          <path d="M0,20 L12,20 L22,16 L35,20 L48,13 L60,18 L74,7 L88,7 L100,4" fill="none" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" />
+        </svg>
+      </div>
+    </motion.div>
   </div>
 );
 
-const ArchitectureVisual = ({ image, label }: { image: string; label: string }) => (
-  <div className="relative min-h-[260px] overflow-hidden border border-[#E2E8F0] bg-gradient-to-br from-slate-50 via-slate-100 to-white p-4 shadow-premium">
-    <img src={image} alt={label} className="absolute inset-0 h-full w-full object-cover opacity-15 saturate-150" loading="lazy" />
-    <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(248,250,252,0.9),rgba(226,232,240,0.74),rgba(248,250,252,0.93))]" />
-    <div className="relative grid h-full min-h-[228px] grid-cols-6 grid-rows-5 gap-3">
-      <motion.div
-        whileHover={{ y: -4 }}
-        className="col-span-3 row-span-2 border border-[#E2E8F0] bg-white p-4 shadow-premium rounded-lg"
-      >
-        <div className="mb-5 h-1.5 w-20 bg-[#3B82F6]" />
-        <div className="h-2 w-full bg-slate-100 rounded-sm" />
-        <div className="mt-3 h-2 w-2/3 bg-slate-50 rounded-sm" />
-      </motion.div>
-      <motion.div
-        whileHover={{ y: -4 }}
-        className="col-span-3 row-span-3 border border-[#E2E8F0] bg-slate-50 p-4 shadow-premium rounded-lg"
-      >
-        <div className="grid grid-cols-3 gap-2">
-          {Array.from({ length: 9 }).map((_, index) => (
-            <span key={index} className="aspect-square border border-[#E2E8F0] bg-white rounded-sm" />
-          ))}
+const SoftwareDevelopmentVisual = ({ image }: { image: string }) => (
+  <div className="relative min-h-[420px] w-full h-full overflow-hidden border-t lg:border-t-0 lg:border-r border-[#E2E8F0] flex items-center justify-center p-8">
+    {/* Full dark image background */}
+    <img src={image} alt="Software Development" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+    <div className="absolute inset-0 bg-gradient-to-br from-slate-900/70 via-slate-800/50 to-blue-900/40" />
+
+    {/* System Overview - top left */}
+    <motion.div
+      animate={{ y: [0, -5, 0] }}
+      transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+      className="absolute top-8 left-4 sm:left-8 z-10 w-[160px] bg-white rounded-xl border border-[#E2E8F0] shadow-[0_8px_32px_rgba(0,0,0,0.2)] p-3.5"
+    >
+      <div className="text-[10px] font-semibold text-slate-500 mb-2">System Overview</div>
+      <div className="flex items-center gap-2.5">
+        <div className="relative w-14 h-14 shrink-0 flex items-center justify-center">
+          <svg className="w-full h-full -rotate-90" viewBox="0 0 36 36">
+            <circle cx="18" cy="18" r="14" fill="none" stroke="#F1F5F9" strokeWidth="4" />
+            <circle cx="18" cy="18" r="14" fill="none" stroke="#3B82F6" strokeWidth="4" strokeDasharray="78 22" strokeLinecap="round" />
+          </svg>
+          <span className="absolute text-[11px] font-black text-slate-800">89%</span>
         </div>
-      </motion.div>
-      <motion.div
-        whileHover={{ y: -4 }}
-        className="col-span-4 row-span-2 border border-[#E2E8F0] bg-white p-4 shadow-premium rounded-lg"
-      >
-        <div className="mb-4 flex items-center gap-2">
-          <span className="h-2.5 w-2.5 rounded-full bg-[#10B981]" />
-          <span className="h-2 w-28 bg-slate-100 rounded-sm" />
+        <div className="space-y-1 text-[9px] font-semibold text-slate-500">
+          <div className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-sm bg-[#3B82F6]" /> Services</div>
+          <div className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-sm bg-emerald-500" /> Databases</div>
+          <div className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-sm bg-amber-400" /> APIs</div>
+          <div className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-sm bg-slate-300" /> Queues</div>
         </div>
-        <div className="space-y-2">
-          <div className="h-2 w-full bg-slate-50 rounded-sm" />
-          <div className="h-2 w-4/5 bg-slate-50 rounded-sm" />
-          <div className="h-2 w-2/5 bg-[#3B82F6]/30 rounded-sm" />
+      </div>
+    </motion.div>
+
+    {/* Architecture - center right */}
+    <motion.div
+      animate={{ y: [0, 4, 0] }}
+      transition={{ duration: 6.5, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
+      className="absolute top-1/2 -translate-y-1/2 right-4 sm:right-8 z-10 w-[170px] bg-white rounded-xl border border-[#E2E8F0] shadow-[0_8px_32px_rgba(0,0,0,0.2)] p-3.5"
+    >
+      <div className="text-[10px] font-semibold text-slate-500 mb-2.5">Architecture</div>
+      <div className="flex flex-col items-center gap-1.5">
+        <div className="border border-blue-200 bg-blue-50 px-3 py-1 text-[9px] font-bold text-blue-700 rounded-md w-full text-center">Web App</div>
+        <div className="text-slate-300 text-[10px] leading-none">│</div>
+        <div className="flex gap-1.5 w-full">
+          <div className="border border-slate-200 bg-slate-50 px-1.5 py-1 text-[8px] font-semibold text-slate-600 rounded-md flex-1 text-center">API Gateway</div>
+          <div className="border border-slate-200 bg-slate-50 px-1.5 py-1 text-[8px] font-semibold text-slate-600 rounded-md flex-1 text-center">Auth Service</div>
         </div>
-      </motion.div>
-      <motion.div
-        whileHover={{ y: -4 }}
-        className="col-span-2 row-span-2 border border-[#E2E8F0] bg-slate-50 p-4 shadow-premium rounded-lg"
-      >
-        <LineChart className="text-[#3B82F6]" size={26} />
-        <div className="mt-8 h-2 w-full bg-slate-200 rounded-sm" />
-      </motion.div>
-    </div>
+        <div className="text-slate-300 text-[10px] leading-none">│</div>
+        <div className="flex gap-2 w-full">
+          <div className="border border-slate-200 bg-slate-50 px-1.5 py-1 text-[8px] font-semibold text-slate-600 rounded-md flex-1 text-center">User DB</div>
+          <div className="border border-slate-200 bg-slate-50 px-1.5 py-1 text-[8px] font-semibold text-slate-600 rounded-md flex-1 text-center">Analytics DB</div>
+        </div>
+      </div>
+    </motion.div>
+
+    {/* Deployments - bottom left */}
+    <motion.div
+      animate={{ y: [0, -4, 0] }}
+      transition={{ duration: 5.4, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+      className="absolute bottom-8 left-4 sm:left-8 z-10 w-[160px] bg-white rounded-xl border border-[#E2E8F0] shadow-[0_8px_32px_rgba(0,0,0,0.2)] p-3.5"
+    >
+      <div className="flex items-center gap-1.5 mb-1">
+        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+        <span className="text-[10px] font-semibold text-slate-500">Deployments</span>
+      </div>
+      <div className="text-[12px] font-bold text-slate-800 mb-2">All Systems Operational</div>
+      <span className="inline-flex items-center gap-1 text-[10px] font-bold text-[#3B82F6]">
+        View Details <ArrowRight size={10} />
+      </span>
+    </motion.div>
+
+    {/* API Health - bottom right */}
+    <motion.div
+      animate={{ y: [0, 5, 0] }}
+      transition={{ duration: 5.9, repeat: Infinity, ease: "easeInOut", delay: 0.1 }}
+      className="absolute bottom-8 right-4 sm:right-8 z-10 w-[130px] bg-white rounded-xl border border-[#E2E8F0] shadow-[0_8px_32px_rgba(0,0,0,0.2)] p-3.5"
+    >
+      <div className="text-[10px] font-semibold text-slate-500 mb-2">API Health</div>
+      <div className="flex items-end justify-between h-9 px-0.5 gap-1">
+        {[35, 55, 42, 70, 85, 75, 90, 95].map((h, i) => (
+          <div key={i} className="flex-1 rounded-t-sm" style={{ height: `${h}%`, background: i >= 5 ? "#3B82F6" : "#93C5FD" }} />
+        ))}
+      </div>
+    </motion.div>
   </div>
 );
+
+const MobileDevelopmentVisual = ({ image }: { image: string }) => (
+  <div className="relative min-h-[420px] w-full h-full overflow-hidden bg-[#EFF4FF] border-t lg:border-t-0 lg:border-l border-[#E2E8F0] flex items-center justify-center p-8">
+    <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.05)_1px,transparent_1px)] bg-[size:28px_28px]" />
+
+    {/* Central phone-in-hand photo */}
+    <div className="relative w-[160px] sm:w-[200px] h-[260px] sm:h-[320px] rounded-2xl overflow-hidden shadow-[0_24px_60px_rgba(0,0,0,0.20)] z-0">
+      <img src={image} alt="Mobile App Development" className="w-full h-full object-cover object-center" loading="lazy" />
+      <div className="absolute inset-0 flex flex-col">
+        <div className="mt-auto mx-3 mb-3 bg-white/95 backdrop-blur rounded-xl p-2.5 shadow-lg">
+          <div className="text-[7px] text-slate-400 font-medium">Good Morning,</div>
+          <div className="text-[9px] font-black text-slate-900">Alex 👋</div>
+          <div className="mt-1.5 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg p-2">
+            <div className="text-[6px] text-blue-200">Balance</div>
+            <div className="text-[11px] font-black text-white">$4,560.00</div>
+          </div>
+          <div className="mt-1.5">
+            <div className="text-[6px] text-slate-400 uppercase font-bold mb-1">Transactions</div>
+            {[
+              { label: "Shopping", val: "-$120.0s" },
+              { label: "Travel", val: "-$560.0s" },
+              { label: "Subscription", val: "-$21.60" },
+            ].map((t, i) => (
+              <div key={i} className="flex justify-between text-[6px] py-0.5 border-b border-slate-100 last:border-0">
+                <span className="text-slate-600 font-semibold">{t.label}</span>
+                <span className="text-slate-800 font-bold">{t.val}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* Platforms - top right */}
+    <motion.div
+      animate={{ y: [0, -5, 0] }}
+      transition={{ duration: 5.8, repeat: Infinity, ease: "easeInOut" }}
+      className="absolute top-8 right-4 sm:right-8 z-10 w-[148px] bg-white rounded-xl border border-[#E2E8F0] shadow-[0_4px_24px_rgba(0,0,0,0.07)] p-3.5"
+    >
+      <div className="text-[10px] font-semibold text-slate-500 mb-2">Platforms</div>
+      <div className="grid grid-cols-2 gap-2">
+        {[
+          { Icon: SiApple, name: "iOS", color: "#000000" },
+          { Icon: SiAndroid, name: "Android", color: "#3DDC84" },
+          { Icon: SiFlutter, name: "Flutter", color: "#54C5F8" },
+          { Icon: SiReact, name: "React Native", color: "#61DAFB" },
+        ].map((plat, i) => (
+          <div key={i} className="flex flex-col items-center gap-1 p-2 bg-slate-50 border border-slate-100 rounded-lg">
+            <plat.Icon style={{ color: plat.color }} className="text-base" />
+            <span className="text-[7px] font-semibold text-slate-500 text-center leading-tight">{plat.name}</span>
+          </div>
+        ))}
+      </div>
+    </motion.div>
+
+    {/* App Performance - bottom left */}
+    <motion.div
+      animate={{ y: [0, 4, 0] }}
+      transition={{ duration: 5.3, repeat: Infinity, ease: "easeInOut", delay: 0.3 }}
+      className="absolute bottom-8 left-4 sm:left-8 z-10 w-[148px] bg-white rounded-xl border border-[#E2E8F0] shadow-[0_4px_24px_rgba(0,0,0,0.07)] p-3.5"
+    >
+      <div className="text-[10px] font-semibold text-slate-500 mb-1">App Performance</div>
+      <div className="text-[13px] font-bold text-emerald-500 flex items-center gap-1">
+        Excellent <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+      </div>
+      <div className="mt-2 w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+        <div className="bg-emerald-500 h-full rounded-full w-full" />
+      </div>
+      <div className="mt-1 text-[9px] font-semibold text-slate-400 text-right">100%</div>
+    </motion.div>
+
+    {/* User Engagement - bottom right */}
+    <motion.div
+      animate={{ y: [0, -4, 0] }}
+      transition={{ duration: 6.2, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
+      className="absolute bottom-8 right-4 sm:right-8 z-10 w-[130px] bg-white rounded-xl border border-[#E2E8F0] shadow-[0_4px_24px_rgba(0,0,0,0.07)] p-3.5"
+    >
+      <div className="text-[10px] font-semibold text-slate-500 mb-0.5">User Engagement</div>
+      <div className="flex items-baseline gap-1.5">
+        <span className="text-xl font-black text-slate-900">72%</span>
+        <span className="flex items-center text-[10px] font-bold text-emerald-500">
+          <TrendingUp size={10} className="mr-0.5" />
+        </span>
+      </div>
+      <div className="mt-1.5 h-9 w-full">
+        <svg className="w-full h-full" viewBox="0 0 100 40" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="engGradMob" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#3B82F6" stopOpacity="0.2" />
+              <stop offset="100%" stopColor="#3B82F6" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+          <path d="M0,38 C15,35 25,28 35,22 S55,12 65,10 S82,6 100,3" fill="none" stroke="#3B82F6" strokeWidth="2.5" strokeLinecap="round" />
+          <path d="M0,38 C15,35 25,28 35,22 S55,12 65,10 S82,6 100,3 L100,40 L0,40 Z" fill="url(#engGradMob)" />
+        </svg>
+      </div>
+      <div className="text-[8px] text-slate-400 font-medium">vs last month</div>
+    </motion.div>
+  </div>
+);
+
 
 const DevelopmentServicesPage = ({ Icon }: { Icon: DetailIcon }) => (
   <div className="min-h-screen bg-background text-foreground">
@@ -330,11 +546,11 @@ const DevelopmentServicesPage = ({ Icon }: { Icon: DetailIcon }) => (
       <section id="core-services" className="bg-white py-24 sm:py-28">
         <div className="mx-auto w-full max-w-7xl px-6 sm:px-10 lg:px-12">
           <SectionHeader
-            eyebrow="Core Services"
+            eyebrow="Engineering Capabilities"
             title="Productized development teams for modern digital systems"
             subtitle="Focused service lines engineered around real product architecture, delivery quality, and enterprise-grade maintainability."
           />
-          <div className="mt-14 space-y-7">
+          <div className="mt-14 space-y-12 sm:space-y-16">
             {coreServices.map((service, index) => {
               const ServiceIcon = service.Icon;
               const reverse = index % 2 === 1;
@@ -348,22 +564,41 @@ const DevelopmentServicesPage = ({ Icon }: { Icon: DetailIcon }) => (
                   transition={{ duration: 0.6, ease: "easeOut" }}
                   className="group grid overflow-hidden rounded-2xl border border-[#E2E8F0] bg-premium-gradient shadow-premium transition-all duration-500 hover:-translate-y-1 hover:border-[#CBD5E1] hover:shadow-premium-hover lg:grid-cols-2"
                 >
-                  <div className={`p-7 sm:p-10 lg:p-12 ${reverse ? "lg:order-2" : ""}`}>
-                    <div className="mb-8 inline-flex h-12 w-12 items-center justify-center border border-[#E2E8F0] bg-[#3B82F6]/5 text-[#3B82F6] rounded-lg">
-                      <ServiceIcon size={24} />
+                  <div className={`p-7 sm:p-10 lg:p-12 flex flex-col justify-between ${reverse ? "lg:order-2" : ""}`}>
+                    <div>
+                      <div className="mb-6 inline-flex h-12 w-12 items-center justify-center border border-[#E2E8F0] bg-[#3B82F6]/5 text-[#3B82F6] rounded-lg">
+                        <ServiceIcon size={24} />
+                      </div>
+                      <span className="block text-xs font-bold uppercase tracking-[0.28em] text-[#3B82F6]">{service.label}</span>
+                      <h3 className="mt-4 font-heading text-3xl font-black text-[#0F172A] sm:text-4xl tracking-tight leading-tight">{service.title}</h3>
+                      <p className="mt-4 text-base leading-8 text-[#475569]">{service.description}</p>
+                      
+                      <ul className="mt-6 space-y-3">
+                        {service.bullets.map((bullet) => (
+                          <li key={bullet} className="flex items-center gap-3 text-sm font-medium text-[#475569]">
+                            <CheckCircle2 size={16} className="text-[#3B82F6] shrink-0" />
+                            {bullet}
+                          </li>
+                        ))}
+                      </ul>
                     </div>
-                    <span className="text-xs font-bold uppercase tracking-[0.28em] text-[#3B82F6]">{service.label}</span>
-                    <h3 className="mt-5 font-heading text-3xl font-black text-[#0F172A] sm:text-4xl tracking-tight leading-tight">{service.title}</h3>
-                    <p className="mt-5 max-w-xl text-base leading-8 text-[#475569]">{service.description}</p>
-                    <Link
-                      to={service.href}
-                      className="mt-9 inline-flex items-center gap-2 text-sm font-bold text-[#0F172A] transition-colors hover:text-[#3B82F6]"
-                    >
-                      Explore Capability
-                      <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
-                    </Link>
+
+                    <div className="mt-8 border-t border-[#E2E8F0] pt-6">
+                      <Link
+                        to={service.href}
+                        className="inline-flex items-center gap-2 text-sm font-bold text-[#0F172A] transition-colors hover:text-[#3B82F6]"
+                      >
+                        Explore Capability
+                        <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+                      </Link>
+                    </div>
                   </div>
-                  <ArchitectureVisual image={service.image} label={`${service.title} architecture visual`} />
+
+                  <div className={`relative ${reverse ? "lg:order-1" : ""}`}>
+                    {index === 0 && <WebDevelopmentVisual image={service.image} />}
+                    {index === 1 && <SoftwareDevelopmentVisual image={service.image} />}
+                    {index === 2 && <MobileDevelopmentVisual image={service.image} />}
+                  </div>
                 </motion.article>
               );
             })}
@@ -423,100 +658,50 @@ const DevelopmentServicesPage = ({ Icon }: { Icon: DetailIcon }) => (
         </div>
       </section>
 
-      <section className="relative overflow-hidden border-y border-[#E2E8F0] bg-gradient-to-b from-[#F8FAFC] to-white py-20">
+      <section className="relative overflow-hidden border-y border-[#E2E8F0] bg-gradient-to-b from-[#F8FAFC] to-white py-24 sm:py-28">
         <div className="mx-auto w-full max-w-7xl px-6 sm:px-10 lg:px-12">
           <SectionHeader
-            eyebrow="Technology Stack"
-            title="Engineering Stack"
-            subtitle="Modern technologies powering scalable digital systems."
+            eyebrow="Engineering Ecosystem"
+            title="Engineering Ecosystem"
+            subtitle="Modern technologies supporting scalable digital products and enterprise systems."
             align="center"
           />
-          <style>
-            {`
-              @keyframes stack-marquee-dev-services {
-                from { transform: translateX(0); }
-                to { transform: translateX(-50%); }
-              }
-            `}
-          </style>
-          <div className="relative mx-auto mt-12 w-[90%] overflow-hidden py-4">
-            {/* Premium Soft-Fade Gradient Masks */}
-            <div className="absolute left-0 top-0 bottom-0 z-10 w-16 bg-gradient-to-r from-[#F8FAFC] via-[#F8FAFC]/50 to-transparent pointer-events-none" />
-            <div className="absolute right-0 top-0 bottom-0 z-10 w-16 bg-gradient-to-l from-white via-white/50 to-transparent pointer-events-none" />
 
-            <div
-              className="flex w-max items-center gap-6 px-6 hover:[animation-play-state:paused]"
-              style={{
-                animation: "stack-marquee-dev-services 24s linear infinite",
-              }}
-            >
-              {[...marqueeItems, ...marqueeItems].map(({ name, Icon: StackIcon, bg, color }, index) => (
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="mx-auto mt-16 max-w-4xl"
+          >
+            <div className="flex flex-wrap justify-center items-center gap-3">
+              {ecosystemItems.map(({ name, Icon: EcoIcon }) => (
                 <div
-                  key={`${name}-${index}`}
-                  className="flex shrink-0 items-center gap-3 bg-white pl-3.5 pr-5 py-2.5 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300"
+                  key={name}
+                  className="group flex items-center gap-2.5 rounded-full border border-[#E2E8F0] bg-white px-5 py-2.5 shadow-sm transition-all duration-300 hover:border-[#3B82F6]/30 hover:shadow-md hover:-translate-y-0.5 cursor-default"
                 >
-                  <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${bg} ${color}`}>
-                    <StackIcon size={20} />
-                  </span>
-                  <span className="whitespace-nowrap font-heading text-base font-black text-[#0F172A]">
+                  <EcoIcon size={16} className="text-[#64748B] transition-colors duration-300 group-hover:text-[#3B82F6]" />
+                  <span className="whitespace-nowrap font-heading text-sm font-bold text-[#334155] tracking-tight transition-colors duration-300 group-hover:text-[#0F172A]">
                     {name}
                   </span>
                 </div>
               ))}
             </div>
-          </div>
-        </div>
-      </section>
 
-      <section className="border-t border-[#E2E8F0] bg-[#F8FAFC] py-20">
-        <div className="mx-auto w-full max-w-7xl px-6 sm:px-10 lg:px-12">
-          <div className="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
-            <div>
-              <span className="text-xs font-bold uppercase tracking-[0.24em] text-[#3B82F6]">Related solutions</span>
-              <h2 className="mt-3 font-heading text-3xl font-black text-[#0F172A] sm:text-4xl tracking-tight">Continue exploring</h2>
+            <div className="mt-10 text-center">
+              <Link
+                to="/technologies"
+                className="inline-flex items-center gap-2 text-sm font-bold text-[#3B82F6] transition-colors hover:text-[#2563EB]"
+              >
+                Explore Full Technology Architecture
+                <ArrowRight size={16} className="transition-transform hover:translate-x-1" />
+              </Link>
             </div>
-            <Link
-              to="/solutions"
-              className="inline-flex items-center gap-2 text-sm font-bold text-[#3B82F6] transition-colors hover:text-[#2563EB]"
-            >
-              See all expertise
-              <ArrowRight size={17} />
-            </Link>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-2">
-            {relatedSolutions.map((solution) => {
-              const RelatedIcon = solution.Icon;
-              return (
-                <Link
-                  key={solution.title}
-                  to={solution.href}
-                  className="group grid gap-5 rounded-2xl border border-[#E2E8F0] bg-white p-5 shadow-premium transition-all duration-300 hover:-translate-y-1 hover:border-[#3B82F6]/30 hover:shadow-premium-hover sm:grid-cols-[160px_1fr]"
-                >
-                  <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-slate-100">
-                    <img
-                      src={solution.image}
-                      alt={solution.title}
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      loading="lazy"
-                    />
-                  </div>
-                  <div className="flex flex-col justify-center">
-                    <div className="mb-3 flex items-center gap-2 text-[#3B82F6]">
-                      <RelatedIcon size={18} />
-                      <span className="text-xs font-bold uppercase tracking-[0.22em]">{solution.eyebrow}</span>
-                    </div>
-                    <h3 className="font-heading text-xl font-black text-[#0F172A] transition-colors group-hover:text-[#3B82F6]">
-                      {solution.title}
-                    </h3>
-                    <p className="mt-3 text-sm leading-6 text-[#475569]">{solution.description}</p>
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
+          </motion.div>
         </div>
       </section>
+
 
 
     </main>
