@@ -29,7 +29,8 @@ const Footer = () => (
             <img 
               src={logo} 
               alt="PIXLYT" 
-              className="h-20 w-auto object-contain brightness-0 invert transition-all duration-300 group-hover:brightness-100 group-hover:invert-0" 
+              style={{ height: "130px", marginTop: "-35px", marginBottom: "-40px", marginLeft: "-13px" }}
+              className="w-auto object-contain brightness-0 invert transition-all duration-300 group-hover:brightness-100 group-hover:invert-0" 
             />
           </div>
           <p className="max-w-xs text-sm leading-relaxed text-primary-foreground/70">

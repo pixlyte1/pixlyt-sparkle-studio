@@ -12,3 +12,5 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+Sitemap: https://pixlyt-sparkle-studio.vercel.app/sitemap.xml
