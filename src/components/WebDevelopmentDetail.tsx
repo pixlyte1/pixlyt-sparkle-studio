@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type ComponentType } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowLeft, ArrowRight, Braces, Cloud, CreditCard, type LucideIcon } from "lucide-react";
+import { ArrowLeft, ArrowRight, Braces, Cloud, CreditCard, Server, Globe, Database, type LucideIcon } from "lucide-react";
 import {
   SiDotnet,
   SiExpress,
@@ -13,6 +13,8 @@ import {
   SiPostman,
   SiReact,
   SiSharp,
+  SiNextdotjs,
+  SiCloudflare,
 } from "react-icons/si";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
@@ -23,6 +25,9 @@ import heroSlide3 from "@/assets/hero-slide-3.jpg";
 import project1 from "@/assets/project-1.jpg";
 import project2 from "@/assets/project-2.jpg";
 import project4 from "@/assets/project-4.jpg";
+import webDevVisualMockup from "@/assets/web_development_visual_mockup.jpg";
+import softwareDevVisualMockup from "@/assets/software_development_visual_mockup.jpg";
+import mobileDevVisualMockup from "@/assets/mobile_development_visual_mockup.jpg";
 
 type DetailIcon = ComponentType<{ size?: number | string; className?: string }>;
 type StackIcon = DetailIcon | LucideIcon;
@@ -58,6 +63,7 @@ type ServiceConfig = {
   stackText: string;
   stackItems: StackItem[];
   buildItems: CapabilityItem[];
+  architectureImage: string;
   ctaLabel: string;
   ctaTitle: string;
   ctaText: string;
@@ -75,8 +81,6 @@ const developmentStackItems: StackItem[] = [
   { title: "C Sharp", Icon: SiSharp, accent: "bg-purple-50 text-purple-700" },
   { title: "Postman API", Icon: SiPostman, accent: "bg-orange-50 text-orange-700" },
   { title: "Cloud", Icon: Cloud, accent: "bg-indigo-50 text-indigo-700" },
-  { title: "AI Tools", Icon: SiOpenai, accent: "bg-teal-50 text-teal-700" },
-  { title: "Payment Integration", Icon: CreditCard, accent: "bg-rose-50 text-rose-700" },
 ];
 
 const mobileStackItems: StackItem[] = [
@@ -90,16 +94,32 @@ const mobileStackItems: StackItem[] = [
   { title: "PostgreSQL", Icon: SiPostgresql, accent: "bg-blue-50 text-blue-700" },
   { title: "Postman API", Icon: SiPostman, accent: "bg-orange-50 text-orange-700" },
   { title: "Cloud", Icon: Cloud, accent: "bg-indigo-50 text-indigo-700" },
-  { title: "AI Tools", Icon: SiOpenai, accent: "bg-teal-50 text-teal-700" },
-  { title: "Payment Integration", Icon: CreditCard, accent: "bg-rose-50 text-rose-700" },
+];
+
+const softwareStackItems: StackItem[] = [
+  { title: "React.js", Icon: SiReact, accent: "bg-sky-50 text-sky-700" },
+  { title: "Next.js", Icon: SiNextdotjs, accent: "bg-slate-100 text-slate-900" },
+  { title: "React Native", Icon: SiReact, accent: "bg-cyan-50 text-cyan-700" },
+  { title: "Flutter", Icon: SiFlutter, accent: "bg-sky-50 text-sky-700" },
+  { title: "Node.js", Icon: SiNodedotjs, accent: "bg-green-50 text-green-700" },
+  { title: "Express.js", Icon: SiExpress, accent: "bg-slate-100 text-slate-900" },
+  { title: "ASP.NET", Icon: SiDotnet, accent: "bg-violet-50 text-violet-700" },
+  { title: "C Sharp", Icon: SiSharp, accent: "bg-purple-50 text-purple-700" },
+  { title: "MongoDB", Icon: SiMongodb, accent: "bg-emerald-50 text-emerald-700" },
+  { title: "PostgreSQL", Icon: SiPostgresql, accent: "bg-blue-50 text-blue-700" },
+  { title: "REST APIs", Icon: Braces, accent: "bg-teal-50 text-teal-700" },
+  { title: "Postman API", Icon: SiPostman, accent: "bg-orange-50 text-orange-700" },
+  { title: "Payment Gateway", Icon: CreditCard, accent: "bg-rose-50 text-rose-700" },
+  { title: "AWS", Icon: Server, accent: "bg-amber-50 text-amber-700" },
+  { title: "Cloud Deployment", Icon: Cloud, accent: "bg-indigo-50 text-indigo-700" },
+  { title: "Cloudflare", Icon: SiCloudflare, accent: "bg-orange-50 text-orange-600" },
 ];
 
 export const developmentTechStackItems: StackItem[] = [
-  ...developmentStackItems.slice(1, 11),
+  ...developmentStackItems.slice(1, 10),
   { title: "React Native", Icon: SiReact, accent: "bg-cyan-50 text-cyan-700" },
   { title: "Flutter", Icon: SiFlutter, accent: "bg-sky-50 text-sky-700" },
   { title: "MERN Stack", Icon: Braces, accent: "bg-slate-100 text-slate-800" },
-  { title: "Payment Integration", Icon: CreditCard, accent: "bg-rose-50 text-rose-700" },
 ];
 
 const serviceConfigs: Record<ServiceSlug, ServiceConfig> = {
@@ -114,6 +134,7 @@ const serviceConfigs: Record<ServiceSlug, ServiceConfig> = {
     aboutDescription:
       "Scalable web foundations for websites, portals, dashboards, ecommerce journeys, and custom browser-based products.",
     architectureLabel: "Web architecture",
+    architectureImage: webDevVisualMockup,
     expertiseTitle: "Core web expertise",
     expertiseText:
       "We build websites and web applications for startups, growing brands, internal teams, and digital products. Our web development process combines responsive UI, backend integrations, CMS workflows, payment gateways, analytics, testing, and deployment support so the final product is practical, fast, and easy to maintain.",
@@ -163,55 +184,70 @@ const serviceConfigs: Record<ServiceSlug, ServiceConfig> = {
   },
   "software-development": {
     title: "Software Development",
-    eyebrow: "Custom business systems",
+    eyebrow: "SaaS & Enterprise Systems",
     heroDescription:
-      "Custom dashboards, SaaS workflows, admin tools, APIs, payment modules, and enterprise software built with MERN, ASP.NET, C Sharp, and cloud-ready architecture.",
-    highlights: ["Custom Workflows", "Secure APIs", "Payment Ready", "Cloud Ready"],
+      "Custom software solutions engineered to run your business operations. We design and build multi-tenant SaaS platforms, secure REST APIs, enterprise applications, workflow automation, and custom internal software using MERN & ASP.NET.",
+    highlights: ["SaaS Platforms", "Secure APIs", "Workflow Automation", "Cloud-ready Systems"],
     aboutEyebrow: "About Software Development",
-    aboutTitle: "Software systems built around operations",
+    aboutTitle: "Enterprise Architecture for Modern Workflows",
     aboutDescription:
-      "Reliable software foundations for dashboards, SaaS products, internal platforms, admin portals, and business workflow automation.",
+      "We engineer robust backend infrastructures, secure database layouts, multi-user access schemes, and cloud-hosted systems that streamline your business operations.",
     architectureLabel: "Software architecture",
-    expertiseTitle: "Core software expertise",
+    architectureImage: softwareDevVisualMockup,
+    expertiseTitle: "Business Systems Focus",
     expertiseText:
-      "We build custom software that connects users, data, payments, and business processes in one maintainable system. The delivery can use MERN for fast product builds, ASP.NET and C Sharp for enterprise-grade systems, PostgreSQL or MongoDB for data, Postman API for testing, and cloud deployment for scale.",
-    expertisePoints: ["MERN and ASP.NET architecture", "Payment and third-party integrations", "Dashboards, roles, reports, and workflow automation"],
-    capabilitiesTitle: "Software development capabilities",
-    moduleLabel: "Software development module",
+      "We build custom enterprise software that connects users, data, payments, and business processes in one maintainable system. From ERP and CRM systems to custom admin dashboards and operational automation, our software is designed for cloud scalability and high security.",
+    expertisePoints: [
+      "Secure REST API & Microservices engineering",
+      "Multi-tenant SaaS & Tenant Isolation architecture",
+      "Workflow automation, Admin Dashboards & CRM integration",
+    ],
+    capabilitiesTitle: "Software Development Capabilities",
+    moduleLabel: "Software Development Module",
     stackTitle: "Development Tech Stack",
     stackText:
-      "A practical software stack for MERN products, ASP.NET applications, secure APIs, payment workflows, databases, cloud deployment, and AI-assisted automation.",
-    stackItems: developmentStackItems,
+      "A practical software stack for scalable business platforms, SaaS systems, APIs, cloud deployment, workflow automation, and cross-platform application development.",
+    stackItems: softwareStackItems,
     buildItems: [
       {
-        title: "Custom Software Platforms",
-        text: "Role-based business applications, SaaS modules, internal portals, and operational systems built around your workflow.",
+        title: "ERP Software",
+        text: "Resource planning platforms designed to sync inventory, scheduling, accounting, and supply chain operations in one central hub.",
         image: project2,
       },
       {
-        title: "Admin Dashboards",
-        text: "Dashboards for analytics, user management, approvals, content operations, inventory, finance, and reporting.",
+        title: "CRM Systems",
+        text: "Customer relationship tools featuring contact management, sales funnels, support tickets, and automated marketing workflows.",
         image: project4,
       },
       {
-        title: "Payment Integration",
-        text: "Secure checkout, recurring billing, invoice workflows, payment status tracking, refunds, and webhook processing.",
-        image: heroSlide2,
-      },
-      {
-        title: "MERN Application Development",
-        text: "React.js, Node.js, Express.js, and MongoDB systems for fast, scalable, API-driven product development.",
+        title: "Admin Dashboards",
+        text: "Real-time portals offering role-based controls, data analytics, custom reporting tools, and secure system monitoring.",
         image: project1,
       },
       {
-        title: "ASP.NET & C Sharp Systems",
-        text: "Enterprise applications, secure APIs, admin portals, and Microsoft-stack integrations built for long-term maintainability.",
+        title: "SaaS Platforms",
+        text: "Multi-tenant cloud platforms complete with subscription management, secure authentication, tenant isolation, and tenant billing.",
+        image: softwareDevVisualMockup,
+      },
+      {
+        title: "Billing & Payment Systems",
+        text: "Invoice tools, subscription billing flows, multi-currency processing, secure checkout, and automated reconciliation.",
+        image: heroSlide2,
+      },
+      {
+        title: "Inventory Management Systems",
+        text: "Real-time stock trackers featuring low-stock alerts, warehouse management, shipping carrier integrations, and sales logs.",
         image: heroSlide3,
       },
       {
-        title: "Cloud, APIs & AI Tools",
-        text: "Postman API workflows, cloud deployment, database operations, AI tool integrations, monitoring, and launch support.",
+        title: "AI-powered Business Tools",
+        text: "AI-assisted modules that automate data entry, generate reports, suggest insights, and speed up business processes.",
         image: heroSlide1,
+      },
+      {
+        title: "Custom Internal Software",
+        text: "Operational databases, portal integrations, custom APIs, and backend frameworks built for specific business requirements.",
+        image: webDevVisualMockup,
       },
     ],
     ctaLabel: "Software development project",
@@ -230,6 +266,7 @@ const serviceConfigs: Record<ServiceSlug, ServiceConfig> = {
     aboutDescription:
       "Customer and internal mobile apps with smooth screens, secure data flows, payment modules, notifications, and scalable backend services.",
     architectureLabel: "Mobile app architecture",
+    architectureImage: mobileDevVisualMockup,
     expertiseTitle: "Core mobile expertise",
     expertiseText:
       "We build mobile apps with React Native and Flutter for user-facing products, internal field apps, ecommerce flows, booking platforms, and service apps. The backend can use MERN, Node.js, Express.js, PostgreSQL, MongoDB, cloud services, Postman API workflows, payment integrations, and AI tools where useful.",
@@ -278,6 +315,64 @@ const serviceConfigs: Record<ServiceSlug, ServiceConfig> = {
     contactMessage: "I'm interested in Mobile App Development.",
   },
 };
+
+const SoftwareArchitectureVisual = () => {
+  const layers = [
+    { title: "Frontend Interface", desc: "React.js • Next.js • TailwindCSS", glow: "from-blue-500/20 to-cyan-500/20 border-blue-500/30 text-blue-400" },
+    { title: "API Gateway Layer", desc: "REST APIs • Postman • Auth Gateway", glow: "from-slate-500/20 to-slate-400/20 border-slate-500/30 text-slate-300" },
+    { title: "Business Logic (Backend)", desc: "Node.js • ASP.NET • Express.js", glow: "from-indigo-500/20 to-purple-500/20 border-indigo-500/30 text-indigo-400" },
+    { title: "Database Systems", desc: "PostgreSQL • MongoDB • Caching", glow: "from-emerald-500/20 to-teal-500/20 border-emerald-500/30 text-emerald-400" },
+    { title: "Cloud Infrastructure", desc: "AWS • Cloud Deployment • Cloudflare", glow: "from-violet-500/20 to-fuchsia-500/20 border-violet-500/30 text-violet-400" },
+  ];
+
+  return (
+    <div className="w-full h-full min-h-[380px] bg-[#0B0F19] p-6 rounded-xl flex flex-col justify-between relative overflow-hidden border border-[#1E293B]">
+      {/* Ambient background glow effects */}
+      <div className="absolute -top-12 -left-12 w-48 h-48 bg-blue-500/10 rounded-full blur-3xl pointer-events-none animate-pulse" />
+      <div className="absolute -bottom-12 -right-12 w-48 h-48 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none animate-pulse" />
+      
+      {layers.map((layer, index) => (
+        <div key={layer.title} className="flex flex-col items-center relative z-10 w-full">
+          <div
+            className={`w-full max-w-[340px] rounded-xl border bg-gradient-to-r px-4 py-2.5 flex flex-col items-center justify-center text-center shadow-lg backdrop-blur-md transition-all duration-500 hover:scale-105 hover:border-white/20 ${layer.glow}`}
+          >
+            <div className="text-[11px] font-black uppercase tracking-widest">{layer.title}</div>
+            <div className="text-[9px] opacity-80 mt-1 font-mono">{layer.desc}</div>
+          </div>
+          {index < layers.length - 1 && (
+            <div className="h-6 flex items-center justify-center relative my-0.5">
+              <svg className="w-4 h-6" viewBox="0 0 16 24" fill="none">
+                <path
+                  d="M8,0 L8,24"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeDasharray="4 4"
+                  className="text-slate-600 animate-[dash_1.5s_linear_infinite]"
+                />
+                <path
+                  d="M5,17 L8,22 L11,17"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="text-slate-500"
+                />
+              </svg>
+            </div>
+          )}
+        </div>
+      ))}
+      <style dangerouslySetInnerHTML={{__html: `
+        @keyframes dash {
+          to {
+            stroke-dashoffset: -20;
+          }
+        }
+      `}} />
+    </div>
+  );
+};
+
 
 const WebDevelopmentDetail = ({
   Icon,
@@ -416,17 +511,22 @@ const WebDevelopmentDetail = ({
             <div className="overflow-hidden rounded-2xl border border-[#E2E8F0] bg-premium-gradient p-4 shadow-premium sm:p-5 lg:p-6">
               <div className="grid gap-8 lg:grid-cols-[0.95fr_80px_1fr] lg:items-center">
                 <div className="rounded-2xl border border-[#E2E8F0] bg-[#F8FAFC] p-3">
-                  <div className="relative aspect-[16/9] overflow-hidden rounded-xl">
-                    <img
-                      src={heroSlide3}
-                      alt={config.architectureLabel}
-                      className="h-full w-full object-cover [filter:saturate(0.9)_brightness(0.92)_contrast(1.05)_hue-rotate(-8deg)]"
-                      loading="lazy"
-                    />
-                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(8,15,30,0.05),rgba(8,15,30,0.35))]" />
-                    <div className="absolute bottom-4 left-4 rounded-md bg-[#061321]/80 px-3 py-2 text-xs font-semibold text-[#5EA2FF] backdrop-blur">
-                      {config.architectureLabel}
-                    </div>
+                  <div className="relative aspect-[16/9] overflow-hidden rounded-xl bg-white flex items-center justify-center p-2">
+                    {serviceSlug === "software-development" ? (
+                      <SoftwareArchitectureVisual />
+                    ) : (
+                      <>
+                        <img
+                          src={config.architectureImage}
+                          alt={config.architectureLabel}
+                          className="max-h-full max-w-full object-contain"
+                          loading="lazy"
+                        />
+                        <div className="absolute bottom-4 left-4 rounded-md bg-[#061321]/80 px-3 py-2 text-xs font-semibold text-[#5EA2FF] backdrop-blur">
+                          {config.architectureLabel}
+                        </div>
+                      </>
+                    )}
                   </div>
                 </div>
 
@@ -538,6 +638,102 @@ const WebDevelopmentDetail = ({
           </div>
         </section>
 
+        {serviceSlug === "software-development" && (
+          <>
+            {/* Workflow Automation & Enterprise Features */}
+            <section className="py-20 bg-[#F8FAFC] border-b border-[#E2E8F0]">
+              <div className="mx-auto w-full max-w-7xl px-6 sm:px-10 lg:px-12">
+                <div className="grid gap-12 lg:grid-cols-2">
+                  {/* Workflow Automation */}
+                  <div className="rounded-2xl border border-[#E2E8F0] bg-white p-8 shadow-sm hover:shadow-md transition-shadow duration-300">
+                    <span className="text-xs font-bold uppercase tracking-widest text-[#3B82F6]">Automation & Scale</span>
+                    <h3 className="mt-3 font-heading text-2xl sm:text-3xl font-black text-[#0F172A] tracking-tight">Workflow Automation</h3>
+                    <p className="mt-3 text-sm leading-relaxed text-[#475569]">
+                      We build background tasks and automated workflows that eliminate manual processing and errors.
+                    </p>
+                    <div className="mt-8 space-y-5">
+                      {[
+                        { title: "Approval Workflows", desc: "Multi-level management signs and sequential trigger events." },
+                        { title: "Task Automation", desc: "Scheduled background workers and webhook listeners." },
+                        { title: "Notification Systems", desc: "Automated SMS, email, and Slack event integrations." },
+                        { title: "Data Synchronization", desc: "Real-time sync between external APIs and internal systems." }
+                      ].map((item) => (
+                        <div key={item.title} className="flex gap-4">
+                          <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-blue-50 text-[#3B82F6] font-bold text-xs">✓</span>
+                          <div>
+                            <h4 className="text-sm font-bold text-[#0F172A]">{item.title}</h4>
+                            <p className="text-xs text-[#475569] mt-0.5">{item.desc}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Enterprise Features */}
+                  <div className="rounded-2xl border border-[#E2E8F0] bg-white p-8 shadow-sm hover:shadow-md transition-shadow duration-300">
+                    <span className="text-xs font-bold uppercase tracking-widest text-[#3B82F6]">Security & Control</span>
+                    <h3 className="mt-3 font-heading text-2xl sm:text-3xl font-black text-[#0F172A] tracking-tight">Enterprise Features</h3>
+                    <p className="mt-3 text-sm leading-relaxed text-[#475569]">
+                      Robust system administration tools for complete visibility, compliance, and platform operations.
+                    </p>
+                    <div className="mt-8 space-y-5">
+                      {[
+                        { title: "Role-based Access Control", desc: "Fine-grained permissions for admins, managers, and clients." },
+                        { title: "Audit Logs", desc: "Immutable records of every user action and data modification." },
+                        { title: "Advanced Reporting", desc: "Custom data exports, CSV/PDF generation, and BI dashboards." },
+                        { title: "Security & Monitoring", desc: "SQL injection protection, rate limiting, and system monitoring." }
+                      ].map((item) => (
+                        <div key={item.title} className="flex gap-4">
+                          <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-emerald-50 text-emerald-600 font-bold text-xs">✓</span>
+                          <div>
+                            <h4 className="text-sm font-bold text-[#0F172A]">{item.title}</h4>
+                            <p className="text-xs text-[#475569] mt-0.5">{item.desc}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Software Development Includes */}
+            <section className="py-20 bg-white border-b border-[#E2E8F0]">
+              <div className="mx-auto w-full max-w-7xl px-6 sm:px-10 lg:px-12">
+                <div className="mb-12 text-center">
+                  <span className="text-xs font-bold uppercase tracking-widest text-[#3B82F6]">Full-cycle Engineering</span>
+                  <h2 className="mt-3 font-heading text-3.5xl sm:text-4xl font-black tracking-tight text-[#0F172A] leading-tight">
+                    Software Development Includes
+                  </h2>
+                  <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-[#475569]">
+                    Every platform we build comes equipped with a baseline of enterprise-ready capabilities and modern software features.
+                  </p>
+                </div>
+                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+                  {[
+                    { title: "Custom Dashboards", desc: "Real-time analytics widgets and metrics tracking charts." },
+                    { title: "REST APIs", desc: "Secure, document-ready JSON API endpoints." },
+                    { title: "Authentication", desc: "Multi-factor JWT login with token refreshes." },
+                    { title: "Database Design", desc: "Normalized schemas, indexing, and connection pools." },
+                    { title: "Payment Integration", desc: "Checkout pipelines and subscription webhook handling." },
+                    { title: "Cloud Deployment", desc: "Scalable cloud instances, load balancing, and SSL." },
+                    { title: "User Management", desc: "Invite systems, profiling, and administrative panels." },
+                    { title: "Workflow Automation", desc: "Trigger events, automated tasks, and email logs." },
+                    { title: "Reporting Systems", desc: "File generation, filters, and audit dashboard tools." },
+                    { title: "Admin Controls", desc: "System settings, database view tools, and logs toggle." }
+                  ].map((card) => (
+                    <div key={card.title} className="rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] p-5 hover:border-[#3B82F6]/30 hover:shadow-premium hover:-translate-y-0.5 transition-all duration-300">
+                      <div className="h-1.5 w-8 bg-[#3B82F6] rounded-full mb-4" />
+                      <h3 className="font-heading text-sm font-bold text-[#0F172A]">{card.title}</h3>
+                      <p className="text-[11px] leading-relaxed text-[#475569] mt-2">{card.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+          </>
+        )}
+
         <section className="relative overflow-hidden border-y border-[#E2E8F0] bg-gradient-to-b from-[#F8FAFC] to-white py-20">
           <div className="relative mx-auto w-full max-w-7xl px-6 sm:px-10 lg:px-12">
             <div className="mb-10 max-w-3xl">
@@ -578,7 +774,7 @@ const WebDevelopmentDetail = ({
               }}
             >
               {[...config.stackItems, ...config.stackItems].map(({ title, Icon: StackIcon, accent }, index) => (
-                <div key={`${title}-${index}`} className="flex shrink-0 items-center gap-3 border border-[#E2E8F0] bg-white px-4 py-2.5 rounded-xl shadow-sm hover:border-[#3B82F6]/30 hover:shadow-md transition-all duration-300">
+                <div key={`${title}-${index}`} className="flex shrink-0 items-center gap-3 px-4 py-2.5 transition-all duration-300">
                   <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${accent}`}>
                     <StackIcon size={21} />
                   </span>
@@ -589,24 +785,6 @@ const WebDevelopmentDetail = ({
           </div>
         </section>
 
-        <section className="bg-white px-6 pb-20 sm:px-10 lg:px-12">
-          <div className="relative mx-auto w-full max-w-7xl overflow-hidden rounded-2xl border border-white/10 bg-gradient-to-br from-[#0F172A] to-[#111827] shadow-[0_24px_70px_rgba(0,0,0,0.5),0_0_50px_rgba(59,130,246,0.12)] p-1">
-            <div className="grid gap-8 p-7 text-white sm:p-10 lg:grid-cols-[1fr_auto] lg:items-center relative z-10">
-              <div>
-                <span className="text-xs font-bold uppercase tracking-widest text-[#3B82F6]">{config.ctaLabel}</span>
-                <h2 className="mt-3 font-heading text-3xl font-black text-white tracking-tight leading-tight">{config.ctaTitle}</h2>
-                <p className="mt-3 max-w-2xl text-sm leading-6 text-[#94A3B8]">{config.ctaText}</p>
-              </div>
-              <a
-                href="#contact"
-                className="inline-flex items-center justify-center gap-2 bg-[#3B82F6] px-6 py-3 text-sm font-bold text-white shadow-[0_0_30px_rgba(59,130,246,0.3)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#2563EB]"
-              >
-                Start a Project
-                <ArrowRight size={17} />
-              </a>
-            </div>
-          </div>
-        </section>
       </main>
 
       <Contact initialMessage={config.contactMessage} />
