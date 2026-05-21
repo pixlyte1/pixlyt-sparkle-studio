@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type ComponentType } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowLeft, ArrowRight, Braces, Cloud, CreditCard, Server, Globe, Database, type LucideIcon } from "lucide-react";
+import { ArrowLeft, ArrowRight, Braces, Cloud, CreditCard, Globe, Database, type LucideIcon } from "lucide-react";
 import {
   SiDotnet,
   SiExpress,
@@ -13,8 +13,6 @@ import {
   SiPostman,
   SiReact,
   SiSharp,
-  SiNextdotjs,
-  SiCloudflare,
 } from "react-icons/si";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
@@ -97,22 +95,16 @@ const mobileStackItems: StackItem[] = [
 ];
 
 const softwareStackItems: StackItem[] = [
-  { title: "React.js", Icon: SiReact, accent: "bg-sky-50 text-sky-700" },
-  { title: "Next.js", Icon: SiNextdotjs, accent: "bg-slate-100 text-slate-900" },
   { title: "React Native", Icon: SiReact, accent: "bg-cyan-50 text-cyan-700" },
   { title: "Flutter", Icon: SiFlutter, accent: "bg-sky-50 text-sky-700" },
   { title: "Node.js", Icon: SiNodedotjs, accent: "bg-green-50 text-green-700" },
   { title: "Express.js", Icon: SiExpress, accent: "bg-slate-100 text-slate-900" },
-  { title: "ASP.NET", Icon: SiDotnet, accent: "bg-violet-50 text-violet-700" },
-  { title: "C Sharp", Icon: SiSharp, accent: "bg-purple-50 text-purple-700" },
   { title: "MongoDB", Icon: SiMongodb, accent: "bg-emerald-50 text-emerald-700" },
   { title: "PostgreSQL", Icon: SiPostgresql, accent: "bg-blue-50 text-blue-700" },
   { title: "REST APIs", Icon: Braces, accent: "bg-teal-50 text-teal-700" },
   { title: "Postman API", Icon: SiPostman, accent: "bg-orange-50 text-orange-700" },
   { title: "Payment Gateway", Icon: CreditCard, accent: "bg-rose-50 text-rose-700" },
-  { title: "AWS", Icon: Server, accent: "bg-amber-50 text-amber-700" },
   { title: "Cloud Deployment", Icon: Cloud, accent: "bg-indigo-50 text-indigo-700" },
-  { title: "Cloudflare", Icon: SiCloudflare, accent: "bg-orange-50 text-orange-600" },
 ];
 
 export const developmentTechStackItems: StackItem[] = [
@@ -206,7 +198,7 @@ const serviceConfigs: Record<ServiceSlug, ServiceConfig> = {
     moduleLabel: "Software Development Module",
     stackTitle: "Development Tech Stack",
     stackText:
-      "A practical software stack for scalable business platforms, SaaS systems, APIs, cloud deployment, workflow automation, and cross-platform application development.",
+      "A mobile-focused software stack for cross-platform apps, secure APIs, payments, cloud deployment, and connected data workflows.",
     stackItems: softwareStackItems,
     buildItems: [
       {
@@ -318,7 +310,7 @@ const serviceConfigs: Record<ServiceSlug, ServiceConfig> = {
 
 const SoftwareArchitectureVisual = () => {
   const layers = [
-    { title: "Frontend Interface", desc: "React.js • Next.js • TailwindCSS", glow: "from-blue-500/20 to-cyan-500/20 border-blue-500/30 text-blue-400" },
+    { title: "Mobile App Interface", desc: "React Native • Flutter • Native UI", glow: "from-blue-500/20 to-cyan-500/20 border-blue-500/30 text-blue-400" },
     { title: "API Gateway Layer", desc: "REST APIs • Postman • Auth Gateway", glow: "from-slate-500/20 to-slate-400/20 border-slate-500/30 text-slate-300" },
     { title: "Business Logic (Backend)", desc: "Node.js • ASP.NET • Express.js", glow: "from-indigo-500/20 to-purple-500/20 border-indigo-500/30 text-indigo-400" },
     { title: "Database Systems", desc: "PostgreSQL • MongoDB • Caching", glow: "from-emerald-500/20 to-teal-500/20 border-emerald-500/30 text-emerald-400" },
@@ -697,40 +689,6 @@ const WebDevelopmentDetail = ({
               </div>
             </section>
 
-            {/* Software Development Includes */}
-            <section className="py-20 bg-white border-b border-[#E2E8F0]">
-              <div className="mx-auto w-full max-w-7xl px-6 sm:px-10 lg:px-12">
-                <div className="mb-12 text-center">
-                  <span className="text-xs font-bold uppercase tracking-widest text-[#3B82F6]">Full-cycle Engineering</span>
-                  <h2 className="mt-3 font-heading text-3.5xl sm:text-4xl font-black tracking-tight text-[#0F172A] leading-tight">
-                    Software Development Includes
-                  </h2>
-                  <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-[#475569]">
-                    Every platform we build comes equipped with a baseline of enterprise-ready capabilities and modern software features.
-                  </p>
-                </div>
-                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-                  {[
-                    { title: "Custom Dashboards", desc: "Real-time analytics widgets and metrics tracking charts." },
-                    { title: "REST APIs", desc: "Secure, document-ready JSON API endpoints." },
-                    { title: "Authentication", desc: "Multi-factor JWT login with token refreshes." },
-                    { title: "Database Design", desc: "Normalized schemas, indexing, and connection pools." },
-                    { title: "Payment Integration", desc: "Checkout pipelines and subscription webhook handling." },
-                    { title: "Cloud Deployment", desc: "Scalable cloud instances, load balancing, and SSL." },
-                    { title: "User Management", desc: "Invite systems, profiling, and administrative panels." },
-                    { title: "Workflow Automation", desc: "Trigger events, automated tasks, and email logs." },
-                    { title: "Reporting Systems", desc: "File generation, filters, and audit dashboard tools." },
-                    { title: "Admin Controls", desc: "System settings, database view tools, and logs toggle." }
-                  ].map((card) => (
-                    <div key={card.title} className="rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] p-5 hover:border-[#3B82F6]/30 hover:shadow-premium hover:-translate-y-0.5 transition-all duration-300">
-                      <div className="h-1.5 w-8 bg-[#3B82F6] rounded-full mb-4" />
-                      <h3 className="font-heading text-sm font-bold text-[#0F172A]">{card.title}</h3>
-                      <p className="text-[11px] leading-relaxed text-[#475569] mt-2">{card.desc}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </section>
           </>
         )}
 
